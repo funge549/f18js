@@ -1,7 +1,7 @@
-@font-face {font-family: "Montserrat"; src: url("../fonts/MontserratAlternates-Black.ttf");}
+@font-face {font-family: "Montserrat"; src: url("../fonts/MontserratAlternates-Bold.ttf");}
 @font-face {font-family: "Montserrat-regular"; src: url("../fonts/MontserratAlternates-Regular.ttf");}
 
-h1 {
+h1, h3{
 	font-family: "Montserrat";
 }
 
@@ -19,7 +19,7 @@ h1 {
 	position: absolute;
 	width: 75%;
 	height: 75%;
-	top: 90%;
+	top: 95%;
 	left: 5%;
 }
 
