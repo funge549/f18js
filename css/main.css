@@ -1,0 +1,31 @@
+@font-face {font-family: "Montserrat"; src: url("../fonts/MontserratAlternates-Black.ttf");}
+@font-face {font-family: "Montserrat-regular"; src: url("../fonts/MontserratAlternates-Regular.ttf");}
+
+h1 {
+	font-family: "Montserrat";
+}
+
+.project-1 {
+	background: #CCCCFF;
+	position: absolute;
+	width: 75%;
+	height: 75%;
+	left: 5%;
+	
+}
+
+.project-2 {
+	background: #FFCCCC;
+	position: absolute;
+	width: 75%;
+	height: 75%;
+	top: 90%;
+	left: 5%;
+}
+
+p{
+	position: absolute;
+	left: 90%;
+	font-family: "Montserrat-regular";
+	font-size: 2em;
+}
