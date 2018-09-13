@@ -1,9 +1,43 @@
 @font-face {font-family: "Montserrat"; src: url("../fonts/MontserratAlternates-Bold.ttf");}
 @font-face {font-family: "Montserrat-regular"; src: url("../fonts/MontserratAlternates-Regular.ttf");}
 
-h1, h3{
+h1, h3 {
+	font-family: "Montserrat";
+	color: black;
+	margin: 0;
+}	
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: purple;
+}
+
+#side-bar ul {
+	position: absolute;
+	right:5%;
+	top: 2%;
+	width: 20%;
+	text-align: right; 
+	list-style-type: none; 
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#side-bar li a {
+	color: black;
+	font-family: "Montserrat-regular";
+}
+
+#side-bar li a:hover {
+	color: purple;
 	font-family: "Montserrat";
 }
+
 
 .project-1 {
 	background: #CCCCFF;
