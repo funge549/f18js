@@ -38,9 +38,11 @@ a:hover {
 	font-family: "Montserrat";
 }
 
+iframe {
+	border: solid black 0.25em;
+}
 
 .project-1 {
-	background: #CCCCFF;
 	position: absolute;
 	width: 75%;
 	height: 75%;
@@ -59,7 +61,14 @@ a:hover {
 
 p{
 	position: absolute;
-	left: 90%;
+	right: 10%;
 	font-family: "Montserrat-regular";
 	font-size: 2em;
 }
+
+p a:hover {
+	color: #9999CC;
+
+}
+
+
