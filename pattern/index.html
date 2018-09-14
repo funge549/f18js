@@ -3,21 +3,29 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
 	<title></title>
 	<style type="text/css">
-		
+
 		html{
-			background-color: salmon;
+
+			font-family: "Noto Serif JP", sans-serif;
 		}
 
-		.two{
-			color: purple;
+		.one{
+			color: #CCFFCC;
+			transform: translate(1em, -10em);
 		}
 
-		.box {
-			color: white;
+		.two {
+			color: #66CCCC;
+			transform: translate(4em, -120em)
 		}
 
+		.three {
+			color: #66CCCC;
+			transform: translate(2em, -80em)
+		}
 
 	</style>
 
@@ -27,31 +35,30 @@
 
 	<div id="wrapper"></div>
 
-
 	<script type="text/javascript">
 
-
 		var myArray = [
-			["a", 16],
-			["b", "box"],
-			["c", 50],
-			["d", "two"],
+			["E", 16],
+			["S", "one"],
+			["F", "three"],
+			["Z", "two"],
 		];
 
 
-		for (var i = 0; i <= 10; i++) {
+		for (var i = 0; i <= myArray.length; i++) {
+			for (var j = 0; j <= 20; j++) {
 
-			var result = i * 6;
-			console.log(result);
+				var element = document.createElement("div");
+				element.className = "newHeader"
 
-			var element = document.createElement("div");
-			element.className = "newHeader";
+				var arrayValue = myArray[i];
+				var arrayValueLetter = arrayValue[0];
+				var arrayValueOne = arrayValue[1];
+				var arrayValueTwo = arrayValue[2];
+				var style = "";
 
-			var arrayValue = myArray[i];
-			var arrayValueOne = arrayValue[1];
-
-			var style = "";
-
+				console.log([i][j]);
+			
 			if (typeof arrayValueOne == "number" ) {
 				style = 'style="font-size: ' + arrayValueOne + 'px;"'
 			}else{
@@ -65,18 +72,14 @@
 			`				
 			
 			document.getElementById("wrapper").appendChild(element)
-
 		}
+
+	}	
 
 
 	</script>
 </body>
 </html>
-
-
-
-
-
 
 
 
