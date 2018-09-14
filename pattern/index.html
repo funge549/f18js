@@ -38,7 +38,7 @@
 	<script type="text/javascript">
 
 		var myArray = [
-			["E", 16],
+			["E" , 16, "hello"],
 			["S", "one"],
 			["F", "three"],
 			["Z", "two"],
@@ -55,12 +55,15 @@
 				var arrayValueLetter = arrayValue[0];
 				var arrayValueOne = arrayValue[1];
 				var arrayValueTwo = arrayValue[2];
+				var arrayValueThree = arrayValue[3];
 				var style = "";
 
 				console.log([i][j]);
 			
 			if (typeof arrayValueOne == "number" ) {
 				style = 'style="font-size: ' + arrayValueOne + 'px;"'
+			// } else if (typeof arrayValueTwo){
+
 			}else{
 				style = 'class="' + arrayValueOne + '"'
 			}

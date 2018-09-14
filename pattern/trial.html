@@ -30,43 +30,75 @@
 
 	<script type="text/javascript">
 
+		var str = [
+		["E", 16], 
+		["S", 18], 
+		["F", 20], 
+		["Z", 1],
+	];
+       for ( var row = 0; row < 10; row++){
+         for ( var col=0; col < row; col++){
+            document.write(str[0][0]);
 
-		var myArray = [
-			["a", 16],
-			["b", "box"],
-			["c", 50],
-			["d", "two"],
-		];
+            console.log (str[0][1]);
 
+            var arrayValueOne = str[0][1];
+            var style = "";
 
-		for (var i = 0; i <myArray.length; i++) {
-
-			var result = i * 2;
-			console.log(result);
-
-			var element = document.createElement("div");
-			element.className = "newHeader";
-
-			var arrayValue = myArray[i];
-			var arrayValueOne = arrayValue[1];
-
-			var style = "";
-
-			if (typeof arrayValueOne == "number" ) {
+        	if (typeof arrayValueOne == "number" ) {
 				style = 'style="font-size: ' + arrayValueOne + 'px;"'
 			}else{
 				style = 'class="' + arrayValueOne + '"'
 			}
 
-			element.innerHTML = `
+          }
+         document.write("<br />");
+        }
 
-				<h1 ${style} >${arrayValue[0]}</h1>
+        for ( var row = 1; row < 10; row++){
+         for ( var col=1; col < row; col++){
+            document.write(str);
+          }
+         document.write("<br />");
+        }
 
-			`				
+
+		// var myArray = [
+		// 	["a", 16],
+		// 	["b", "box"],
+		// 	["c", 50],
+		// 	["d", "two"],
+		// ];
+
+
+		// for (var i = 0; i <myArray.length; i++) {
+
+		// 	var result = i * 2;
+		// 	console.log(result);
+
+		// 	var element = document.createElement("div");
+		// 	element.className = "newHeader";
+
+		// 	var arrayValue = myArray[i];
+		// 	var arrayValueOne = arrayValue[1];
+
+		// 	var style = "";
+
+		// 	if (typeof arrayValueOne == "number" ) {
+		// 		style = 'style="font-size: ' + arrayValueOne + 'px;"'
+		// 	}else{
+		// 		style = 'class="' + arrayValueOne + '"'
+		// 	}
+
+			// element.innerHTML = `
+
+			// 	<h1 ${style} >${arrayValue[0]}</h1>
+
+			// `				
 			
-			document.getElementById("wrapper").appendChild(element)
+			// document.getElementById("wrapper").appendChild(element)
 
-		}
+//		}
 
 
 	</script>
