@@ -10,22 +10,22 @@
 		html{
 
 			font-family: "Noto Serif JP", sans-serif;
+			display: inline-block;
 		}
 
+		
+/*
 		.one{
 			color: #CCFFCC;
-			transform: translate(1em, -10em);
 		}
 
 		.two {
 			color: #66CCCC;
-			transform: translate(4em, -120em)
 		}
 
 		.three {
 			color: #66CCCC;
-			transform: translate(2em, -80em)
-		}
+		}*/
 
 	</style>
 
@@ -45,17 +45,18 @@
 		];
 
 
-		for (var i = 0; i <= myArray.length; i++) {
-			for (var j = 0; j <= 20; j++) {
+		for (var j = 0; j < 20; j++) {
+
+			for (var i = 0; i < myArray.length; i++) {
 
 				var element = document.createElement("div");
 				element.className = "newHeader"
 
 				var arrayValue = myArray[i];
-				var arrayValueLetter = arrayValue[0];
+				// var arrayValueLetter = arrayValue[0];
 				var arrayValueOne = arrayValue[1];
-				var arrayValueTwo = arrayValue[2];
-				var arrayValueThree = arrayValue[3];
+				// var arrayValueTwo = arrayValue[2];
+				// var arrayValueThree = arrayValue[3];
 				var style = "";
 
 				console.log([i][j]);
@@ -69,6 +70,7 @@
 			}
 
 			element.innerHTML = `
+
 
 				<h1 ${style} >${arrayValue[0]}</h1>
 

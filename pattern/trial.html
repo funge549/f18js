@@ -30,37 +30,31 @@
 
 	<script type="text/javascript">
 
-		var str = [
-		["E", 16], 
-		["S", 18], 
-		["F", 20], 
-		["Z", 1],
-	];
-       for ( var row = 0; row < 10; row++){
-         for ( var col=0; col < row; col++){
-            document.write(str[0][0]);
+ //       for ( var row = 0; row < 10; row++){
+ //         for ( var col=0; col < row; col++){
+ //            document.write(str[0][0]);
 
-            console.log (str[0][1]);
+ //            console.log (str[0][1]);
 
-            var arrayValueOne = str[0][1];
-            var style = "";
+ //            var arrayValueOne = str[0][1];
+ //            var style = "";
 
-        	if (typeof arrayValueOne == "number" ) {
-				style = 'style="font-size: ' + arrayValueOne + 'px;"'
-			}else{
-				style = 'class="' + arrayValueOne + '"'
-			}
+ //        	if (typeof arrayValueOne == "number" ) {
+	// 			style = 'style="font-size: ' + arrayValueOne + 'px;"'
+	// 		}else{
+	// 			style = 'class="' + arrayValueOne + '"'
+	// 		}
 
-          }
-         document.write("<br />");
-        }
+ //          }
+ //         document.write("<br />");
+ //        }
 
-        for ( var row = 1; row < 10; row++){
-         for ( var col=1; col < row; col++){
-            document.write(str);
-          }
-         document.write("<br />");
-        }
+        // for ( var row = 1; row < 10; row++){
+        //  for ( var col=1; col < row; col++){
+        //     document.write(str);
+        //   }
+        //  document.write("<br />");
+        // }
 
 
 		// var myArray = [
@@ -99,6 +93,63 @@
 			// document.getElementById("wrapper").appendChild(element)
 
 //		}
+
+
+
+	// other option of for looping
+	// essential to use variables outside of the loop
+
+	// use of counter is to make the loop end at some point. If just made i loop itself, it will never end.
+
+
+
+		var myArray = [
+		["E", 16], 
+		["S", 18], 
+		["F", 20], 
+		["Z", 1],
+	];
+
+	var counter = 0;
+
+
+	for (var i = 0; i < 50; i++) {
+
+
+		var element = document.createElement("div");
+				element.className = "newHeader"
+
+				var arrayValue = myArray[counter];
+				var arrayValueOne = arrayValue[1];
+				var style = "";
+			
+			if (typeof arrayValueOne == "number" ) {
+				style = 'style="font-size: ' + arrayValueOne + 'px;"'
+			// } else if (typeof arrayValueTwo){
+
+			}else{
+				style = 'class="' + arrayValueOne + '"'
+			}
+
+			element.innerHTML = `
+
+				<h1 ${style} >${arrayValue[0]}</h1>
+
+			`				
+			
+			document.getElementById("wrapper").appendChild(element)
+
+			// this will make it re iterate
+
+			counter ++;
+
+			if(counter >= myArray.length){
+				
+				//works as a reset
+				counter = 0;
+			}
+
+	}
 
 
 	</script>
