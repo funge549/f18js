@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
 	<title></title>
+
 	<style type="text/css">
-
-		html{
-
-			font-family: "Noto Serif JP", sans-serif;
-			display: inline-block;
-		}
-
 		
-/*
-		.one{
-			color: #CCFFCC;
+		html{
+			background-color: white;
 		}
 
-		.two {
-			color: #66CCCC;
+		html, body, h1, h2, h3, h4, h5, h6, p, ul, li{
+			padding: 0;
+			margin: 0;
 		}
 
-		.three {
-			color: #66CCCC;
-		}*/
+		.container{
+			position: relative;
+			display: inline-block;
+			width: 0.66vw;
+			height: 0.66vw;	
+			padding: 2.5vw;
+		}
+
+		.square{
+			width: auto;
+			height: auto;
+			vertical-align: middle;
+			position: absolute;
+			top:50%;
+			left:50%;
+			transform: translate(-50%, -50%);
+			background-color: purple;
+			border: 16px solid pink;
+		}
+
 
 	</style>
-
-
 </head>
 <body>
 
@@ -37,55 +43,53 @@
 
 	<script type="text/javascript">
 
-		var myArray = [
-			["E" , 16, "hello"],
-			["S", "one"],
-			["F", "three"],
-			["Z", "two"],
-		];
+		var squareDiameter = 0
+		var direction = false;
 
-
-		for (var j = 0; j < 20; j++) {
-
-			for (var i = 0; i < myArray.length; i++) {
-
-				var element = document.createElement("div");
-				element.className = "newHeader"
-
-				var arrayValue = myArray[i];
-				// var arrayValueLetter = arrayValue[0];
-				var arrayValueOne = arrayValue[1];
-				// var arrayValueTwo = arrayValue[2];
-				// var arrayValueThree = arrayValue[3];
-				var style = "";
-
-				console.log([i][j]);
+		for (var i = 0; i < 1200; i++) {
 			
-			if (typeof arrayValueOne == "number" ) {
-				style = 'style="font-size: ' + arrayValueOne + 'px;"'
-			// } else if (typeof arrayValueTwo){
+			var container = document.createElement("div")
+			container.className = "container"
 
-			}else{
-				style = 'class="' + arrayValueOne + '"'
+			if(i % 15 == 0){ //if i is a multiple of 5
+				if(direction){
+					//direction = false
+				}else{
+					//direction = true
+					squareDiameter = 1;
+				}
+
+				direction = !direction;
 			}
 
-			element.innerHTML = `
+			if(direction){
+				squareDiameter++;
+			}else{
+				squareDiameter--;
+			}
 
+			var opacity = squareDiameter / 20;
 
-				<h1 ${style} >${arrayValue[0]}</h1>
+			var degrees = squareDiameter * 10;
 
-			`				
+			function getRandomInt(min, max) {
+			return Math.floor(Math.random() * (max - min)) + min;
+			}
+
+			var red = getRandomInt(198,239);
+			var green = getRandomInt(7,88);
+			var blue = getRandomInt(27,128);
 			
-			document.getElementById("wrapper").appendChild(element)
+			var color = "rgb(" + red + ",0,"+ blue +")";
+
+				container.innerHTML = `
+					<div style="transform: rotate(${degrees}deg);background-color: ${color}  opacity: ${opacity}; width:${squareDiameter}vw; height:${squareDiameter}vw;" class="square" ></div>
+
+				`
+				document.getElementById("wrapper").appendChild(container)	
+
 		}
-
-	}	
-
 
 	</script>
 </body>
 </html>
-
-
-
-

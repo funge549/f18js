@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+	<title></title>
+	<style type="text/css">
+
+		html{
+
+			font-family: "Noto Serif JP", sans-serif;
+			display: inline-block;
+		}
+
+		
+/*
+		.one{
+			color: #CCFFCC;
+		}
+
+		.two {
+			color: #66CCCC;
+		}
+
+		.three {
+			color: #66CCCC;
+		}*/
+
+	</style>
+
+
+</head>
+<body>
+
+	<div id="wrapper"></div>
+
+	<script type="text/javascript">
+
+		var myArray = [
+			["E" , 16, "hello"],
+			["S", "one"],
+			["F", "three"],
+			["Z", "two"],
+		];
+
+
+		for (var j = 0; j < 20; j++) {
+
+			for (var i = 0; i < myArray.length; i++) {
+
+				var element = document.createElement("div");
+				element.className = "newHeader"
+
+				var arrayValue = myArray[i];
+				// var arrayValueLetter = arrayValue[0];
+				var arrayValueOne = arrayValue[1];
+				// var arrayValueTwo = arrayValue[2];
+				// var arrayValueThree = arrayValue[3];
+				var style = "";
+
+				console.log([i][j]);
+			
+			if (typeof arrayValueOne == "number" ) {
+				style = 'style="font-size: ' + arrayValueOne + 'px;"'
+			// } else if (typeof arrayValueTwo){
+
+			}else{
+				style = 'class="' + arrayValueOne + '"'
+			}
+
+			element.innerHTML = `
+
+
+				<h1 ${style} >${arrayValue[0]}</h1>
+
+			`				
+			
+			document.getElementById("wrapper").appendChild(element)
+		}
+
+	}	
+
+
+	</script>
+</body>
+</html>
+
+
+
+
