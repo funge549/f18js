@@ -17,9 +17,9 @@
 		.container{
 			position: relative;
 			display: inline-block;
-			width: 0.1vw;
-			height: 0.1vw;	
-			padding: 2.2vw;
+			width: 0.85vw;
+			height: 0.85vw;	
+			padding: 2.5vw;
 		}
 
 		.square{
@@ -51,7 +51,8 @@
 			// degrees = false,
 			direction = false,
 			interval = 0,
-			counter = 0; 
+			counter = 0;
+
 
 		for (var i = 0; i < 240; i++) {
 
@@ -67,7 +68,7 @@
 					if(w % 15 == 0){ 
 					if(direction){
 					}else{
-						squareDiameter = getRandomInt(1,6);
+						squareDiameter = 2;
 					}
 					direction = !direction;
 					}
@@ -80,7 +81,7 @@
 
 				var opacity = squareDiameter / 20;
 
-				var rotate = getRandomInt(35,165)
+				var rotate = getRandomInt(0,90)
 
 				var degrees = squareDiameter * rotate;
 
@@ -108,7 +109,7 @@
 				var color;
 				
 
-				if (squareDiameter % 9 == 0){
+				if (w % 40 == 0){
 					color = "rgb(" + "0" + ",0," + b +")"
 					console.log(color);
 				}else {
