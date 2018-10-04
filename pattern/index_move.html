@@ -17,14 +17,12 @@
 		.container{
 			position: relative;
 			display: inline-block;
-			width: 0.1vw;
-			height: 0.1vw;	
 			padding: 2.2vw;
 		}
 
 		.square{
-			width: auto;
-			height: auto;
+/*			width: auto;
+			height: auto;*/
 			vertical-align: middle;
 			position: absolute;
 			top:50%;
@@ -33,12 +31,19 @@
 			border: 1.3vw solid pink;
 		}
 
+		.change{
+			transform: rotate(90deg) !important;
+			transition: 2s;
+		}
 
 	</style>
+
 </head>
 <body>
 
 	<div id="wrapper"></div>
+
+	<script src="./js/jquery-3.3.1.min.js"></script>  
 
 	<script type="text/javascript">
 
@@ -47,42 +52,51 @@
 			}
 
 		var squareDiameter = 0,
-			// squareDegree = 0,
-			// degrees = false,
-			direction = false,
+			opacity = 0,
+			direction = true,
 			interval = 0,
+			totalLength = 24,
 			counter = 0; 
 
-		for (var i = 0; i < 240; i++) {
+		for (var i = 0; i < totalLength; i++) {
 
 			setTimeout(function(){
 
-				var container = document.createElement("div")
-				container.className = "container"
-
-				var square = ""; 
-
-				for (var w = 0; w < 50; w++) {
-
-					if(w % 15 == 0){ 
+				
+               // console.log(direction)
+				 
+				// if(i % 2 == 0){ 
 					if(direction){
+						direction = false;
+						squareDiameter = 0
 					}else{
-						squareDiameter = getRandomInt(1,6);
+						direction = true
+					
 					}
-					direction = !direction;
-					}
+				
+				// }
+				// console.log(direction)
+				for (var w = 0; w < 15; w++) {
+					var container = document.createElement("div")
+				container.className = "container"
+					var square = "";
 
-				if(direction){
+
+				if(!direction){
 					squareDiameter++;
 				}else{
 					squareDiameter--;
 				}
 
+				// var opacity = counter / 0.5;
+
 				var opacity = squareDiameter / 20;
 
-				var rotate = getRandomInt(35,165)
+				//console.log(counter);
 
-				var degrees = squareDiameter * rotate;
+				var rotate = w / squareDiameter;
+
+				var degrees = w * rotate * 2;
 
 				// if(w % 1 == 0){
 				// 	if(degrees){
@@ -106,30 +120,51 @@
 				var blue = getRandomInt(27,128);
 
 				var color;
-				
 
-				if (squareDiameter % 9 == 0){
+				var progress = counter/totalLength;
+				
+				//add a counter
+				// console.log(squareDiameter)
+				if (squareDiameter % 8 == 0){
 					color = "rgb(" + "0" + ",0," + b +")"
-					console.log(color);
+					//console.log(color);
 				}else {
 					color = "rgb(" + red + ",0,"+ blue +")"
 				}
-				
-				}
-				
+				//console.log(squareDiameter)
 				container.innerHTML = `
 					<div style="transform: rotate(${degrees}deg);background-color: ${color};  opacity: ${opacity}; width:${squareDiameter}vw; height:${squareDiameter}vw;" class="square" ></div>
 
 				`
+
+				// var square = document.createElement("div")
+				// square.className = "square"
+				// square.setAttribute("width",squareDiameter + "vw")
+				// square.setAttribute("background", "red")
+				// square.setAttribute("height",squareDiameter + "vw")
+
+
+				//console.log(squareDiameter)
+				// container.appendChild(square);
 				document.getElementById("wrapper").appendChild(container);
-				window.scrollTo(document.body.scrollWidth, document.body.scrollHeight);	
+				// window.scrollTo(document.body.scrollWidth, document.body.scrollHeight);	
+				}
+				
 			
 			   counter ++;
+			   $(".square").on("click", function(){
+					$(this).toggleClass("change")
+					console.log("hi")
+				})
 			}, interval);
 
-			interval += 300; 
+			interval += 100; 
 
-		}	
+			}	
+		
+
+
+		
 
 	</script>
 </body>

@@ -17,9 +17,9 @@
 		.container{
 			position: relative;
 			display: inline-block;
-			width: 0.85vw;
-			height: 0.85vw;	
-			padding: 2.5vw;
+			width: 0.1vw;
+			height: 0.1vw;	
+			padding: 2.2vw;
 		}
 
 		.square{
@@ -47,14 +47,13 @@
 			}
 
 		var squareDiameter = 0,
-			// squareDegree = 0,
-			// degrees = false,
+			opacity = 0,
 			direction = false,
 			interval = 0,
-			counter = 0;
+			totalLength = 240,
+			counter = 0; 
 
-
-		for (var i = 0; i < 240; i++) {
+		for (var i = 0; i < totalLength; i++) {
 
 			setTimeout(function(){
 
@@ -67,23 +66,29 @@
 
 					if(w % 15 == 0){ 
 					if(direction){
+						direction = false;
 					}else{
-						squareDiameter = 2;
+						direction = true
+						squareDiameter =1
 					}
 					direction = !direction;
 					}
 
-				if(direction){
+				if(!direction){
 					squareDiameter++;
 				}else{
 					squareDiameter--;
 				}
 
-				var opacity = squareDiameter / 20;
+				// var opacity = counter / 0.5;
 
-				var rotate = getRandomInt(0,90)
+				var opacity = squareDiameter / 10;
 
-				var degrees = squareDiameter * rotate;
+				console.log(counter);
+
+				var rotate = counter / squareDiameter;
+
+				var degrees = counter * rotate;
 
 				// if(w % 1 == 0){
 				// 	if(degrees){
@@ -107,9 +112,12 @@
 				var blue = getRandomInt(27,128);
 
 				var color;
-				
 
-				if (w % 40 == 0){
+				var progress = counter/totalLength;
+				
+				//add a counter
+
+				if (squareDiameter % 8 == 0){
 					color = "rgb(" + "0" + ",0," + b +")"
 					console.log(color);
 				}else {
@@ -128,7 +136,7 @@
 			   counter ++;
 			}, interval);
 
-			interval += 300; 
+			interval += 100; 
 
 		}	
 
