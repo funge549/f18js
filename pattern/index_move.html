@@ -31,12 +31,11 @@
 
 		.change{
 			transform: rotate(90deg) !important;
+			border: 2vw double lavender !important;
+			background-color: rgb(71, 9, 183)!important;
 			transition: 5s;
 		}
 
-		.colorChange{
-			background-color: red;
-		}
 	</style>
 
 </head>
@@ -73,7 +72,7 @@
 				
 				for (var w = 0; w < 12; w++) {
 					var container = document.createElement("div")
-				container.className = "container"
+					container.className = "container"
 					var square = "";
 
 
@@ -95,7 +94,6 @@
 
 				if (squareDiameter % 8 == 0){
 					color = "rgb(" + "0" + ",0," + b +")"
-					console.log(color);
 				}else {
 					color = "rgb(" + red + ",0,"+ blue +")"
 				}
@@ -108,17 +106,14 @@
 				document.getElementById("wrapper").appendChild(container);
 				window.scrollTo(0, document.body.scrollHeight);	
 				}
-				
 			
 			   counter ++;
 			   $(".square").on("mouseover", function(){
 					$(this).toggleClass("change")
 
 				})
-			   $(".square").on("click", function(){
-					$(this).toggleClass("colorChange")
 
-				})
+
 			}, interval);
 
 			interval += 200; 

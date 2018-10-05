@@ -1,0 +1,26 @@
+			var cChange = document.createElement("div")
+				cChange.className = "cChange"
+
+				var newSquare = "";
+
+			var r2 = getRandomInt(180,237),
+				b2 = getRandomInt(198,255),
+				g2 = getRandomInt(27,128),
+				color2;
+
+			color2 = "rgb(" + r2 + b2 + g2 +")"
+
+
+			container.innerHTML = `
+			<div style="background-color: ${color2}; " class="newSquare" ></div>
+
+			`
+			document.getElementById("wrapper").appendChild(cChange);
+
+
+			   $(".square").on("click", function(){
+					$(this).toggleClass(cChange)
+						
+
+
+				})
