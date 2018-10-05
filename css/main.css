@@ -38,37 +38,28 @@ a:hover {
 	font-family: "Montserrat";
 }
 
+.projects{
+}
+
 iframe {
 	border: solid black 0.25em;
+	display: inline-block;
+	width: 65vw;
+	height: 35vw;
 }
 
-.project-1 {
+.tombstone{
 	position: absolute;
-	width: 75%;
-	height: 75%;
-	left: 5%;
-	
+	left:70vw;
+	font-family: "Montserrat";
+	font-size: 24pt;
 }
 
-.project-2 {
-	background: #FFCCCC;
-	position: absolute;
-	width: 75%;
-	height: 75%;
-	top: 95%;
-	left: 5%;
+.one {
+	padding-top: 2em;
+	padding-bottom: 2em;
 }
 
-p{
-	position: absolute;
-	right: 10%;
-	font-family: "Montserrat-regular";
-	font-size: 2em;
-}
 
-p a:hover {
-	color: #9999CC;
-
-}
 
 
