@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>dynamic</title>
+
+	<style type="text/css">
+		
+		html{
+			background-color: #e5e5e5;
+		}
+
+		html, body, h1, h2, h3, h4, h5, h6, p, ul, li{
+			padding: 0;
+			margin: 0;
+		}
+
+		.container{
+			position: relative;
+			display: inline-block;
+			padding: 2.2vw;
+		}
+
+		.square{
+			vertical-align: middle;
+			position: absolute;
+			top:50%;
+			left:50%;
+			transform: translate(-50%, -50%);
+			border: 1vw solid pink;
+		}
+
+		.change{
+			transform: rotate(90deg) !important;
+			/*border: 2vw double lavender !important;*/
+			background-color: rgb(71, 9, 183)!important;
+			transition: 5s;
+		}
+
+	</style>
+
+</head>
+<body>
+
+	<div id="wrapper"></div>
+
+	<script src="./js/jquery-3.3.1.min.js"></script>  
+	<script type="text/javascript">
+
+		function getRandomInt(min, max) {
+			return Math.floor(Math.random() * (max - min)) + min;
+			}
+
+		var squareDiameter = 0,
+			squareDegree = 0,
+			opacity = 0,
+			direction = false,
+			degrees = false,
+			interval = 0,
+			totalLength = 10,
+			counter = 0; 
+
+
+		for (var i = 0; i < 240; i++) {
+
+			for (var w = 0; w < 12; w++){
+
+				setTimeout(function(){
+
+					var container = document.createElement("div")
+					container.className = "container"
+
+					if(i % 15 == 0){ 
+					if(direction){
+					}else{
+						squareDiameter = 1;
+						}
+					direction = !direction;	
+					}
+
+
+					if(direction){
+						squareDiameter++;
+					}else{
+						squareDiameter--;
+					}
+
+					var opacity = squareDiameter / 20;
+
+					var degrees = squareDiameter * 10;
+
+					var b = getRandomInt(180,237);
+
+					var red = getRandomInt(198,239);
+					var blue = getRandomInt(27,128);
+
+					var color;
+					
+
+					if (i % 40 == 0){
+						color = "rgb(" + "0" + ",0," + b +")"
+					}else {
+						color = "rgb(" + red + ",0,"+ blue +")"
+					}
+
+
+					container.innerHTML = `
+						<div style="transform: rotate(${degrees}deg);background-color: ${color};  opacity: ${opacity}; width:${squareDiameter}vw; height:${squareDiameter}vw;" class="square" ></div>
+
+					`
+					document.getElementById("wrapper").appendChild(container)
+					window.scrollTo(0, document.body.scrollHeight);		
+
+				counter ++
+
+				}, interval);
+
+				interval += 200
+
+			}
+		}	
+
+	</script>
+</body>
+</html>

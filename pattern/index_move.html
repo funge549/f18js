@@ -59,6 +59,8 @@
 			totalLength = 50,
 			counter = 0; 
 
+
+
 		for (var i = 0; i < totalLength; i++) {
 
 			setTimeout(function(){
@@ -107,18 +109,21 @@
 				window.scrollTo(0, document.body.scrollHeight);	
 				}
 			
-			   counter ++;
-			   $(".square").on("mouseover", function(){
+			counter ++;	
+
+			$(".square").on("mouseover", function(){
 					$(this).toggleClass("change")
 
-				})
-
+				})	
 
 			}, interval);
 
 			interval += 200; 
 
 			}	
+
+
+
 
 	</script>
 </body>
