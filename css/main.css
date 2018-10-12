@@ -1,6 +1,18 @@
 @font-face {font-family: "Montserrat"; src: url("../fonts/MontserratAlternates-Bold.ttf");}
 @font-face {font-family: "Montserrat-regular"; src: url("../fonts/MontserratAlternates-Regular.ttf");}
 
+::-webkit-scrollbar {
+    width: 0.5vw;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
 h1, h3 {
 	font-family: "Montserrat";
 	color: black;
@@ -38,15 +50,14 @@ a:hover {
 	font-family: "Montserrat";
 }
 
-.projects{
-}
-
 iframe {
 	border: solid black 0.25em;
 	display: inline-block;
 	width: 65vw;
 	height: 35vw;
+	overflow: hidden;
 }
+
 
 .tombstone{
 	position: absolute;

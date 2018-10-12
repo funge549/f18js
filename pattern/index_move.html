@@ -61,11 +61,11 @@
 			last_class;	
 
 		$(document).ready(function() {
-			audio.src = "audio/rain.wav";
-			audiotwo.src = "audio/river.m4a";
+			// audio.src = "audio/rain.wav";
+			audiotwo.src = "audio/water.mp3";
 			audiothree.src = "audio/waves.wav";
 			audiofour.src = "audio/waves2.wav";	
-			audiofive.src = "audio/whiteNoise.m4a";	
+			audiofive.src = "audio/stream.wav";	
 		})	
 
 		var squareDiameter = 0,
@@ -144,9 +144,9 @@
 					console.log(last_class);
 					console.log(audio.src);
 
-					if( last_class == "uno" ) {
-					audio.play();
-					}
+					// if( last_class == "uno" ) {
+					// audio.play();
+					// }
 					if( last_class == "dos" ) {
 						audiotwo.play();
 					}
