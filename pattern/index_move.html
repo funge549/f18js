@@ -57,15 +57,14 @@
 			audiothree = new Audio(),
 			audiofour = new Audio(),
 			audiofive  = new Audio(),
-			classes = ["uno", "dos", "tres", "cuatro", "cinco",],
+			classes = ["dos", "tres", "cuatro", "cinco",],
 			last_class;	
 
 		$(document).ready(function() {
-			// audio.src = "audio/rain.wav";
-			audiotwo.src = "audio/water.mp3";
-			audiothree.src = "audio/waves.wav";
-			audiofour.src = "audio/waves2.wav";	
-			audiofive.src = "audio/stream.wav";	
+			audiotwo.src = "audio/piano.mp3";
+			audiothree.src = "audio/piano.wav";
+			audiofour.src = "audio/piano2.wav";	
+			audiofive.src = "audio/piano2.mp3";	
 		})	
 
 		var squareDiameter = 0,
@@ -144,9 +143,7 @@
 					console.log(last_class);
 					console.log(audio.src);
 
-					// if( last_class == "uno" ) {
-					// audio.play();
-					// }
+
 					if( last_class == "dos" ) {
 						audiotwo.play();
 					}
