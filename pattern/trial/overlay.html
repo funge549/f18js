@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>dynamic</title>
+
+	<style type="text/css">
+		
+		html{
+			background-color: #e5e5e5;
+		}
+
+		html, body, h1, h2, h3, h4, h5, h6, p, ul, li{
+			padding: 0;
+			margin: 0;
+		}
+
+		.container{
+			position: relative;
+			display: inline-block;
+			padding: 2.2vw;
+		}
+
+		.square{
+			vertical-align: middle;
+			position: absolute;
+			top:50%;
+			left:50%;
+			transform: translate(-50%, -50%);
+			border: 1vw solid pink;
+		}
+
+		.change{
+			transform: rotate(90deg) !important;
+			border: 2vw double lavender !important;
+			/*background-color: rgb(71, 9, 183)!important;*/
+			transition: 5s;
+		}
+
+	</style>
+
+</head>
+<body>
+
+	<div id="wrapper">
+
+	</div>
+
+	<script src="./js/jquery-3.3.1.min.js"></script>  
+	<script type="text/javascript">
+
+		function getRandomInt(min, max) {
+			return Math.floor(Math.random() * (max - min)) + min;
+			}
+
+		var audio = new Audio(),
+			audiotwo = new Audio(),
+			audiothree = new Audio(),
+			audiofour = new Audio(),
+			audiofive  = new Audio(),
+			classes = ["uno", "dos", "tres", "cuatro", "cinco",],
+			last_class;	
+
+		$(document).ready(function() {
+			audio.src = "audio/rain.wav";
+			audiotwo.src = "audio/river.m4a";
+			audiothree.src = "audio/waves.wav";
+			audiofour.src = "audio/waves2.wav";	
+			audiofive.src = "audio/whiteNoise.m4a";	
+		})	
+
+		var squareDiameter = 0,
+			opacity = 0,
+			direction = true,
+			interval = 0,
+			totalLength = 70,
+			counter = 0; 
+
+		$( document ).ready(function() {
+
+		for (var i = 0; i < totalLength; i++) {
+
+			setTimeout(function(){
+
+					if(direction){
+						direction = false;
+						squareDiameter = 0
+					}else{
+						direction = true
+					}
+				
+				for (var w = 0; w < 12; w++) {
+					var container = document.createElement("div")
+					container.className = "container"
+					var square = "";
+
+
+				if(!direction){
+					squareDiameter++;
+				}else{
+					squareDiameter--;
+				}
+
+
+				var opacity = squareDiameter / 20,
+					rotate = counter / squareDiameter,
+					degrees = counter * rotate * 2,
+					b = getRandomInt(180,237),
+					red = getRandomInt(198,255),
+					blue = getRandomInt(27,128),
+					color,
+					color2,
+					azul = getRandomInt (0,255),
+					progress = counter/totalLength;
+
+				if (squareDiameter % 8 == 0){
+					color = "rgb(" + "0" + ",0," + b +")"
+				}else {
+					color = "rgb(" + red + ",0,"+ blue +")"
+				}
+
+				color2 = "rgb(" + "0" + ",0," + azul +")"
+
+				container.innerHTML = `
+					<div style="transform: rotate(${degrees}deg);background-color: ${color};  opacity: ${opacity}; width:${squareDiameter}vw; height:${squareDiameter}vw;  " class="square" ></div>
+
+					<div style="background-color: color2 !important; " class="change" ></div>
+
+				`
+
+				document.getElementById("wrapper").appendChild(container);
+				window.scrollTo(0, document.body.scrollHeight);	
+				}
+			
+			counter ++;	
+
+			$(".square").mouseover(function(){
+				$(this).toggleClass("change")
+			})
+
+			$(".square").click(function(){
+				$(this).removeClass("change");
+				last_class = classes[getRandomInt(0,classes.length)];
+				$(this).toggleClass(last_class);
+
+					console.log(last_class)
+
+					if( last_class == "uno" ) {
+					audio.play();
+					}
+					if( last_class == "dos" ) {
+						audiotwo.play();
+					}
+					if( last_class == "tres" ) {
+						audiothree.play();
+					}
+
+					if( last_class == "cuatro" ) {
+						audiofour.play();
+					}
+					if( last_class == "cinco" ) {
+						audiofive.play();
+					}
+				})
+
+			}, interval);
+
+			interval += 250; 
+
+			}	
+		});		
+
+
+
+
+	</script>
+</body>
+</html>

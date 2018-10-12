@@ -52,19 +52,21 @@
 
 		var squareDiameter = 0,
 			opacity = 0,
-			direction = true,
+			direction = false,
 			interval = 0,
 			totalLength = 50,
-			counter = 0; 
+			counter = 1; 
 
 		for (var i = 0; i < totalLength; i++) {
 
-			if(direction){
-					direction = false;
-					squareDiameter = 0
+			if(i % 10 == 0){
+				if(direction){
 				}else{
-					direction = true
+					squareDiameter = 1;
 				}
+
+				direction = !direction;
+			}	
 
 			for (var w = 0; w < 12; w++){
 
@@ -81,9 +83,9 @@
 						squareDiameter++;
 					}
 
-					var opacity = squareDiameter / 20,
-						rotate = w / squareDiameter,
-						degrees = w * rotate * 2,
+					var opacity = squareDiameter / 2,
+						rotate = counter,
+						degrees = counter * 2,
 						b = getRandomInt(180,237),
 						red = getRandomInt(198,255),
 						blue = getRandomInt(27,128),

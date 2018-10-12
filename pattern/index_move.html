@@ -32,7 +32,7 @@
 		.change{
 			transform: rotate(90deg) !important;
 			border: 2vw double lavender !important;
-			background-color: rgb(71, 9, 183)!important;
+			background-color: rgb(131, 239, 201)!important;
 			transition: 5s;
 		}
 
@@ -52,14 +52,30 @@
 			return Math.floor(Math.random() * (max - min)) + min;
 			}
 
+		var audio = new Audio(),
+			audiotwo = new Audio(),
+			audiothree = new Audio(),
+			audiofour = new Audio(),
+			audiofive  = new Audio(),
+			classes = ["uno", "dos", "tres", "cuatro", "cinco",],
+			last_class;	
+
+		$(document).ready(function() {
+			audio.src = "audio/rain.wav";
+			audiotwo.src = "audio/river.m4a";
+			audiothree.src = "audio/waves.wav";
+			audiofour.src = "audio/waves2.wav";	
+			audiofive.src = "audio/whiteNoise.m4a";	
+		})	
+
 		var squareDiameter = 0,
 			opacity = 0,
 			direction = true,
 			interval = 0,
-			totalLength = 50,
+			totalLength = 70,
 			counter = 0; 
 
-
+		$( document ).ready(function() {
 
 		for (var i = 0; i < totalLength; i++) {
 
@@ -86,12 +102,14 @@
 
 
 				var opacity = squareDiameter / 20,
-					rotate = w / squareDiameter,
-					degrees = w * rotate * 2,
+					rotate = counter / squareDiameter,
+					degrees = counter * rotate * 2,
 					b = getRandomInt(180,237),
 					red = getRandomInt(198,255),
 					blue = getRandomInt(27,128),
 					color,
+					color2,
+					azul = getRandomInt (0,255),
 					progress = counter/totalLength;
 
 				if (squareDiameter % 8 == 0){
@@ -100,8 +118,11 @@
 					color = "rgb(" + red + ",0,"+ blue +")"
 				}
 
+				color2 = "rgb(" + "0" + ",0," + azul +")"
+
 				container.innerHTML = `
-					<div style="transform: rotate(${degrees}deg);background-color: ${color};  opacity: ${opacity}; width:${squareDiameter}vw; height:${squareDiameter}vw;" class="square" ></div>
+					<div style="transform: rotate(${degrees}deg);background-color: ${color};  opacity: ${opacity}; width:${squareDiameter}vw; height:${squareDiameter}vw;  " class="square" ></div>
+
 
 				`
 
@@ -111,16 +132,42 @@
 			
 			counter ++;	
 
-			$(".square").on("mouseover", function(){
-					$(this).toggleClass("change")
+			$(".square").mouseover(function(){
+				$(this).toggleClass("change")
+			})
 
-				})	
+			$(".square").click(function(){
+				$(this).removeClass("change");
+				last_class = classes[getRandomInt(0,classes.length)];
+				$(this).toggleClass(last_class);
+
+					console.log(last_class);
+					console.log(audio.src);
+
+					if( last_class == "uno" ) {
+					audio.play();
+					}
+					if( last_class == "dos" ) {
+						audiotwo.play();
+					}
+					if( last_class == "tres" ) {
+						audiothree.play();
+					}
+
+					if( last_class == "cuatro" ) {
+						audiofour.play();
+					}
+					if( last_class == "cinco" ) {
+						audiofive.play();
+					}
+				})
 
 			}, interval);
 
-			interval += 200; 
+			interval += 250; 
 
 			}	
+		});		
 
 
 
