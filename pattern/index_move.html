@@ -36,6 +36,11 @@
 			transition: 5s;
 		}
 
+		.bgC{
+			background-color: rgb(255,102,0) !important;
+			border: 3vw double white !important;
+		}
+
 	</style>
 
 </head>
@@ -136,7 +141,7 @@
 			})
 
 			$(".square").click(function(){
-				$(this).removeClass("change");
+				$(this).toggleClass("bgC");
 				last_class = classes[getRandomInt(0,classes.length)];
 				$(this).toggleClass(last_class);
 
