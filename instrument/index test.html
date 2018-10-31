@@ -38,18 +38,48 @@
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
 	<script type="text/paperscript" canvas="paperjsCanvas">
+
 		function onFrame(event) {
 
-			var text = new PointText(new Point(30, 30));
-			text.fillColor = 'black';
+			var text2 = new PointText({
+				point: (500,500),
+				justification: 'left',
+				fontSize: 30,
+				fillColor: 'red'
+			});
+
+			text2.content = 'orders four gallons of coffee';
+
+			var text = new PointText(new Point(100, 100));
+			text.fillColor = 'red';
+			text.strokeColor = 'black';
+			text.strokeWidth = 1;
+
+			var path = new Path.Rectangle(new Point(50, 25), new Size(50, 50));
+			path.fillColor = 'black';
+
+			view.onFrame = function(event) {
+    			path.rotate(3);
+			}
 
 			text.content = 'orders four gallons of coffee';	
 
 			view.onFrame = function(event) {
     		text.rotate(1);
     		text.fillColor.hue += 1;
-}
+
+    		text2.skew(1);
+
+			}
+
+			text.onClick = function(event) {
+   			 this.strokeColor = 'red';
+			}
 		}
+
+
+
+
 
 
 		
