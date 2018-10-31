@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vent</title>
+
+	<style type="text/css">
+
+		body, html{
+			width: 100vw;
+			height: 100vh;
+		}
+
+		.container{
+			width: 100vw;
+		}
+
+		a{
+			text-decoration: none;
+			color:black;
+		}
+
+		pre{
+			font-size: 12px;
+		}
+
+		#border {
+	    	border: 1px solid gray;
+		}
+
+		textarea {
+		    height: 50vh;
+		    width: 100vw;
+		}
+
+		#result{
+			font-family: monospace;	
+		}
+
+		.hello {
+			font-family: monospace;
+			padding-bottom: 1vh;
+		}
+
+/*		.circle{
+        display: inline-block;
+        margin: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        background-color: red;
+    }  */     
+
+	</style>
+
+	<!-- Load jquery -->
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+	<!-- Load the javascript cookie library -->
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+
+</head>
+<body>
+
+	<div class="wrapper">
+		<a href="index.html"><pre>don't feel like this anymore?</pre></a>
+		<div class="hello"></div>
+        <textarea id='text'></textarea>
+        <div id="result">
+            venting tracker: <span id="wordCount">0</span><br/>
+        </div>
+
+	</div>
+
+	<div class="container"></div>
+
+	<script type="text/javascript">
+		
+		// var allCircles = [],
+		// 		circle = "<div class='circle'></div>"; 
+
+		
+		// if (Cookies.getJSON('allCircles')) { 
+
+		// 	console.log("there are cookies!");
+		// 	allCircles = Cookies.getJSON('allCircles');
+
+		// 	for (var i = 0; i < allCircles.length; i++) {
+		// 		$(".container").append(allCircles[i]);
+		// 	}
+		// }
+
+
+		// $("body").click(function(){
+		// 	$(".container").append(circle);
+		// 	allCircles.push(circle);
+		// 	Cookies.set('allCircles', allCircles, {expires: 10}); 
+		// })
+
+		function getRandomInt(min, max) {
+			return Math.floor(Math.random() * (max - min)) + min;
+			}
+
+		// $(document).on('keypress', function(e) {
+		// 	  var key = e.key;
+		// 	  var img,
+		// 	  	  text;
+
+		// 	  console.log('keypress:', key);
+
+		// 	  if ( key == 'a' ) {
+		// 	    img = 'img/cat.JPG';
+		// 	  } else if ( key == 's' ) {
+		// 	    img = 'img/cat.jpg';
+		// 	  } else if ( e.keyCode == 32) {
+		// 	    img = 'img/cat.jpg';
+		// 	  } 
+
+
+			  // etc.
+
+			  // if ( img ) {
+			  //   $('body').append('<img src="' + img + '" style="position: fixed; top: '+ getRandomInt() * 100 + '%; left: ' + Math.random() * 100 + '%; transform: translate(-50%, -50%); max-width: 300px;">');
+			  // } else {
+			  //   $('body').append('<h2 style="position: relative; float:left;  ; font-size: ' + getRandomInt(50,100) + 'px;">' + key + '</h2>');
+			  // }
+
+			//     if ( img ) {
+			//     $('body').append('<img src="' + img + '" style="position: relative; float:left; max-width: 300px;">');
+			//   } else {
+			//     $('body').append('<h2 style="position: relative; float:left;  ; font-size: 20px;">' + key + '</h2>');
+			//   }
+			// });
+
+		counter = function() {
+		    var value = $('#text').val();
+
+		    if (value.length == 0) {
+		        $('#wordCount').html(0);
+		        $('#totalChars').html(0);
+		        return;
+		    }
+
+		    var regex = /\s+/gi;
+		    var wordCount = value.trim().replace(regex, ' ').split(' ').length;
+		    var totalChars = value.length;
+
+		    $('#wordCount').html(wordCount);
+		    $('#totalChars').html(totalChars);
+		};
+
+		$(document).ready(function() {
+		    $('#count').click(counter);
+		    $('#text').change(counter);
+		    $('#text').keydown(counter);
+		    $('#text').keypress(counter);
+		    $('#text').keyup(counter);
+
+		});
+		
+		function updateBackground() {
+		  var 
+		    hr = (new Date()).getHours(),
+		    body = document.body,
+		    bstyle = body.style, 
+		    hello = document.querySelector(".hello");
+		 //    r = getRandomInt(196, 245),
+		 //    g = getRandomInt(218, 252),
+		 //    b = getRandomInt(245, 252),
+		    
+			// r2 = 52,
+		 //    g2 = getRandomInt(69,188),
+		 //    b2 = 219
+
+		 //    r3 = getRandomInt(5,34),
+		 //    g3 = getRandomInt(5,12),
+		 //    b3 = 58
+
+		    // dayColor = [],
+		    // middayColor = [],
+		    // nightColor = [];
+
+		    // dayColor = "rgb(" + r + b + g +")";
+		    // middayColor = "rgb(" + r2 + b2 + g2 +")";
+		    // nightColor = "rgb(" + r3 + b3 + g3 +")";   
+
+
+		  if (hr < 10) {
+		    bstyle.backgroundColor = "yellow";
+		    bstyle.color = "black";
+		    hello.innerText = "bad sleep?";
+		  } else if (hr < 20) {
+		    bstyle.backgroundColor = "green";
+		    bstyle.color = "white";
+		    hello.innerText ="it's like noon, why are you so angry?";
+		  } else {
+		    bstyle.backgroundColor = "purple";
+		    bstyle.color = "white";
+		    hello.innerText = "tough day?";
+		  } 
+		}
+
+	setInterval(updateBackground, 1000 * 60);
+	updateBackground();
+
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
