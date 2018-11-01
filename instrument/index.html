@@ -78,9 +78,13 @@
 				}
 			}
 
+			function newDoc() {
+    			window.location.assign("http://www.evelinfung.com/f18js/instrument/moods.html")
+			}
+
 			text.onClick = function(event) {
-   			 this.fillColor = 'red';
-			}	
+   			 newDoc();
+			}
 
 
 
@@ -90,7 +94,7 @@
 
 </head>
 <body>
-	<a href="google.com">
+	<a href="moods.html">
 		<canvas id="paperjsCanvas" resize="true"></canvas>
 	</a>
 	

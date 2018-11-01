@@ -39,37 +39,82 @@
 
 	<script type="text/paperscript" canvas="paperjsCanvas">
 
+	var topLeft = view.center - [1000, 1000];
+	var bottomRight = view.center + [1000, 1000];
+
+	var path = new Path.Rectangle({
+	    topLeft: topLeft,
+	    bottomRight: bottomRight,
+	    // Fill the path with a gradient of three color stops
+	    // that runs between the two points we defined earlier:
+	    fillColor: {
+	        gradient: {
+	            stops: ['#e01b83', '#1f0a59']
+	        },
+	        origin: topLeft,
+	        destination: bottomRight
+	    }
+	});	
+
+	function newDoc() {
+    window.location.assign("https://www.google.com")
+	}
+
 		function onFrame(event) {
 
-			var text2 = new PointText({
-				point: (500,500),
-				justification: 'left',
-				fontSize: 30,
-				fillColor: 'red'
+			var text = new PointText({
+				point: (0,150),
+				fontSize: 25,
+				fillColor: 'black'
 			});
 
-			var text = new PointText(new Point(100, 100));
-			text.fillColor = 'red';
-			text.strokeColor = 'black';
-			text.strokeWidth = 1;
-
-			var path = new Path.Rectangle(new Point(50, 25), new Size(25, 25));
+			var path = new Path.Rectangle(new Point(100, 25), new Size(25, 25));
 			path.fillColor = 'black';
 
-			text.content = 'orders four gallons of coffee';	
+			text.content = '*orders four gallons of coffee*';	
+
+			var text2 = new PointText({
+				point: (450),
+				fontSize: 25,
+				fillColor: 'black'
+			});
+
+			var path2 = new Path.Rectangle(new Point(150, 100), new Size(25, 25));
+			path.fillColor = 'black';
+
+			text2.content = 'Hot mess? I prefer divine disaster';	
 
 			view.onFrame = function(event) {
-    		text.rotate(1);
+    		text.rotate(0.5);
     		path.fillColor.hue += 1;
-    		path.rotate(3);
+    		path.rotate(0.5);
 
 			}
 
 			path.onClick = function(event) {
    			 this.fillColor = 'red';
-			}	
+   			 newDoc();
+			}
+
+			if (text.rotate < 180) {
+				text.rotate(0);
+			}
 
 		}
+
+		var myCircle = new Path.Circle(new Point(200, 170), 100); myCircle.fillColor = 'pink';
+
+		 var myCircleB = myCircle.clone();
+			  myCircleB.fillColor = 'orange';
+			  myCircleB.position += new Point(80, 80);
+			  myCircleB.opacity = 0.6;
+			  myCircleB.blendMode = 'color-burn';
+			  myCircleB.scale(1.5);
+			  myCircleB.rotate(45);
+
+
+		
+		
 
 		
 	</script>

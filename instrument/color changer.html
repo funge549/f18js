@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>vent</title>
+	<title>unleash your emotions</title>
 
 	<style type="text/css">
 
@@ -41,25 +41,12 @@
 			padding-bottom: 1vh;
 		}
 
-/*		.circle{
-        display: inline-block;
-        margin: 10px;
-        width: 40px;
-        height: 40px;
-        border-radius: 20px;
-        background-color: red;
-    }  */     
 
 	</style>
 
-	<!-- Load jquery -->
-	<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-
 	<!-- Load the javascript cookie library -->
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+	<script src="./js/jquery-3.3.1.min.js"></script>  
 
 
 </head>
@@ -70,7 +57,7 @@
 		<div class="hello"></div>
         <textarea id='text'></textarea>
         <div id="result">
-            venting tracker: <span id="wordCount">0</span><br/>
+            emotions tracker: <span id="wordCount">0</span><br/>
         </div>
 
 	</div>
@@ -104,43 +91,42 @@
 			return Math.floor(Math.random() * (max - min)) + min;
 			}
 
-		// $(document).on('keypress', function(e) {
-		// 	  var key = e.key;
-		// 	  var img,
-		// 	  	  text;
+		$(document).on('keypress', function(e) {
+			  var key = e.key;
+			  var img,
+			  	  text;	  
 
-		// 	  console.log('keypress:', key);
+			if ( e.keyCode == 32) {
+			  		key == '-' 
+			 }
 
-		// 	  if ( key == 'a' ) {
-		// 	    img = 'img/cat.JPG';
-		// 	  } else if ( key == 's' ) {
-		// 	    img = 'img/cat.jpg';
-		// 	  } else if ( e.keyCode == 32) {
-		// 	    img = 'img/cat.jpg';
-		// 	  } 
+			  // if ( key == 'a' ) {
+			  //   img = 'img/cat.JPG';
+			  // } else if ( key == 's' ) {
+			  //   img = 'img/cat.jpg';
+			  // } else if ( e.keyCode == 32) {
+			  //   img = 'img/cat.jpg';
+			  // } 
 
+			  if ( img ) {
+			    $('body').append('<img src="' + img + '" style="position: relative; float:left; max-width: 300px;">');
+			  } else {
+			    $('body').append('<h2 style="position: relative; float:left;  ; font-size: 20px;">' + key + '</h2>');
+			  }
+			});
 
-			  // etc.
-
-			  // if ( img ) {
-			  //   $('body').append('<img src="' + img + '" style="position: fixed; top: '+ getRandomInt() * 100 + '%; left: ' + Math.random() * 100 + '%; transform: translate(-50%, -50%); max-width: 300px;">');
-			  // } else {
-			  //   $('body').append('<h2 style="position: relative; float:left;  ; font-size: ' + getRandomInt(50,100) + 'px;">' + key + '</h2>');
-			  // }
-
-			//     if ( img ) {
-			//     $('body').append('<img src="' + img + '" style="position: relative; float:left; max-width: 300px;">');
-			//   } else {
-			//     $('body').append('<h2 style="position: relative; float:left;  ; font-size: 20px;">' + key + '</h2>');
-			//   }
-			// });
+		function sayHi(){
+		  var txtName = document.getElementById("text");
+		  var txtOutput = document.getElementById("txtOutput");
+		  var name = txtName.value;
+		  txtOutput.value = "Hi there, " + name + "!"
+		 } 
 
 		counter = function() {
 		    var value = $('#text').val();
 
 		    if (value.length == 0) {
 		        $('#wordCount').html(0);
-		        $('#totalChars').html(0);
 		        return;
 		    }
 
@@ -149,43 +135,39 @@
 		    var totalChars = value.length;
 
 		    $('#wordCount').html(wordCount);
-		    $('#totalChars').html(totalChars);
 		};
 
 		$(document).ready(function() {
-		    $('#count').click(counter);
 		    $('#text').change(counter);
-		    $('#text').keydown(counter);
-		    $('#text').keypress(counter);
-		    $('#text').keyup(counter);
 
 		});
-		
+
 		function updateBackground() {
 		  var 
 		    hr = (new Date()).getHours(),
 		    body = document.body,
 		    bstyle = body.style, 
 		    hello = document.querySelector(".hello");
-		 //    r = getRandomInt(196, 245),
-		 //    g = getRandomInt(218, 252),
-		 //    b = getRandomInt(245, 252),
+
+		    r = getRandomInt(196, 245),
+		    g = getRandomInt(218, 252),
+		    b = getRandomInt(245, 252),
 		    
-			// r2 = 52,
-		 //    g2 = getRandomInt(69,188),
-		 //    b2 = 219
+			r2 = 52,
+		    g2 = getRandomInt(69,188),
+		    b2 = 219
 
-		 //    r3 = getRandomInt(5,34),
-		 //    g3 = getRandomInt(5,12),
-		 //    b3 = 58
+		    r3 = getRandomInt(5,34),
+		    g3 = getRandomInt(5,12),
+		    b3 = 58
 
-		    // dayColor = [],
-		    // middayColor = [],
-		    // nightColor = [];
+		    dayColor = [],
+		    middayColor = [],
+		    nightColor = [];
 
-		    // dayColor = "rgb(" + r + b + g +")";
-		    // middayColor = "rgb(" + r2 + b2 + g2 +")";
-		    // nightColor = "rgb(" + r3 + b3 + g3 +")";   
+		    dayColor = "rgb(" + r + b + g +")";
+		    middayColor = "rgb(" + r2 + b2 + g2 +")";
+		    nightColor = "rgb(" + r3 + b3 + g3 +")";   
 
 
 		  if (hr < 10) {
