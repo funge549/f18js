@@ -5,6 +5,8 @@
 
 	<style type="text/css">
 
+		@font-face {font-family: "Univers"; src: url("fonts/UniversLTStd-Black.otf");}
+
 		*{
 			margin: 0;
 			padding: 0;
@@ -15,7 +17,7 @@
 			top: 0px;
 			left: 0px;
 			width: 100%;
-			height: 100vh;
+			height: 100%;
 		}
 
 		#paperjsCanvas{
@@ -23,10 +25,11 @@
 			top: 0px;
 			left: 0px;*/
 			width: 100%;
-			height: 100vh;
-			background-color: white;
-		}
+			height: 100%;
+			overflow: auto;
+			font-family: "Univers";
 
+		}
 
 		
 	</style>
@@ -39,78 +42,205 @@
 
 	<script type="text/paperscript" canvas="paperjsCanvas">
 
+	function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+      }	
+	
+	var color,
+    	color2,
+    	b = getRandomInt(180,237),
+        r = getRandomInt(201,237);
+
+    color = "rgb(" + "143" + ",0," + b +")";  
+    color2 = "rgb(" + r + ",255,"  + b +")"; 	
+
 	var topLeft = view.center - [1000, 1000];
 	var bottomRight = view.center + [1000, 1000];
 
 	var path = new Path.Rectangle({
 	    topLeft: topLeft,
 	    bottomRight: bottomRight,
-	    // Fill the path with a gradient of three color stops
-	    // that runs between the two points we defined earlier:
-	    fillColor: {
-	        gradient: {
-	            stops: ['#e01b83', '#1f0a59']
-	        },
-	        origin: topLeft,
-	        destination: bottomRight
-	    }
+	    fillColor: 'blue',
+	    strokeColor: 'black',
+	    opacity: 0.9
 	});	
 
 	function newDoc() {
-    window.location.assign("https://www.google.com")
-	}
+          window.location.assign("http://www.evelinfung.com/f18js/instrument/dead.html")
+      }
+
+    function newDoc2() {
+          window.location.assign("http://www.evelinfung.com/f18js/instrument/hot.html")
+      } 
+
+    function newDoc3() {
+          window.location.assign("http://www.evelinfung.com/f18js/instrument/lies.html")
+      }
+
+    function newDoc4() {
+          window.location.assign("http://www.evelinfung.com/f18js/instrument/not_today.html")
+      } 
+
+    function newDoc5() {
+          window.location.assign("http://www.evelinfung.com/f18js/instrument/love.html")
+      }
+
+    function newDoc6() {
+          window.location.assign("http://www.evelinfung.com/f18js/instrument/vegan.html")
+      } 
+
+    function newDoc7() {
+          window.location.assign("http://www.evelinfung.com/f18js/instrument/dead.html")
+      }       
+
 
 		function onFrame(event) {
 
-			var text = new PointText({
-				point: (0,150),
-				fontSize: 25,
-				fillColor: 'black'
-			});
+			//texts
 
-			var path = new Path.Rectangle(new Point(100, 25), new Size(25, 25));
-			path.fillColor = 'black';
+			var text = new PointText(new Point(1000, 150)); 
+				
+				text.fontSize= 18;
+				text.fillColor= 'pink';
+				text.strokeColor= 'blue';
+				text.font= 'Univers';
+				text.content = '*orders four gallons of coffee*';
 
-			text.content = '*orders four gallons of coffee*';	
+			var text2 = text.clone();
+				text2.position += new Point(-500, 100);		
+				text2.fillColor= 'DeepPink';
+				text2.strokeColor= 'blue';
+				text2.content = 'Hot mess? I prefer divine disaster';
 
-			var text2 = new PointText({
-				point: (450),
-				fontSize: 25,
-				fillColor: 'black'
-			});
+			var text3 = text.clone();
+				text3.position += new Point(-100, 450);		
+				text3.fillColor= 'white';
+				text3.strokeColor= 'HotPink';
+				text3.content = 'what concealer do u use for your lies?';
 
-			var path2 = new Path.Rectangle(new Point(150, 100), new Size(25, 25));
-			path.fillColor = 'black';
+			var text4 = text.clone();
+				text4.position += new Point(-850, 450);		
+				text4.fillColor= 'white';
+				text4.strokeColor= 'red';
+				text4.content = 'not today, satan';		
 
-			text2.content = 'Hot mess? I prefer divine disaster';	
+			var text5 = text.clone();
+				text5.position += new Point(-900, 0);		
+				text5.fillColor= 'DeepPink';
+				text5.strokeColor= 'MediumPurple';
+				text5.content = '<3 i (hate) love you <3';
+
+			var text6 = text.clone();
+				text6.position += new Point(-600, 350);		
+				text6.fillColor= 'SpringGreen';
+				text6.strokeColor= 'DarkOrange';
+				text6.content = 'that healthy organic';		
+
+			var text7 = text.clone();
+				text7.position += new Point(-610, 350);		
+				text7.fillColor= 'DarkOrange';
+				text7.strokeColor= 'SpringGreen';
+				text7.content = 'vegan lifestyle';					
+
+
+			//effects 
 
 			view.onFrame = function(event) {
     		text.rotate(0.5);
-    		path.fillColor.hue += 1;
-    		path.rotate(0.5);
+    		//path.fillColor.hue += 1;
+    		text2.rotate(-0.3);
+    		text3.rotate(-0.1);
+    		text4.rotate(-1);
+    		text5.rotate(-0.1);
+    		text6.skew(-1,0.6);
+    		text7.skew(-1,0.6);
+
+    		myCircleB.skew(-1,1.5);
+    		myCircleF.skew(-1,0.3);
+
+
 
 			}
 
-			path.onClick = function(event) {
-   			 this.fillColor = 'red';
+			text.onClick = function(event) {
    			 newDoc();
 			}
 
-			if (text.rotate < 180) {
-				text.rotate(0);
+			text2.onClick = function(event) {
+   			 newDoc2();
 			}
+
+			text3.onClick = function(event) {
+   			 newDoc3();
+			}
+
+			text4.onClick = function(event) {
+   			 newDoc4();
+			}
+
+			text5.onClick = function(event) {
+   			 newDoc5();
+			}
+
+			text6.onClick = function(event) {
+   			 newDoc6();
+			}
+
+			text7.onClick = function(event) {
+   			 newDoc6();
+			}
+
 
 		}
 
-		var myCircle = new Path.Circle(new Point(200, 170), 100); myCircle.fillColor = 'pink';
+		var myCircle = new Path.Circle(new Point(200, 100), 70); myCircle.fillColor = color;
+		myCircle.opacity = 0.2;
 
 		 var myCircleB = myCircle.clone();
-			  myCircleB.fillColor = 'orange';
-			  myCircleB.position += new Point(80, 80);
-			  myCircleB.opacity = 0.6;
-			  myCircleB.blendMode = 'color-burn';
+			  myCircleB.fillColor = 'yellow';
+			  myCircleB.position += new Point(170, 100);
+			  myCircleB.opacity = 0.3;
 			  myCircleB.scale(1.5);
 			  myCircleB.rotate(45);
+
+		var myCircleC = myCircle.clone();
+			  myCircleC.fillColor = 'aqua';
+			  myCircleC.position += new Point(450, 280);
+			  myCircleC.opacity = 0.3;
+			  myCircleC.scale(1);
+			  myCircleC.rotate(45);
+
+		var myCircleD = myCircle.clone();
+			  myCircleD.fillColor = 'DeepSkyBlue';
+			  myCircleD.position += new Point(350, 410);
+			  myCircleD.opacity = 0.3;
+			  myCircleD.scale(0.6);
+			  myCircleD.rotate(45);	  
+
+		var myCircleE = myCircle.clone();
+			  myCircleE.fillColor = 'LightSkyBlue';
+			  myCircleE.position += new Point(550, 370);
+			  myCircleE.opacity = 0.3; 
+			  myCircleE.scale(0.3);
+
+
+		var myCircleF = myCircle.clone();
+			  myCircleF.fillColor = 'LightSkyBlue';
+			  myCircleF.position += new Point(650, 450);
+			  myCircleF.opacity = 0.3; 
+			  myCircleF.scale(0.3);
+
+		var myCircleG = myCircle.clone();
+			  myCircleG.fillColor = 'black';
+			  myCircleG.position += new Point(200, 350);
+			  myCircleG.opacity = 0.3; 
+			  myCircleG.scale(0.3);	  
+  
+
+
+
+	  
+			  
 
 
 		

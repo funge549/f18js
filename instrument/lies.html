@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>orders four gallons of coffee</title>
+  <title>what concelear do u use for your lies?</title>
 <head>
   <meta charset="utf-8">
 
   <style>
   
   body {
-    background-color:#f911de;
-    font-family: helvetica, sans-serif;
+    background-color:#2F4F4F;
+    font-family: helvectica, sans-serif;
     font-weight: bold;
+    color: white;
   }
 
   fieldset {
@@ -28,7 +29,7 @@
   .print-output-line {
     white-space: pre;
     padding: 5px;
-    font-family: monaco, monospace;
+    font-family: helvectica, sans-serif;
     font-size: .7em;
     position: relative;
     float: left;
@@ -49,7 +50,13 @@
     font-size: 30px;
   }
 
-   #other #cookie {
+   #other{
+    font-family: helvetica, sans-serif;
+    font-weight: bold;
+
+   } 
+
+   #cookie {
     font-family: helvetica, sans-serif;
     font-weight: bold;
 
@@ -74,17 +81,17 @@
  
   <form>
     <fieldset>
-      <label for="target">Pour it all out honey,</label>
+      <label for="target">what has the snake done now?</label>
       <input id="target" type="text">
     </fieldset>
   </form>
 
   <button id="other">
-    Want to release more stress?
+    release your problems
   </button>
 
   <button id="cookie">
-    Want to see your past?
+    check the previous times they were snakes
   </button>
 
   <script src="js/events.js"></script>
@@ -97,25 +104,20 @@
       }
 
     var opacity = 0.5,
-        b = getRandomInt(180,237),
-        r = getRandomInt(201,237),
         size,
-        color,
-        color2,
         height,
         width,
         opacity;
 
 
     size = getRandomInt(12,32);
-    color = "rgb(" + "143" + ",0," + b +")";  
-    color2 = "rgb(" + r + ",255,"  + b +")";  
+
 
     var xTriggered = 0;
     $( "#target" ).keypress(function( event ) {
      
      xTriggered++;
-      var msg = "Stress has been relieved " + xTriggered + " time(s).";
+      var msg = "snakes have been spotted " + xTriggered + " time(s).";
       $.print( msg);
     });
 
@@ -125,11 +127,15 @@
      
     $( "#other").click(function() {
       $( "#target" ).keypress();
-      $(this).css({"color": color, "background-color": "black"});
-      $("#target").css({"background-color": "yellow"});
-      $("body").css({"background-color": color, "color":color2});
+      $(this).css({"color": "Chartreuse ", "background-color": "Goldenrod"});
+      $("#target").css({"background-color": "violet"});
+      $("body").css({"background-color": "brown", "color":"paleGreen"});
 
     });
+
+    $( "#cookie").click(function() {
+       $(this).css({"background-color": "darkGreen", color: "white"});
+     })
 
     //cookies
 
@@ -151,7 +157,7 @@
     $("#cookie").click(function(){
 
       $("body").append(line);
-      $(".line").css({"background-color": "gray", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
+      $(".line").css({"background-color": "yellowGreen", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
 
       allLines.push(line);
 

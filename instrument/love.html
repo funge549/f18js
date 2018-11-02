@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>orders four gallons of coffee</title>
+  <title>&#60;3 i (hate) love you &#60;3 </title>
 <head>
   <meta charset="utf-8">
 
   <style>
   
   body {
-    background-color:#f911de;
-    font-family: helvetica, sans-serif;
+    background-color:#db95d8;
+    font-family: comic sans MS, cursive, sans-serif;
     font-weight: bold;
   }
 
@@ -49,8 +49,14 @@
     font-size: 30px;
   }
 
-   #other #cookie {
-    font-family: helvetica, sans-serif;
+   #other {
+     font-family: comic sans MS, cursive, sans-serif;
+    font-weight: bold;
+
+   }  
+
+   #cookie {
+     font-family: comic sans MS, cursive, sans-serif;
     font-weight: bold;
 
    }    
@@ -74,7 +80,8 @@
  
   <form>
     <fieldset>
-      <label for="target">Pour it all out honey,</label>
+      <label for="target">they love me, they love me not<br> do they?</label>
+
       <input id="target" type="text">
     </fieldset>
   </form>
@@ -97,19 +104,14 @@
       }
 
     var opacity = 0.5,
-        b = getRandomInt(180,237),
-        r = getRandomInt(201,237),
         size,
-        color,
-        color2,
         height,
         width,
         opacity;
 
 
     size = getRandomInt(12,32);
-    color = "rgb(" + "143" + ",0," + b +")";  
-    color2 = "rgb(" + r + ",255,"  + b +")";  
+
 
     var xTriggered = 0;
     $( "#target" ).keypress(function( event ) {
@@ -125,11 +127,15 @@
      
     $( "#other").click(function() {
       $( "#target" ).keypress();
-      $(this).css({"color": color, "background-color": "black"});
-      $("#target").css({"background-color": "yellow"});
-      $("body").css({"background-color": color, "color":color2});
+      $(this).css({"color": "white", "background-color": "plum"});
+      $("#target").css({"background-color": "deepSkyBlue"});
+      $("body").css({"background-color": "#f911de" , "color":"papayaWhip"});
 
     });
+
+     $( "#cookie").click(function() {
+       $(this).css({"background-color": "aqua", "color": "white"});
+     })
 
     //cookies
 
@@ -151,7 +157,7 @@
     $("#cookie").click(function(){
 
       $("body").append(line);
-      $(".line").css({"background-color": "gray", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
+      $(".line").css({"background-color": "lightCyan", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
 
       allLines.push(line);
 

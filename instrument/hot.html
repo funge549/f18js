@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>orders four gallons of coffee</title>
+  <title>hot mess? i prefer divine disaster</title>
 <head>
   <meta charset="utf-8">
 
   <style>
   
   body {
-    background-color:#f911de;
-    font-family: helvetica, sans-serif;
+    background-color: Bisque;
+    font-family: georgia, serif;
     font-weight: bold;
   }
 
@@ -49,8 +49,14 @@
     font-size: 30px;
   }
 
-   #other #cookie {
-    font-family: helvetica, sans-serif;
+   #other {
+    font-family: georgia, serif;
+    font-weight: bold;
+
+   }    
+
+   #cookie {
+    font-family: georgia, serif;
     font-weight: bold;
 
    }    
@@ -74,17 +80,17 @@
  
   <form>
     <fieldset>
-      <label for="target">Pour it all out honey,</label>
+      <label for="target">are you doing great sweetie?</label>
       <input id="target" type="text">
     </fieldset>
   </form>
 
   <button id="other">
-    Want to release more stress?
+    i wished...
   </button>
 
   <button id="cookie">
-    Want to see your past?
+    expose yourself
   </button>
 
   <script src="js/events.js"></script>
@@ -97,20 +103,14 @@
       }
 
     var opacity = 0.5,
-        b = getRandomInt(180,237),
-        r = getRandomInt(201,237),
         size,
-        color,
-        color2,
         height,
         width,
         opacity;
 
 
     size = getRandomInt(12,32);
-    color = "rgb(" + "143" + ",0," + b +")";  
-    color2 = "rgb(" + r + ",255,"  + b +")";  
-
+    
     var xTriggered = 0;
     $( "#target" ).keypress(function( event ) {
      
@@ -125,11 +125,16 @@
      
     $( "#other").click(function() {
       $( "#target" ).keypress();
-      $(this).css({"color": color, "background-color": "black"});
-      $("#target").css({"background-color": "yellow"});
-      $("body").css({"background-color": color, "color":color2});
+      $(this).css({"color": "Crimson", "background-color": "Salmon"});
+      $("#target").css({"background-color": "Lavender"});
+      $("body").css({"background-color": "hotPink", "color":"crimson"});
 
     });
+
+
+    $( "#cookie").click(function() {
+       $(this).css({"background-color": "salmon", color: "crimson"});
+     })
 
     //cookies
 
@@ -151,7 +156,7 @@
     $("#cookie").click(function(){
 
       $("body").append(line);
-      $(".line").css({"background-color": "gray", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
+      $(".line").css({"background-color": "LightPink", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
 
       allLines.push(line);
 

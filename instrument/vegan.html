@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>orders four gallons of coffee</title>
+  <title>that healthy vegan organic lifestyle</title>
 <head>
   <meta charset="utf-8">
 
   <style>
   
   body {
-    background-color:#f911de;
-    font-family: helvetica, sans-serif;
+    background-color:#e28c6f;
+    font-family: monaco, monospace;
     font-weight: bold;
   }
 
@@ -25,10 +25,11 @@
   #print-output {
     width: 100%;
   }
+
   .print-output-line {
     white-space: pre;
     padding: 5px;
-    font-family: monaco, monospace;
+    font-family: helvetica, sans-serif;
     font-size: .7em;
     position: relative;
     float: left;
@@ -49,10 +50,14 @@
     font-size: 30px;
   }
 
-   #other #cookie {
+   #other {
     font-family: helvetica, sans-serif;
     font-weight: bold;
+   }    
 
+   #cookie {
+    font-family: helvetica, sans-serif;
+    font-weight: bold;
    }    
 
   .line{
@@ -74,17 +79,17 @@
  
   <form>
     <fieldset>
-      <label for="target">Pour it all out honey,</label>
+      <label for="target">When was the last time you ate greens?</label>
       <input id="target" type="text">
     </fieldset>
   </form>
 
   <button id="other">
-    Want to release more stress?
+    click to feel better
   </button>
 
   <button id="cookie">
-    Want to see your past?
+    keep track of the greens you've eaten
   </button>
 
   <script src="js/events.js"></script>
@@ -97,8 +102,9 @@
       }
 
     var opacity = 0.5,
-        b = getRandomInt(180,237),
-        r = getRandomInt(201,237),
+        b = getRandomInt(41,90),
+        r = getRandomInt(67,150),
+        r2 = getRandomInt(140,200),
         size,
         color,
         color2,
@@ -108,14 +114,14 @@
 
 
     size = getRandomInt(12,32);
-    color = "rgb(" + "143" + ",0," + b +")";  
-    color2 = "rgb(" + r + ",255,"  + b +")";  
+    color = "rgb(" + r + ",232," + b +")";  
+    color2 = "rgb(" + r2 + ",100,"  + "20" +")";  
 
     var xTriggered = 0;
     $( "#target" ).keypress(function( event ) {
      
      xTriggered++;
-      var msg = "Stress has been relieved " + xTriggered + " time(s).";
+      var msg = "eating has happened" + xTriggered + " time(s).";
       $.print( msg);
     });
 
@@ -151,7 +157,7 @@
     $("#cookie").click(function(){
 
       $("body").append(line);
-      $(".line").css({"background-color": "gray", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
+      $(".line").css({"background-color": "chocolate", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
 
       allLines.push(line);
 
