@@ -45,14 +45,6 @@
 	function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
       }	
-	
-	var color,
-    	color2,
-    	b = getRandomInt(180,237),
-        r = getRandomInt(201,237);
-
-    color = "rgb(" + "143" + ",0," + b +")";  
-    color2 = "rgb(" + r + ",255,"  + b +")"; 	
 
 	var topLeft = view.center - [1000, 1000];
 	var bottomRight = view.center + [1000, 1000];
@@ -91,7 +83,11 @@
 
     function newDoc7() {
           window.location.assign("http://www.evelinfung.com/f18js/instrument/dead.html")
-      }       
+      }  
+
+    function newDoc7() {
+          window.location.assign("http://www.evelinfung.com/f18js/instrument/problem.html")
+      }         
 
 
 		function onFrame(event) {
@@ -140,27 +136,50 @@
 				text7.position += new Point(-610, 350);		
 				text7.fillColor= 'DarkOrange';
 				text7.strokeColor= 'SpringGreen';
-				text7.content = 'vegan lifestyle';					
+				text7.content = 'vegan lifestyle';	
+
+			var text8 = text.clone();
+				text8.position += new Point(-80, 230);		
+				text8.fillColor= 'DarkOrange';
+				text8.strokeColor= 'SpringGreen';
+				text8.content = '99 problems';
+
+			var text9 = text.clone();
+				text9.position += new Point(-100, 250);		
+				text9.fillColor= 'DarkOrange';
+				text9.strokeColor= 'SpringGreen';
+				text9.content = 'but a bitch';	
+
+			var text10 = text.clone();
+				text10.position += new Point(-120, 270);		
+				text10.fillColor= 'DarkOrange';
+				text10.strokeColor= 'SpringGreen';
+				text10.content = 'ain\u0027t one';							
 
 
 			//effects 
 
 			view.onFrame = function(event) {
     		text.rotate(0.5);
-    		//path.fillColor.hue += 1;
+    		path.fillColor.hue += 0.5;
     		text2.rotate(-0.3);
     		text3.rotate(-0.1);
     		text4.rotate(-1);
     		text5.rotate(-0.1);
     		text6.skew(-1,0.6);
     		text7.skew(-1,0.6);
+    		text9.skew(-1,0.6);
 
     		myCircleB.skew(-1,1.5);
     		myCircleF.skew(-1,0.3);
-
-
-
+    		myCircleQ.skew(-1,0.9);
+    		myCircleV.skew(-1,1.5);
+    		myCircleC.skew(-1,0.2);
+    		myCircleX.skew(-1,0.1);
+    		myCircleZ.skew(-1,0.4);
 			}
+
+			//links
 
 			text.onClick = function(event) {
    			 newDoc();
@@ -190,10 +209,13 @@
    			 newDoc6();
 			}
 
+			text8.onClick = function(event) {
+   			 newDoc7();
+			}
 
 		}
 
-		var myCircle = new Path.Circle(new Point(200, 100), 70); myCircle.fillColor = color;
+		var myCircle = new Path.Circle(new Point(200, 100), 70); myCircle.fillColor = "red";
 		myCircle.opacity = 0.2;
 
 		 var myCircleB = myCircle.clone();
@@ -228,7 +250,13 @@
 			  myCircleF.fillColor = 'LightSkyBlue';
 			  myCircleF.position += new Point(650, 450);
 			  myCircleF.opacity = 0.3; 
-			  myCircleF.scale(0.3);
+			  myCircleF.scale(0.5);
+
+		var myCircleF2 = myCircle.clone();
+			  myCircleF2.fillColor = 'LightSkyBlue';
+			  myCircleF2.position += new Point(600, 500);
+			  myCircleF2.opacity = 0.3; 
+			  myCircleF2.scale(1);	  
 
 		var myCircleG = myCircle.clone();
 			  myCircleG.fillColor = 'black';
@@ -236,17 +264,131 @@
 			  myCircleG.opacity = 0.3; 
 			  myCircleG.scale(0.3);	  
   
+		var myCircleH = myCircle.clone();
+			  myCircleH.fillColor = '#e28c6f';
+			  myCircleH.position += new Point(600, 0);
+			  myCircleH.opacity = 0.3; 
+			  myCircleH.scale(0.3);	 
 
+		var myCircleI = myCircle.clone();
+			  myCircleI.fillColor = 'chocolate';
+			  myCircleI.position += new Point(400, 50);
+			  myCircleI.opacity = 0.3; 
+			  myCircleI.scale(1);	  
 
-
-	  
+		var myCircleJ = myCircle.clone();
+			  myCircleJ.fillColor = 'bisque';
+			  myCircleJ.position += new Point(-200, -350);
+			  myCircleJ.opacity = 0.3; 
+			  myCircleJ.scale(0.3);	  
 			  
+		var myCircleK = myCircle.clone();
+			  myCircleK.fillColor = 'salmon';
+			  myCircleK.position += new Point(800, 550);
+			  myCircleK.opacity = 0.3; 
+			  myCircleK.scale(0.6);	  
+			  
+		var myCircleL = myCircle.clone();
+			  myCircleL.fillColor = 'crimson';
+			  myCircleL.position += new Point(1200, 850);
+			  myCircleL.opacity = 0.3; 
+			  myCircleL.scale(0.9);	
+
+		var myCircleM = myCircleL.clone();
+			  myCircleM.fillColor = 'white';
+			  myCircleM.position += new Point(0,150);
+			  myCircleM.opacity = 0.3; 
+			  myCircleM.scale(1);	  
+
+		var myCircleN = myCircleL.clone();
+			  myCircleN.fillColor = '#db95d8';
+			  myCircleN.position += new Point(200, -350);
+			  myCircleN.opacity = 0.3; 
+			  myCircleN.scale(0.3);	  
+			  
+		var myCircleO = myCircleL.clone();
+			  myCircleO.fillColor = 'plum';
+			  myCircleO.position += new Point(800, 550);
+			  myCircleO.opacity = 0.3; 
+			  myCircleO.scale(0.6);	  
+			  
+		var myCircleP = myCircleL.clone();
+			  myCircleP.fillColor = 'deepSkyBlue';
+			  myCircleP.position += new Point(100, 50);
+			  myCircleP.opacity = 0.3; 
+			  myCircleP.scale(0.9);	
+
+		var myCircleP = myCircleL.clone();
+			  myCircleP.fillColor = '#2F4F4F';
+			  myCircleP.position += new Point(-500, -850);
+			  myCircleP.opacity = 0.3; 
+			  myCircleP.scale(0.9);	
+
+		var myCircleP = myCircleL.clone();
+			  myCircleP.fillColor = 'white';
+			  myCircleP.position += new Point(-300, -350);
+			  myCircleP.opacity = 0.3; 
+			  myCircleP.scale(1.2);	
+
+		var myCircleQ = myCircleL.clone();
+			  myCircleQ.fillColor = 'Goldenrod';
+			  myCircleQ.position += new Point(-100, -550);
+			  myCircleQ.opacity = 0.3; 
+			  myCircleQ.scale(1.3);	
+		
+		var myCircleR = myCircleL.clone();
+			  myCircleR.fillColor = 'yellowGreen';
+			  myCircleR.position += new Point(-150, -50);
+			  myCircleR.opacity = 0.3; 
+			  myCircleR.scale(0.2);	
+
+		var myCircleS = myCircleL.clone();
+			  myCircleS.fillColor = 'Chartreuse';
+			  myCircleS.position += new Point(0, -100);
+			  myCircleS.opacity = 0.3; 
+			  myCircleS.scale(0.5);	
 
 
+		var myCircleT = myCircle.clone();
+			  myCircleT.fillColor = 'white';
+			  myCircleT.position += new Point(0, 500);
+			  myCircleT.opacity = 0.3; 
+			  myCircleT.scale(1.3);	
 		
-		
+		var myCircleU = myCircle.clone();
+			  myCircleU.fillColor = 'LightPink';
+			  myCircleU.position += new Point(-100,300);
+			  myCircleU.opacity = 0.3; 
+			  myCircleU.scale(0.2);	
 
-		
+		var myCircleV = myCircle.clone();
+			  myCircleV.fillColor = 'lavander';
+			  myCircleV.position += new Point(-50, 400);
+			  myCircleV.opacity = 0.3; 
+			  myCircleV.scale(0.5);		  	  	  	  	  	  	    	  	  	  	   			
+		var myCircleW = myCircle.clone();
+			  myCircleW.fillColor = 'LightPink';
+			  myCircleW.position += new Point(900,125);
+			  myCircleW.opacity = 0.3; 
+			  myCircleW.scale(0.2);	
+
+		var myCircleX = myCircle.clone();
+			  myCircleX.fillColor = 'white';
+			  myCircleX.position += new Point(1050, 400);
+			  myCircleX.opacity = 0.3; 
+			  myCircleX.scale(0.5);
+
+		var myCircleY = myCircle.clone();
+			  myCircleY.fillColor = 'white';
+			  myCircleY.position += new Point(1050, 0);
+			  myCircleY.opacity = 0.3; 
+			  myCircleY.scale(0.5);	 
+
+			var myCircleZ = myCircle.clone();
+			  myCircleZ.fillColor = 'white';
+			  myCircleZ.position += new Point(750, 100);
+			  myCircleZ.opacity = 0.3; 
+			  myCircleZ.scale(1.3);	 	   		  	  	  	  	  	  	    	  	  	  	   				  
 	</script>
 
 </head>

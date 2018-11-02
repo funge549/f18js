@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>not today, satan</title>
+  <title>hot mess? i prefer divine disaster</title>
 <head>
   <meta charset="utf-8">
 
   <style>
-
+  
   body {
-    background-color:white;
-    font-family: times, serif;
+    background-color: Bisque;
+    font-family: georgia, serif;
     font-weight: bold;
   }
 
@@ -49,17 +49,19 @@
     font-size: 30px;
   }
 
-   #other{
-    font-family: times, serif;
+   #other {
+    font-family: georgia, serif;
     font-weight: bold;
+
    }    
 
    #cookie {
-    font-family: times, serif;
+    font-family: georgia, serif;
     font-weight: bold;
+
    }    
 
-    #home {
+   #home {
     position: fixed;
     bottom: 2.5vh;
     right: 2.5vw;
@@ -74,7 +76,6 @@
     font-family: helvetica, sans-serif;
     font-weight: bold;
    }   
-
 
   .line{
     float:left;
@@ -95,27 +96,26 @@
  
   <form>
     <fieldset>
-      <label for="target">Tell me about today's accomplishments</label>
+      <label for="target">are you doing great sweetie?</label>
       <input id="target" type="text">
     </fieldset>
   </form>
 
   <button id="other">
-    click to beat satan!
+    i wished...
   </button>
 
   <button id="cookie">
-    Want to see your previous accomplishments?
+    expose yourself
   </button>
 
-    <button id="end">
+  <button id="end">
     feeling better?
   </button>
 
   <button id="home">
     still feel emotional?
   </button>
-
 
   <script src="js/events.js"></script>
 
@@ -126,29 +126,23 @@
       return Math.floor(Math.random() * (max - min)) + min;
       }
 
-      function newDoc() {
-    window.location.assign("http://www.evelinfung.com/f18js/instrument/moods.html")
+    function newDoc() {
+      window.location.assign("http://www.evelinfung.com/f18js/instrument/moods.html")
     }
 
-  function newDoc2() {
-    window.location.assign("http://www.evelinfung.com/f18js/instrument/thanks.html")
+    function newDoc2() {
+      window.location.assign("http://www.evelinfung.com/f18js/instrument/thanks.html")
     }  
 
     var opacity = 0.5,
-        b = getRandomInt(180,237),
-        r = getRandomInt(76,226),
         size,
-        color,
-        color2,
         height,
         width,
         opacity;
 
 
     size = getRandomInt(12,32);
-    color = "rgb(" + r + ",8," + "8" +")";  
-    color2 = "rgb(" + r + ",255,"  + b +")";  
-
+    
     var xTriggered = 0;
     $( "#target" ).keypress(function( event ) {
      
@@ -163,14 +157,15 @@
      
     $( "#other").click(function() {
       $( "#target" ).keypress();
-      $(this).css({"color": color, "background-color": "white"});
-      $("#target").css({"background-color": "red"});
-      $("body").css({"background-color": color, "color":color2});
+      $(this).css({"color": "Crimson", "background-color": "Salmon"});
+      $("#target").css({"background-color": "Lavender"});
+      $("body").css({"background-color": "hotPink", "color":"crimson"});
 
     });
 
+
     $( "#cookie").click(function() {
-       $(this).css({"background-color": "black", color: "red"});
+       $(this).css({"background-color": "salmon", color: "crimson"});
      })
 
     //cookies
@@ -193,7 +188,7 @@
     $("#cookie").click(function(){
 
       $("body").append(line);
-      $(".line").css({"background-color": "black", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
+      $(".line").css({"background-color": "LightPink", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
 
       allLines.push(line);
 
@@ -201,10 +196,11 @@
 
     })
 
-  $("#home").click(function(){
+    $("#home").click(function(){
       newDoc()
     })
-  $("#end").click(function(){
+
+    $("#end").click(function(){
       newDoc2()
     })
     

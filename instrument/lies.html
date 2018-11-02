@@ -60,7 +60,23 @@
     font-family: helvetica, sans-serif;
     font-weight: bold;
 
-   }    
+   }
+
+   #home {
+    position: fixed;
+    bottom: 2.5vh;
+    right: 2.5vw;
+    font-family: helvetica, sans-serif;
+    font-weight: bold;
+   } 
+
+   #end {
+    position: fixed;
+    bottom: 5.5vh;
+    right: 2.5vw;
+    font-family: helvetica, sans-serif;
+    font-weight: bold;
+   }      
 
   .line{
     float:left;
@@ -94,6 +110,14 @@
     check the previous times they were snakes
   </button>
 
+  <button id="end">
+    feeling better?
+  </button>
+
+  <button id="home">
+    still feel emotional?
+  </button>
+
   <script src="js/events.js"></script>
 
    
@@ -102,6 +126,14 @@
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
       }
+
+    function newDoc() {
+      window.location.assign("http://www.evelinfung.com/f18js/instrument/moods.html")
+    }
+
+    function newDoc2() {
+      window.location.assign("http://www.evelinfung.com/f18js/instrument/thanks.html")
+    }    
 
     var opacity = 0.5,
         size,
@@ -163,6 +195,13 @@
 
       Cookies.set('allLines', allLines, {expires: 10});
 
+    })
+
+    $("#home").click(function(){
+      newDoc()
+    })
+    $("#end").click(function(){
+      newDoc2()
     })
     
 
