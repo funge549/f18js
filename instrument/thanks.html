@@ -39,19 +39,17 @@
 
 	<script type="text/paperscript" canvas="paperjsCanvas">
 		
-		var count = 15;
+		var count = 100;
 
-		var text = new PointText({
+		var square = new Path.Rectangle({
 			point: view.center,
-			justification: 'center',
-			fontSize: 100,
+			size: view.center,
 			fillColor: '#e01b83',
+			opacity: 0.2
 		});
 
-		text.content = 'unleash your emotions here';
 
-
-		var symbol = new Symbol(text);
+		var symbol = new Symbol(square);
 
 		for (var i = 0; i < count; i++) {
 			var center = Point.random() * view.size;
@@ -61,7 +59,7 @@
 		
 			function onFrame(event) {
 
-				text.fillColor.hue -= 5;
+				square.fillColor.hue -= 1;
 
 				for (var i = 0; i < count; i++) {
 					var item = project.activeLayer.children[i];
@@ -73,15 +71,6 @@
 					}
 				}
 			}
-
-
-		function newDoc() {
-			window.location.assign("http://www.evelinfung.com/f18js/instrument/moods.html")
-		}
-
-		text.onClick = function(event) {
-			 newDoc();
-		}
 
 		
 	</script>
