@@ -18,6 +18,7 @@
     border-width: 0px;
     border-style: none;
   }
+  
   input {
     display: block;
     margin-bottom: .25em;
@@ -101,9 +102,9 @@
     </fieldset>
   </form>
 
-  <button id="other">
+<!--   <button id="other">
     i wished...
-  </button>
+  </button> -->
 
   <button id="cookie">
     expose yourself
@@ -143,11 +144,31 @@
 
     size = getRandomInt(12,32);
     
+
+    var emptySentence = "";
+
+    if(Cookies.get("sentence")){
+
+      emptySentence = Cookies.get("sentence");
+
+      $("#target").val(emptySentence);
+
+    }
+
     var xTriggered = 0;
     $( "#target" ).keypress(function( event ) {
      
+      var currentText = $("#target").val();
+
+      console.log(currentText)
+
+      emptySentence = currentText;
+
+      Cookies.set("sentence", emptySentence, {expires: 10});
+
+
      xTriggered++;
-      var msg = "Stress has been relieved " + xTriggered + " time(s).";
+      var msg = currentText;
       $.print( msg);
     });
 
@@ -170,31 +191,31 @@
 
     //cookies
 
-    var allLines = [],
-    line = "<div class='line'></div>";
+    // var allLines = [],
+    // line = "<div class='line'></div>";
 
-    if (Cookies.getJSON('allLines')){
-      console.log("cookies are creeping on you");
+    // if (Cookies.getJSON('allLines')){
+    //   console.log("cookies are creeping on you");
 
-      allLines = Cookies.getJSON('allLines')
+    //   allLines = Cookies.getJSON('allLines')
 
-      for (var i = 0; i < allLines.length; i++) {
+    //   for (var i = 0; i < allLines.length; i++) {
 
-        $("body").append(allLines[i]);
-      }
-    }
+    //     $("body").append(allLines[i]);
+    //   }
+    // }
     
 
-    $("#cookie").click(function(){
+    // $("#cookie").click(function(){
 
-      $("body").append(line);
-      $(".line").css({"background-color": "LightPink", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
+    //   $("body").append(line);
+    //   $(".line").css({"background-color": "LightPink", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
 
-      allLines.push(line);
+    //   allLines.push(line);
 
-      Cookies.set('allLines', allLines, {expires: 10});
+    //   Cookies.set('allLines', allLines, {expires: 10});
 
-    })
+    // })
 
     $("#home").click(function(){
       newDoc()

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js apis</title>
+
+	<style type="text/css">
+		
+	body{
+		background-color: salmon;
+		transition: background-color 3s ease-in-out;
+
+
+	}
+		.calendar{
+		display: block;
+		position: fixed;
+		top: 1em;
+		right: 1em;
+		color: red;
+		font-family: sans-serif;
+		font-weight: bold;
+	}
+
+	.button{
+		position: fixed;
+		bottom: 1.5em;
+		background-color: transparent;
+	    border: none;
+	    color: black;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 32px;
+	    margin: 4px 2px;
+	    cursor: pointer;
+	    opacity: 0.5;
+	}
+
+	.button:hover {
+		opacity: 1;
+		transform: scale(1.5);
+		transition: ease-in 0.5s;
+
+	}
+
+	.temp {
+		left: 2em;
+	}
+
+	.sky {
+		left: 3em;
+	}
+
+	.air{
+		left: 4.5em;
+	}
+
+	.currentT {
+		width: 0;
+		height: 0;
+		border-left: 50px solid transparent;
+		border-right: 50px solid transparent;
+		border-bottom: 100px solid red;
+		position: fixed;
+		/*float: left;*/
+/*		display: inherit;*/
+}
+
+	.minT {
+		width: 0;
+		height: 0;
+		border-left: 25px solid transparent;
+		border-right: 25px solid transparent;
+		border-bottom: 50px solid yellow;
+		position: fixed;
+}
+
+	.maxT {
+		width: 0;
+		height: 0;
+		border-left: 25px solid transparent;
+		border-right: 25px solid transparent;
+		border-bottom: 50px solid blue;
+		position: fixed;
+}
+
+
+	.wind{
+		width: 200px;
+		background-color: white;
+		opacity: 0.5;
+		margin-top: auto;
+		margin-bottom: auto;
+		margin-left: auto;
+		margin-right: auto;
+		position: relative;
+		display: inline-block;
+		transition: transform 2s;
+
+}
+
+	.cloudy{
+		height: 50px;
+	  	width: 50px;
+	  	background-color: white;
+	  	border-radius: 50%;
+	  	position: relative;
+
+	}
+
+	</style>
+
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+	<script type="text/javascript">
+
+		function getRandomInt(min, max) {
+			return Math.floor(Math.random() * (max - min)) + min;
+		}
+
+			const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+				];
+
+			var today = new Date(),
+				dd = today.getDate(),
+				yyyy = today.getFullYear();
+					
+			if(dd<10) {
+			    dd = '0'+dd
+			} 
+
+			if(mm<10) {
+			    mm = '0'+mm
+			} 
+
+			today = dd  + mm[today.getMonth()] + yyyy;
+			document.write(today);
+
+		// $("body").addClass("calendar");	
+
+	$(document).ready(function(){
+
+	    $.get( "http://api.openweathermap.org/data/2.5/weather?id=5128638&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
+
+
+     	var weather = data.main;
+
+     	function temperatures(){
+
+	    	var tempK = weather.temp,
+	     		tempKN = weather.temp_min,
+	     		tempKX = weather.temp_max,
+	     		tempC = tempK-273.15,
+	     		tempCN = tempKN-273.15,
+	     		tempCX = tempKX-273.15,
+	     		temperature = Math.floor(tempC)+3,
+	     		nTemperature = Math.floor(tempCN)+10,
+	     		xTemperature = Math.floor(tempCX)+1;
+
+	     	var positionY = getRandomInt(20,30),
+	     		positionX = getRandomInt(30,50),
+
+	     		rPositionY = getRandomInt(25,40),
+	     		rPositionX = getRandomInt(60,80),
+
+	     		lPositionY = getRandomInt(4,15),
+	     		lPositionX = getRandomInt(2,22);
+
+	     	for (var i = 0; i < temperature; i++) {
+	     		
+	     		var triangle = $("<div/>"); 
+
+	     		triangle.addClass("currentT");
+
+	     		$("body").append(triangle);
+
+	     		$(".currentT").css({
+	     			"top" :  positionY + "em",
+	     			"left" : positionX + "em"
+	     			})
+	     		}
+
+	     	for (var t = 0; t < nTemperature; t++) {
+	     		
+	     		var triangle2 = $("<div/>");
+
+	     		triangle2.addClass("minT");
+
+	     		$("body").append(triangle2);
+
+	     		$(".minT").css({
+	     			"top" :  lPositionY + "em",
+	     			"left" : lPositionX + "em"
+	     			})
+	     		}
+
+	     		for (var x = 0; x < xTemperature; x++) {
+	     		
+	     		var triangle3 = $("<div/>") ;
+
+	     		triangle3.addClass("maxT");
+
+	     		$("body").append(triangle3);
+
+	     		$(".maxT").css({
+	     			"top" :  rPositionY + "em",
+	     			"left" : rPositionX + "em"
+	     			})
+	     		}
+
+     	}
+
+
+     	$( ".temp").click(function() {
+  			$(temperatures).toggle();
+    	});
+
+	     	// if(tempC > 25){
+	     	// 	$("body").css({"background-color" : "#d6e5ff"})
+	     	// 	// $(".positiveT").css({"color": "red"})
+
+
+	     	// }else if(tempC < 30){
+	     	// 	$("body").css({"background-color" : "#ffffff"})
+	     	// 	// $(".positiveT").css({"color": "black"})
+	     	// }
+
+	    function atmosphere(){
+
+	    var clouds = data.clouds.all,
+	    	precipitation = data.weather[0].description,
+	    	positionY = getRandomInt(20,30),
+     		positionX = getRandomInt(0,20);
+
+	   	for (var c = 0; c < clouds.length; c++) {
+	   		var cloud = $("<div/>");
+	   		cloud.addClass("cloudy");
+	   		$("body").append(cloud);
+	   		$(".cloudy").css({
+	     			"top" :  positionY + "em",
+	     			"left" : positionX + "em",
+	     			})
+     		}
+
+	    }
+
+	    
+	    $( ".sky").click(function() {
+  			$(cloud).toggle();
+    	});	
+
+	    function wind(){
+
+     		var amount = data.wind.speed,
+     			degree = data.wind.deg,
+     			amountWind = Math.floor(amount)/4,
+     			positionY = getRandomInt(20,30),
+     			positionX = getRandomInt(0,20);
+
+
+     		for (var w = 0; w < amount; w++) {
+	     		var line = $("<div/>"); 
+	     		line.addClass("wind");
+	     		$("body").append(line);
+	     		$(".wind").css({
+	     			"top" :  positionY + "em",
+	     			"left" : positionX + "em",
+	     			"transform" : "rotate( " + degree + "deg)",
+	     			"height" : amountWind + "em"
+	     			})
+     		}
+	    }
+
+
+	    $( ".air").click(function() {
+  			$(wind).toggleClass();
+    	});	     	
+
+	    });
+	})
+
+	</script>
+
+</head>
+<body>
+	<div id="openweather"></div>
+
+	<button class="button temp">
+    	&#176;
+  	</button>
+
+  	<button class="button sky">	
+		&#8258;
+  	</button>
+
+  	<button class="button air">	
+		&#12336;
+  	</button>
+
+</body>
+</html>

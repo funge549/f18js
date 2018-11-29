@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vent</title>
+
+	<style type="text/css">
+
+		html, body{
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100vh;
+		}
+
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	
+	<script type="text/javascript">
+
+		var url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=n8crr5x2p5cjGMmRxvynqIDBDJ4qZ6ZMLqrPl1lm";
+
+
+
+
+		$.ajax({
+		  url: url,
+		  success: function(result){
+
+		  	//console.log(result.photos)
+
+		  	 var images = result.photos;
+
+		  	 	for (var i = 0; i < images.length; i++) {
+
+		  	 		 console.log(images[i]);
+
+		  	 	}
+
+		  	 // $("#apod_img_id").attr("src", result.url);	
+
+		}	
+
+		});
+ 
+
+		
+
+	</script>	
+
+</head>
+<body>
+
+  <img id="apod_img_id" width="250px"/>
+
+
+</body>	
+
+</html>
+
+
+
+
+
+
+
+
+
