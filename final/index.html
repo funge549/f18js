@@ -29,13 +29,33 @@
 		  url: url,
 		  success: function(result){
 
-		  	//console.log(result.photos)
+		  	//console.log(result.photos
 
-		  	 var images = result.photos;
+		  	
 
-		  	 	for (var i = 0; i < images.length; i++) {
+		  	  var images = result.photos;
 
-		  	 		 console.log(images[i]);
+		  	  	console.log(images)
+		  	   
+
+		  	 	for (var z = 0; z < 10; z++) {
+
+		  	 		var imageUrl = images[z].img_src;
+
+		  	 		var triangle = $("<div/>"); 
+
+
+
+		     		
+
+		  	 		$("body").append(`
+
+	     			<img src="${imageUrl}"</img>
+
+	     			`
+
+	     			)
+
 
 		  	 	}
 

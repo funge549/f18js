@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js apis</title>
+
+	<style type="text/css">
+		
+	body{
+		background-color: salmon;
+		transition: background-color 3s ease-in-out;
+	}
+
+
+
+	</style>
+
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+	<script type="text/javascript">
+
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min)) + min;
+	}
+
+	const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+				];
+
+	var today = new Date(),
+		dd = today.getDate(),
+		yyyy = today.getFullYear();
+
+
+		if(dd<10) {
+		    dd = '0'+dd
+		} 
+
+		if(mm<10) {
+		    mm = '0'+mm
+		} 
+
+		today = dd  + mm[today.getMonth()] + yyyy;
+
+
+
+	document.getElementById('day').innerHTML = dd;
+	//console.log("mins: ", mins)
+	document.getElementById('month').innerHTML = mm;
+	document.getElementById('year').innerHTML = yyyy;
+
+
+
+
+
+
+	</script>
+
+</head>
+<body>
+
+
+
+		<div class='times'>
+	
+			<input type="text" id="day" name="hrs" value="0" size="3" maxlength="3" />
+		</div>
+
+		<div class='times'>
+			
+			<input type="text" id="month" name="mns" value="0" size="3" maxlength="3" /> 
+		</div>
+
+		<div class='times'>
+			
+			<input type="text" id="year" name="scs" value="0" size="2" maxlength="2" />
+		</div>
+
+
+</body>
+</html>

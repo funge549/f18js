@@ -11,7 +11,8 @@
 
 
 	}
-		.calendar{
+
+	.calendar{
 		display: block;
 		position: fixed;
 		top: 1em;
@@ -55,33 +56,56 @@
 		left: 4.5em;
 	}
 
+	#left {
+		position: relative;
+		height: 100%;
+		width: 100%;
+
+	}
+	
+	#middle {
+		position: relative;
+		height: 100%;
+		width: 100%;
+
+	}
+	
+	#right {
+		position: relative;
+		height: 100%;
+		width: 100%;
+
+	}
+
+
 	.currentT {
+		position: fixed;
 		width: 0;
 		height: 0;
 		border-left: 50px solid transparent;
 		border-right: 50px solid transparent;
 		border-bottom: 100px solid red;
-		position: fixed;
-		/*float: left;*/
-/*		display: inherit;*/
+
 }
 
 	.minT {
+		position: fixed;
 		width: 0;
 		height: 0;
 		border-left: 25px solid transparent;
 		border-right: 25px solid transparent;
 		border-bottom: 50px solid yellow;
-		position: fixed;
+
 }
 
 	.maxT {
+		position: fixed;
 		width: 0;
 		height: 0;
 		border-left: 25px solid transparent;
 		border-right: 25px solid transparent;
 		border-bottom: 50px solid blue;
-		position: fixed;
+
 }
 
 
@@ -96,15 +120,37 @@
 		position: relative;
 		display: inline-block;
 		transition: transform 2s;
-
-}
+	}
 
 	.cloudy{
+		position: fixed;
 		height: 50px;
 	  	width: 50px;
 	  	background-color: white;
 	  	border-radius: 50%;
-	  	position: relative;
+	}
+
+	.rain{
+		height: 50px;
+	  	width: 50px;
+	  	border-radius: 50%;
+	  	border: solid black 2px;
+
+	}
+
+	.thunder{
+		width: 200px;
+		height: 25px;
+		border: solid white 2px;
+
+	}
+
+	.snow{
+		height: 100px;
+	  	width: 25px;
+	  	background-color: #555;
+	  	border-radius: 50%;
+	  	transform: rotate(25deg);
 
 	}
 
@@ -118,27 +164,39 @@
 			return Math.floor(Math.random() * (max - min)) + min;
 		}
 
-			const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+		const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
 				];
 
-			var today = new Date(),
-				dd = today.getDate(),
-				yyyy = today.getFullYear();
+		var today = new Date(),
+			dd = today.getDate(),
+			yyyy = today.getFullYear();
+
 					
-			if(dd<10) {
-			    dd = '0'+dd
-			} 
+		if(dd<10) {
+		    dd = '0'+dd
+		} 
 
-			if(mm<10) {
-			    mm = '0'+mm
-			} 
+		if(mm<10) {
+		    mm = '0'+mm
+		} 
 
-			today = dd  + mm[today.getMonth()] + yyyy;
+		today = dd  + mm[today.getMonth()] + yyyy;
 			document.write(today);
 
-		// $("body").addClass("calendar");	
+		// document.getElementById('day').innerHTML = dd;	
+		 // document.getElementById('month').innerHTML = mm;
+		 // document.getElementById('year').innerHTML = yyyy;	
+
+
+		
+		 
 
 	$(document).ready(function(){
+
+
+
+	
+
 
 	    $.get( "http://api.openweathermap.org/data/2.5/weather?id=5128638&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
 
@@ -172,7 +230,7 @@
 
 	     		triangle.addClass("currentT");
 
-	     		$("body").append(triangle);
+	     		$("#left").append(triangle);
 
 	     		$(".currentT").css({
 	     			"top" :  positionY + "em",
@@ -186,21 +244,34 @@
 
 	     		triangle2.addClass("minT");
 
-	     		$("body").append(triangle2);
+	     		$("#middle").append(triangle2);
 
 	     		$(".minT").css({
 	     			"top" :  lPositionY + "em",
 	     			"left" : lPositionX + "em"
 	     			})
+
+	     		$(".minT").each(function(){
+
+	     			var randomNumber = Math.random()*10
+	     			var randomNumber2 = Math.random()*10
+
+	     			$(this).css({
+	     			"top" :  randomNumber + "em",
+	     			"left" : randomNumber2 + "em"
+	     			})
+
+	     		})
+
 	     		}
 
-	     		for (var x = 0; x < xTemperature; x++) {
+	     	for (var x = 0; x < xTemperature; x++) {
 	     		
 	     		var triangle3 = $("<div/>") ;
 
 	     		triangle3.addClass("maxT");
 
-	     		$("body").append(triangle3);
+	     		$("#right").append(triangle3);
 
 	     		$(".maxT").css({
 	     			"top" :  rPositionY + "em",
@@ -212,7 +283,12 @@
 
 
      	$( ".temp").click(function() {
-  			$(temperatures).toggle();
+  			//$(temperatures).toggle();
+
+  			if($(".minT").length){
+  				$(".minT").remove()
+  			}
+  			temperatures();
     	});
 
 	     	// if(tempC > 25){
@@ -227,27 +303,48 @@
 
 	    function atmosphere(){
 
-	    var clouds = data.clouds.all,
-	    	precipitation = data.weather[0].description,
-	    	positionY = getRandomInt(20,30),
-     		positionX = getRandomInt(0,20);
+	    	var white = data.clouds.all,
+	    		precipitation = data.weather[0].description,
+				positionY2 = getRandomInt(20,30),
+				positionX2 = getRandomInt(0,20);
 
-	   	for (var c = 0; c < clouds.length; c++) {
-	   		var cloud = $("<div/>");
-	   		cloud.addClass("cloudy");
-	   		$("body").append(cloud);
-	   		$(".cloudy").css({
-	     			"top" :  positionY + "em",
-	     			"left" : positionX + "em",
-	     			})
-     		}
+			for (var c = 0; c < white; c++) {
+
+				var nube = $("<div/>");
+				nube.addClass("cloudy");
+				$("#circles").append(nube);
+				$(".cloudy").css({
+					"top" :  positionY2 + "em",
+     				"left" : positionX2 + "em",
+				})
+				
+			}
+
+			if(precipitation == "rain" ){
+	     		$("body").css({"background-color" : "red"})	
+	     	}else if(precipitation == "shower Rain"){
+	     		$("body").css({"background-color" : "white"})
+	     		// $(".positiveT").css({"color": "black"})
+	     	}else if(precipitation == "thunderstorm"){
+	     		$("body").css({"background-color" : "blue"})
+	     		// $(".positiveT").css({"color": "black"})
+	     	}else if(precipitation == "snow"){
+	     		$("body").css({"background-color" : "green"})
+	     		// $(".positiveT").css({"color": "black"})
+	     	}else if(precipitation == "mist"){
+	     		$("body").css({"background-color" : "yellow"})
+	     		// $(".positiveT").css({"color": "black"})
+	     	}else{
+	     		$("body").css({"background-color" : "blue"})
+	     		// $(".positiveT").css({"color": "black"})
+	     	}
+
 
 	    }
 
-	    
-	    $( ".sky").click(function() {
-  			$(cloud).toggle();
-    	});	
+		$( ".sky").click(function() {
+	  			$(atmosphere).toggleClass();
+	    	});	
 
 	    function wind(){
 
@@ -273,17 +370,41 @@
 
 
 	    $( ".air").click(function() {
-  			$(wind).toggleClass();
+  			$(wind).toggle();
+  			// $(wind).css({opacity:"1"});
     	});	     	
 
 	    });
+
 	})
 
 	</script>
 
 </head>
 <body>
-	<div id="openweather"></div>
+	<div id="left"></div>
+	<div id="middle"></div>
+	<div id="right"></div>
+
+	<div id="circles"></div>
+	<div class="rain"></div>
+	<div class="thunder"></div>
+	<div class="snow"></div>
+
+
+<!-- 	<div class='times'>
+		<input type="text" id="day" name="dd"  size="3" maxlength="3" /> 
+	</div>
+
+	<div class='times'>
+		<input type="text" id="month" name="mm"  size="3" maxlength="3" /> 
+	</div>
+
+	<div class='times'>
+		<input type="text" id="year" name="yyyy"  size="3" maxlength="3" /> 
+	</div>
+ -->
+
 
 	<button class="button temp">
     	&#176;
