@@ -1,90 +1,463 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>vent</title>
+	<title>js apis</title>
 
-	<style type="text/css">
+	<style type="text/css">	
+		body{
+			background-color: salmon;
+			transition: background-color 3s ease-in-out;
+		}
 
-		html, body{
+		.button{
 			position: fixed;
-			top: 0px;
-			left: 0px;
+			bottom: 1.5em;
+			background-color: transparent;
+		    border: none;
+		    color: black;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 32px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+		    opacity: 0.5;
+		}
+
+		.button:hover {
+			opacity: 1;
+			transform: scale(1.5);
+			transition: ease-in 0.5s;
+		}
+
+		.temp {
+			left: 2em;
+		}
+
+		.sky {
+			left: 3em;
+		}
+
+		.air{
+			left: 4.5em;
+		}
+
+		#left {
+			position: relative;
+			height: 100%;
 			width: 100%;
-			height: 100vh;
+		}
+		
+		#middle {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+		}
+		
+		#right {
+			position: relative;
+			height: 100%;
+			width: 100%;
+		}
+
+		.currentT {
+			position: fixed;
+			width: 0;
+			height: 0;
+			border-left: 50px solid transparent;
+			border-right: 50px solid transparent;
+			border-bottom: 100px solid red;
+		}
+
+		.minT {
+			position: fixed;
+			width: 0;
+			height: 0;
+			border-left: 25px solid transparent;
+			border-right: 25px solid transparent;
+			border-bottom: 50px solid yellow;
+		}
+
+		.maxT {
+			position: fixed;
+			width: 0;
+			height: 0;
+			border-left: 25px solid transparent;
+			border-right: 25px solid transparent;
+			border-bottom: 50px solid blue;
+		}
+
+		.wind{
+			width: 200px;
+			background-color: white;
+			opacity: 0.5;
+			margin-top: auto;
+			margin-bottom: auto;
+			margin-left: auto;
+			margin-right: auto;
+			position: relative;
+			display: inline-block;
+			transition: transform 2s;
+		}
+
+		.cloudy{
+			position: fixed;
+			width: 75px;
+			height: 75px;
+		  	background-color: white;
+		  	border-radius: 50%;
+		  	transition: background-color 3s ease-in-out;
+		}
+
+		.rain{
+			position: fixed;
+			left: 20em;
+			height: 50px;
+		  	width: 50px;
+		  	border-radius: 50%;
+		  	border: solid #6699CC 2px;
+		}
+
+		.thunder{
+			position: fixed;
+			width: 200px;
+			height: 7px;
+			border: solid #99FFFF 4px;
+			opacity: 0.7;
+		}
+
+		.snow{
+			position: fixed;
+			height: 100px;
+		  	width: 25px;
+		  	background-color: #CCCCFF;
+		  	border-radius: 50%;
+		  	transform: rotate(25deg);
+		  	opacity: 0.5;
+		  	transition: background-color 3s ease-in-out;
 		}
 
 	</style>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 
-	
 	<script type="text/javascript">
 
-		var url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=n8crr5x2p5cjGMmRxvynqIDBDJ4qZ6ZMLqrPl1lm";
+		function getRandomInt(min, max) {
+			return Math.floor(Math.random() * (max - min)) + min;
+		}
 
+		const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+				];
 
-
-
-		$.ajax({
-		  url: url,
-		  success: function(result){
-
-		  	//console.log(result.photos
-
-		  	
-
-		  	  var images = result.photos;
-
-		  	  	console.log(images)
-		  	   
-
-		  	 	for (var z = 0; z < 10; z++) {
-
-		  	 		var imageUrl = images[z].img_src;
-
-		  	 		var triangle = $("<div/>"); 
-
-
-
-		     		
-
-		  	 		$("body").append(`
-
-	     			<img src="${imageUrl}"</img>
-
-	     			`
-
-	     			)
-
-
-		  	 	}
-
-		  	 // $("#apod_img_id").attr("src", result.url);	
-
-		}	
-
-		});
- 
-
+		var today = new Date(),
+			dd = today.getDate(),
+			yyyy = today.getFullYear();
 		
+		if(dd<10) {
+		    dd = '0'+dd
+		} 
 
-	</script>	
+		if(mm<10) {
+		    mm = '0'+mm
+		} 
+
+		today = dd  + mm[today.getMonth()] + yyyy;
+			document.write(today);
+
+		// document.getElementById('day').innerHTML = dd;	
+		 // document.getElementById('month').innerHTML = mm;
+		 // document.getElementById('year').innerHTML = yyyy;	
+
+	$(document).ready(function(){
+
+	    $.get( "http://api.openweathermap.org/data/2.5/weather?id=5128638&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
+
+     	var weather = data.main;
+
+     	function temperatures(){
+
+	    	var tempK = weather.temp,
+	     		tempKN = weather.temp_min,
+	     		tempKX = weather.temp_max,
+	     		tempC = tempK-273.15,
+	     		tempCN = tempKN-273.15,
+	     		tempCX = tempKX-273.15,
+	     		temperature = Math.floor(tempC)+3,
+	     		nTemperature = Math.floor(tempCN)+10,
+	     		xTemperature = Math.floor(tempCX)+5;
+
+	     	for (var i = 0; i < temperature; i++) {
+	     		
+	     		var triangle = $("<div/>"); 
+	     		triangle.addClass("currentT");
+	     		$("#left").append(triangle);
+	     		$(".currentT").each(function(){
+	     			var randomNumber = getRandomInt(1,3)*15,
+	     				randomNumber2 = getRandomInt(1,3)*20
+	     			$(this).css({
+	     			"top" :  randomNumber + "em",
+	     			"left" : randomNumber2 + "em"
+	     			})
+	     		})
+	     	}
+
+	     	for (var t = 0; t < nTemperature; t++) {
+	     		var triangle2 = $("<div/>");
+	     		triangle2.addClass("minT");
+	     		$("#middle").append(triangle2);
+	     		$(".minT").each(function(){
+	     			var randomNumber3 = getRandomInt(1,3)*10
+	     			var randomNumber4 = Math.random()*10
+	     			$(this).css({
+	     			"top" :  randomNumber3 + "em",
+	     			"left" : randomNumber4 + "em"
+	     			})
+	     		})
+	     	}
+
+	     	for (var x = 0; x < xTemperature; x++) {	  
+	     		var triangle3 = $("<div/>") ;
+	     		triangle3.addClass("maxT");
+	     		$("#right").append(triangle3);	     		
+	     		$(".maxT").each(function(){
+	     			var randomNumber5 = getRandomInt(3,5)*10,randomNumber6 = getRandomInt(3,5)*10
+	     			$(this).css({
+	     			"top" :  randomNumber5 + "em",
+	     			"left" : randomNumber6 + "em"
+	     			})
+	     		})
+	     	}
+     	}
+
+
+     	$( ".temp").click(function() {
+
+     		if($(".currentT").length){
+  				$(".currentT").remove()
+  			}
+  			if($(".minT").length){
+  				$(".minT").remove()
+  			}
+  			if($(".maxT").length){
+  				$(".maxT").remove()
+  			}
+  			temperatures();
+    	});
+
+	     	// if(tempC > 25){
+	     	// 	$("body").css({"background-color" : "#d6e5ff"})
+	     	// 	// $(".positiveT").css({"color": "red"})
+
+
+	     	// }else if(tempC < 30){
+	     	// 	$("body").css({"background-color" : "#ffffff"})
+	     	// 	// $(".positiveT").css({"color": "black"})
+	     	// }
+
+	    function atmosphere(){
+	    	var white = data.clouds.all,
+	    		precipitation = data.weather[0].description;
+			
+			for (var c = 0; c < white; c++) {	  
+	     		var nube = $("<div/>") ;
+	     		nube.addClass("cloudy");
+	     		$("#circles").append(nube);
+	     		$(".cloudy").each(function(){
+	     			var randomNumber7 = Math.random()*50,
+	     				randomNumber8 = Math.random()*100
+	     			$(this).css({
+	     			"top" :  randomNumber7 + "em",
+	     			"left" : randomNumber8 + "em"
+	     			})
+	     		})
+	     	}
+
+			if(precipitation == "rain" ){
+				var rn = 20
+	     		for (var r = 0; r < rn; r++) {	  
+		     		var rain = $("<div/>") ;
+		     		rain.addClass("rain");
+		     		$("#circles").append(rain);
+		     		$(".rain").each(function(){
+		     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
+		     			$(this).css({
+		     			"top" :  randomNumber9 + "em",
+		     			"left" : randomNumber10 + "em"
+		     			})
+		     		})
+	     		}
+	     		$("body").css({"background-color" : "#666699"})
+
+	     	}else if(precipitation == "shower rain"){
+	     		var sr = 100;
+	     		for (var s = 0; s < sr; s++) {
+		     		var rain = $("<div/>") ;
+		     		rain.addClass("rain");
+		     		$("#circles").append(rain);
+		     		$(".rain").each(function(){
+		     			var randomNumber11 = Math.random()*50,randomNumber12 = Math.random()*100
+		     			$(this).css({
+		     			"top" :  randomNumber11 + "em",
+		     			"left" : randomNumber12 + "em",
+		     			"transform" : "rotate(45deg)",
+		     			})
+		     		})
+	     		}
+	     		$("body").css({"background-color" : "#9999CC"})
+	     		
+	     	}else if(precipitation == "thunderstorm"){
+	     		var rn = 150
+	     		for (var r = 0; r < rn; r++) {
+		     		var rain = $("<div/>") ;
+		     		rain.addClass("rain");
+		     		$("#circles").append(rain);
+		     		$(".rain").each(function(){
+		     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
+		     			$(this).css({
+		     			"top" :  randomNumber9 + "em",
+		     			"left" : randomNumber10 + "em",
+		     			"height" : "100px",
+		     			"width" : "100px",
+		     			"border" : "solid #669999 3px"
+		     			})
+		     		})
+	     		}
+
+	     		var ts = 100;
+	     		for (var t = 0; t < ts; t++) {
+		     		var thunder = $("<div/>") ;
+		     		thunder.addClass("thunder");
+		     		$("#circles").append(thunder);
+		     		$(".thunder").each(function(){
+		     			var randomNumber11 = Math.random()*50,randomNumber12 = Math.random()*100
+		     			$(this).css({
+		     			"top" :  randomNumber11 + "em",
+		     			"left" : randomNumber12 + "em",
+		     			"transform" : "rotate(90deg)",
+		     			})
+		     		})
+	     		}
+
+	     		$("body").css({"background-color" : "#663366"})
+	     		
+	     	}else if(precipitation == "snow"){
+	    		var sw = 80
+	     		for (var w = 0; w < sw; w++) {
+		     		var snow = $("<div/>") ;
+		     		snow.addClass("snow");
+		     		$("#circles").append(snow);
+		     		$(".snow").each(function(){
+		     			var randomNumber7 = Math.random()*50,randomNumber8 = Math.random()*100
+		     			$(this).css({
+		     			"top" :  randomNumber7 + "em",
+		     			"left" : randomNumber8 + "em",
+		     			"transform" : "rotate(75deg)",
+		     			"background-color" : "#33CCCC"
+		     			})
+		     		})
+	     		}
+	     		$("body").css({"background-color" : "#99CCCC"})
+
+	     	}else if(precipitation == "light snow"){
+	     		var ls = 20
+	     		for (var s = 0; s < ls; s++) {
+		     		var snow = $("<div/>") ;
+		     		snow.addClass("snow");
+		     		$("#circles").append(snow);
+		     		$(".snow").each(function(){
+		     			var randomNumber7 = Math.random()*50,randomNumber8 = Math.random()*100
+		     			$(this).css({
+		     			"top" :  randomNumber7 + "em",
+		     			"left" : randomNumber8 + "em"
+		     			})
+		     		})
+	     		}
+	     		$("body").css({"background-color" : "#CCFFFF"})
+
+	     	}else if(precipitation == "mist"){
+				var mt = 200
+	     		for (var m = 0; m < mt; m++) {	  
+		     		var rain = $("<div/>") ;
+		     		rain.addClass("rain");
+		     		$("#circles").append(rain);
+		     		$(".rain").each(function(){
+		     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
+		     			$(this).css({
+		     			"top" :  randomNumber9 + "em",
+		     			"left" : randomNumber10 + "em",
+		     			"height" : "3.5em",
+		     			"width" : "7em",
+		     			"border-color" : "#996666"
+		     			})
+		     		})
+	     		}
+	     		$("body").css({"background-color" : "#CC99CC"})
+	     		
+	     	}else{
+	     		$("body").css({"background-color" : "#66CCCC"})
+	     		
+	     	}
+	    }
+
+		$( ".sky").click(function() {
+			if($(".cloudy").length){
+				$(".cloudy").remove()
+			}
+  			atmosphere();
+	    });	
+
+	    function wind(){
+
+     		var amount = data.wind.speed,
+     			degree = data.wind.deg,
+     			amountWind = Math.floor(amount)/4,
+     			positionY = getRandomInt(20,30),
+     			positionX = getRandomInt(0,20);
+
+     		for (var w = 0; w < amount; w++) {
+	     		var line = $("<div/>"); 
+	     		line.addClass("wind");
+	     		$("body").append(line);
+	     		$(".wind").css({
+	     			"top" :  positionY + "em",
+	     			"left" : positionX + "em",
+	     			"transform" : "rotate( " + degree + "deg)",
+	     			"height" : amountWind + "em"
+	     			})
+     		}
+	    }
+
+	    $( ".air").click(function() {
+  			$(wind).toggle();
+  			// $(wind).css({opacity:"1"});
+    	});	     	
+
+	    });
+
+	})
+
+	</script>
 
 </head>
 <body>
+	<div id="left"></div>
+	<div id="middle"></div>
+	<div id="right"></div>
+	<div id="circles"></div>
+	
 
-  <img id="apod_img_id" width="250px"/>
+	<button class="button temp">
+    	&#176;
+  	</button>
 
+  	<button class="button sky">	
+		&#8258;
+  	</button>
 
-</body>	
+  	<button class="button air">	
+		&#12336;
+  	</button>
 
+</body>
 </html>
-
-
-
-
-
-
-
-
-

@@ -130,9 +130,11 @@
 	}
 
 	.thunder{
+		position: fixed;
 		width: 200px;
-		height: 25px;
-		border: solid white 2px;
+		height: 7px;
+		border: solid #99FFFF 4px;
+		opacity: 0.7;
 
 	}
 
@@ -306,40 +308,25 @@
 
 
 			for (var c = 0; c < white; c++) {
-	  
 	     		var nube = $("<div/>") ;
-
 	     		nube.addClass("cloudy");
-
 	     		$("#circles").append(nube);
-
 	     		$(".cloudy").each(function(){
-
-	     			var randomNumber7 = Math.random()*50
-	     			var randomNumber8 = Math.random()*100
-
+	     			var randomNumber7 = Math.random()*50,
+	     				randomNumber8 = Math.random()*100
 	     			$(this).css({
 	     			"top" :  randomNumber7 + "em",
 	     			"left" : randomNumber8 + "em"
 	     			})
-
 	     		})
-
 	     	}
 
-
-			if(precipitation == "rain" ){
-
-				var rn = 20
-
+			if (precipitation == "rain" ){
+				var rn = 20;
 	     		for (var r = 0; r < rn; r++) {
-	  
 		     		var rain = $("<div/>") ;
-
 		     		rain.addClass("rain");
-
 		     		$("#circles").append(rain);
-
 		     		$(".rain").each(function(){
 
 		     			var randomNumber9 = Math.random()*50
@@ -371,34 +358,8 @@
 	     		
 	     	}else if(precipitation == "light snow"){
 
-	     		//shower rain
 
-	     		var sr = 100;
 
-	     		for (var s = 0; s < sr; s++) {
-	  
-		     		var rain = $("<div/>") ;
-
-		     		rain.addClass("rain");
-
-		     		$("#circles").append(rain);
-
-		     		$(".rain").each(function(){
-
-		     			var randomNumber11 = Math.random()*50
-		     			var randomNumber12 = Math.random()*100
-
-		     			$(this).css({
-		     			"top" :  randomNumber11 + "em",
-		     			"left" : randomNumber12 + "em",
-		     			"transform" : "rotate(45deg)",
-		     			})
-
-		     		})
-
-	     		}
-
-	     		$("body").css({"background-color" : "#9999CC"})
 
 	     	}else if(precipitation == "mist"){
 	     		$("body").css({"background-color" : "yellow"})
