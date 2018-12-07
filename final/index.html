@@ -173,7 +173,7 @@
 		}
 
 		.wind:hover{
-			transform: rotate(600deg) !important;
+			transform: rotate(360deg) !important;
 			transition: ease-in 2s !important;
 		}
 
@@ -598,6 +598,9 @@
      			amountWind = Math.floor(amount)/4,
      			positionY = getRandomInt(20,30),
      			positionX = getRandomInt(0,20);
+
+     			console.log(degree)
+
 
      		for (var w = 0; w < amount; w++) {
 	     		var line = $("<div/>"); 
