@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>your weather</title>
+	<title>my weather</title>
 	<link rel="icon" href="./img/favicon.png" type="image/x-icon" />
 
 	<style type="text/css">	
@@ -41,25 +41,47 @@
 			line-height: 0.7em;
 		}
 
-		.button{
+		#cities{
+			bottom: 0.25em;
+			position: absolute;
+			font-size: 1em;
+			line-height: 2em;
+		}
+
+		.location{
+			position: relative;
+			float: left;
+			display: inline-block;
+			margin: 1em;
+			cursor: pointer;
+		}
+
+		#buttons{
+			width: 3em;
 			position: fixed;
-			bottom: 1.5em;
+			bottom: 1em;
+			right: 2em;
+
+		}
+
+		.button{
 			background-color: transparent;
 		    border: none;
 		    color: black;
-		    text-align: center;
-		    text-decoration: none;
-		    display: inline-block;
 		    font-size: 32px;
 		    margin: 4px 2px;
 		    cursor: pointer;
 		    opacity: 0.7;
+		    transform-origin: center;
 		}
 
 		.button:hover {
+			/*position: absolute;*/
 			opacity: 1;
 			transform: scale(1.5);
+			transform-origin: center;
 			transition: ease-in 0.5s;
+
 		}
 
 		.button:focus {
@@ -68,18 +90,6 @@
 
 		.button:focus-within {
 			outline: none;
-		}
-
-		.temp {
-			left: 2em;
-		}
-
-		.sky {
-			left: 3em;
-		}
-
-		.air{
-			left: 4.5em;
 		}
 
 		#middle {
@@ -172,11 +182,6 @@
 			display: inline-block;
 		}
 
-		.wind:hover{
-			transform: rotate(360deg) !important;
-			transition: ease-in 2s !important;
-		}
-
 		.cloudy{
 			position: fixed;
 			width: 75px;
@@ -228,432 +233,464 @@
 	
 	$(document).ready(function(){
 
+		$(".ny").click(function(){
+
+			 $.get( "http://api.openweathermap.org/data/2.5/weather?id=5128638&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
+
+				allWeather();
+
+				console.log(weather)
+
+			 })
+
+		})
+
 
 
 
 	    $.get( "http://api.openweathermap.org/data/2.5/weather?id=5128638&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
 
-     	var weather = data.main;
+	    });
 
-     	function temperatures(){
 
-	    	var tempK = weather.temp,
-	     		tempKN = weather.temp_min,
-	     		tempKX = weather.temp_max,
-	     		tempC = tempK-273.15,
-	     		tempCN = tempKN-273.15,
-	     		tempCX = tempKX-273.15,
-	     		temperature = Math.floor(tempC);
-	     		nTemperature = Math.floor(tempCN);
-	     		xTemperature = Math.floor(tempCX);
+	    function allWeather(data){
 
-	     	if(temperature >= 1 ){
-	     		for (var i = 0; i < temperature; i++) {
-		     		var triangle = $("<div/>"); 
-		     		triangle.addClass("currentT");
-		     		$("#middle").append(triangle);
-		     		$(".currentT").each(function(){
-		     			var randomNumber = getRandomInt(1,3)*15,
-		     				randomNumber2 = getRandomInt(1,3)*20
-		     			$(this).css({
-			     			"top" :  randomNumber + "em",
-			     			"left" : randomNumber2 + "em"
+	    	var weather = data.main;
+
+	     	function temperatures(){
+
+		    	var tempK = weather.temp,
+		     		tempKN = weather.temp_min,
+		     		tempKX = weather.temp_max,
+		     		tempC = tempK-273.15,
+		     		tempCN = tempKN-273.15,
+		     		tempCX = tempKX-273.15,
+		     		temperature = Math.floor(tempC);
+		     		nTemperature = Math.floor(tempCN);
+		     		xTemperature = Math.floor(tempCX);
+
+		     	console.log(temperature, nTemperature, xTemperature)
+
+
+		     	if(temperature >= 1 ){
+		     		for (var i = 0; i < temperature; i++) {
+			     		var triangle = $("<div/>"); 
+			     		triangle.addClass("currentT");
+			     		$("#middle").append(triangle);
+			     		$(".currentT").each(function(){
+			     			var randomNumber = getRandomInt(1,3)*15,
+			     				randomNumber2 = getRandomInt(1,3)*20
+			     			$(this).css({
+				     			"top" :  randomNumber + "em",
+				     			"left" : randomNumber2 + "em"
+				     		})
+				     	})
+				    $("body").css({"background-color": "#FF6666"})
+		     	}
+		     		
+		     	}else if(temperature <= -1){
+
+		     		var tempetureN = temperature*-1;
+
+			     	for (var n = 0; n < tempetureN; n++) {
+			     		var triangleN = $("<div/>"); 
+			     		triangleN.addClass("currentT-negative");
+			     		$("#middle").append(triangleN);
+			     		$(".currentT-negative").each(function(){
+			     			var randomNumber3 = Math.random()*35,
+			     				randomNumber4 = Math.random()*50
+			     			$(this).css({
+			     			"top" :  randomNumber3 + "em",
+			     			"left" : randomNumber4 + "em"
+			     			})
 			     		})
-			     	})
-			    $("body").css({"background-color": "#FF6666"})
-	     	}
-	     		
-	     	}else if(temperature <= -1){
+			     	$("body").css({"background-color": "#FFFF99"})	
 
-	     		var tempetureN = temperature*-1;
+			     	}
 
-		     	for (var n = 0; n < tempetureN; n++) {
-		     		var triangleN = $("<div/>"); 
-		     		triangleN.addClass("currentT-negative");
-		     		$("#middle").append(triangleN);
-		     		$(".currentT-negative").each(function(){
+
+		     	}else{
+		     		var triangleO = $("<div/>"); 
+		     		triangleO.addClass("currentT-zero");
+		     		$("#middle").append(triangleO);
+		     		$(".currentT-zero").each(function(){
+		     			var randomNumber5 = Math.random()*35,
+		     				randomNumber6 = Math.random()*50
+		     			$(this).css({
+		     			"top" :  randomNumber5 + "em",
+		     			"left" : randomNumber6 + "em"
+		     			})
+		     		})
+
+		     		$("body").css({"background-color": "#FFCC33"})	
+
+		  
+		     	}	
+
+		     	//min
+
+		     	if(nTemperature >= 1 ){
+		     		for (var t = 0; t < nTemperature; t++) {
+			     		var triangle2 = $("<div/>");
+			     		triangle2.addClass("minT");
+			     		$("#middle").append(triangle2);
+			     		$(".minT").each(function(){
+			     			var randomNumber3 = Math.random()*25
+			     			var randomNumber4 = Math.random()*25
+			     			$(this).css({
+			     			"top" :  randomNumber3 + "em",
+			     			"left" : randomNumber4 + "em"
+			     			})
+			     		})
+		     		}
+
+		     	}else if(nTemperature <= -1){
+
+		     		var nTemperatureN = nTemperature*-1;
+
+		     		for (var n = 0; n < nTemperatureN; n++) {
+		     		var triangle2 = $("<div/>"); 
+		     		triangle2.addClass("minT-negative");
+		     		$("#middle").append(triangle2);
+		     		$(".minT-negative").each(function(){
 		     			var randomNumber3 = Math.random()*35,
 		     				randomNumber4 = Math.random()*50
 		     			$(this).css({
 		     			"top" :  randomNumber3 + "em",
 		     			"left" : randomNumber4 + "em"
 		     			})
-		     		})
-		     	$("body").css({"background-color": "#FFFF99"})	
+		     			})
+		     		}
 
+		     	}else{
+		     		var triangle2 = $("<div/>"); 
+		     		triangle2.addClass("min-max-zero");
+		     		$("#middle").append(triangle2);
+		     		$(".min-max-zero").each(function(){
+		     			var randomNumber5 = Math.random()*35,
+		     				randomNumber6 = Math.random()*50
+		     			$(this).css({
+		     			"top" :  randomNumber5 + "em",
+		     			"left" : randomNumber6 + "em"
+		     			})
+		     		})	
+		     	}	
+
+		    //max
+
+		    if(xTemperature >= 1 ){	
+		     	for (var x = 0; x < xTemperature; x++) {	  
+		     		var triangle3 = $("<div/>") ;
+		     		triangle3.addClass("maxT");
+		     		$("#middle").append(triangle3);	     		
+		     		$(".maxT").each(function(){
+		     			var randomNumber5 = Math.random()*25,
+		     				randomNumber6 = Math.random()*25
+		     			$(this).css({
+		     			"top" :  randomNumber5 + "em",
+		     			"left" : randomNumber6 + "em"
+		     			})
+		     		})
 		     	}
 
+		    	}else if(xTemperature <= -1){
 
-	     	}else{
-	     		var triangleO = $("<div/>"); 
-	     		triangleO.addClass("currentT-zero");
-	     		$("#middle").append(triangleO);
-	     		$(".currentT-zero").each(function(){
-	     			var randomNumber5 = Math.random()*35,
-	     				randomNumber6 = Math.random()*50
-	     			$(this).css({
-	     			"top" :  randomNumber5 + "em",
-	     			"left" : randomNumber6 + "em"
-	     			})
-	     		})
+		     		var xTemperatureX = xTemperature*-1;
 
-	     		$("body").css({"background-color": "#FFCC33"})	
-
-	  
-	     	}	
-
-	     	//min
-
-	     	if(nTemperature >= 1 ){
-	     		for (var t = 0; t < nTemperature; t++) {
-		     		var triangle2 = $("<div/>");
-		     		triangle2.addClass("minT");
-		     		$("#middle").append(triangle2);
-		     		$(".minT").each(function(){
-		     			var randomNumber3 = Math.random()*25
-		     			var randomNumber4 = Math.random()*25
+		     		for (var n = 0; n < xTemperatureX; n++) {
+		     		var triangle3 = $("<div/>"); 
+		     		triangle3.addClass("maxT-negative");
+		     		$("#middle").append(triangle3);
+		     		$(".maxT-negative").each(function(){
+		     			var randomNumber3 = Math.random()*35,
+		     				randomNumber4 = Math.random()*50
 		     			$(this).css({
 		     			"top" :  randomNumber3 + "em",
 		     			"left" : randomNumber4 + "em"
 		     			})
-		     		})
-	     		}
+		     			})
+		     		}
 
-	     	}else if(nTemperature <= -1){
-
-	     		var nTemperatureN = nTemperature*-1;
-
-	     		for (var n = 0; n < nTemperatureN; n++) {
-	     		var triangle2 = $("<div/>"); 
-	     		triangle2.addClass("minT-negative");
-	     		$("#middle").append(triangle2);
-	     		$(".minT-negative").each(function(){
-	     			var randomNumber3 = Math.random()*35,
-	     				randomNumber4 = Math.random()*50
-	     			$(this).css({
-	     			"top" :  randomNumber3 + "em",
-	     			"left" : randomNumber4 + "em"
-	     			})
-	     			})
-	     		}
-
-	     	}else{
-	     		var triangle2 = $("<div/>"); 
-	     		triangle2.addClass("min-max-zero");
-	     		$("#middle").append(triangle2);
-	     		$(".min-max-zero").each(function(){
-	     			var randomNumber5 = Math.random()*35,
-	     				randomNumber6 = Math.random()*50
-	     			$(this).css({
-	     			"top" :  randomNumber5 + "em",
-	     			"left" : randomNumber6 + "em"
-	     			})
-	     		})	
-	     	}	
-
-	    //max
-
-	    if(xTemperature >= 1 ){	
-	     	for (var x = 0; x < xTemperature; x++) {	  
-	     		var triangle3 = $("<div/>") ;
-	     		triangle3.addClass("maxT");
-	     		$("#middle").append(triangle3);	     		
-	     		$(".maxT").each(function(){
-	     			var randomNumber5 = Math.random()*25,
-	     				randomNumber6 = Math.random()*25
-	     			$(this).css({
-	     			"top" :  randomNumber5 + "em",
-	     			"left" : randomNumber6 + "em"
-	     			})
-	     		})
+			    }else{
+		     		var triangle3 = $("<div/>"); 
+		     		triangle3.addClass("min-max-zero");
+		     		$("#middle").append(triangle3);
+		     		$(".min-max-zero").each(function(){
+		     			var randomNumber5 = Math.random()*35,
+		     				randomNumber6 = Math.random()*50
+		     			$(this).css({
+		     			"top" :  randomNumber5 + "em",
+		     			"left" : randomNumber6 + "em"
+		     			})
+		     		})	
+			    }	
 	     	}
 
-	    	}else if(xTemperature <= -1){
 
-	     		var xTemperatureX = xTemperature*-1;
+	     	$( ".temp").click(function() {
 
-	     		for (var n = 0; n < xTemperatureX; n++) {
-	     		var triangle3 = $("<div/>"); 
-	     		triangle3.addClass("maxT-negative");
-	     		$("#middle").append(triangle3);
-	     		$(".maxT-negative").each(function(){
-	     			var randomNumber3 = Math.random()*35,
-	     				randomNumber4 = Math.random()*50
-	     			$(this).css({
-	     			"top" :  randomNumber3 + "em",
-	     			"left" : randomNumber4 + "em"
-	     			})
-	     			})
-	     		}
+	     		if($(".currentT").length){
+	  				$(".currentT").remove()
+	  			}
+	  			if($(".currentT-negative").length){
+	  				$(".currentT-negative").remove()
+	  			}
+	  			if($(".currentT-zero").length){
+	  				$(".currentT-zero").remove()
+	  			}
 
-		    }else{
-	     		var triangle3 = $("<div/>"); 
-	     		triangle3.addClass("min-max-zero");
-	     		$("#middle").append(triangle3);
-	     		$(".min-max-zero").each(function(){
-	     			var randomNumber5 = Math.random()*35,
-	     				randomNumber6 = Math.random()*50
-	     			$(this).css({
-	     			"top" :  randomNumber5 + "em",
-	     			"left" : randomNumber6 + "em"
-	     			})
-	     		})	
-		    }	
-     	}
+	  			if($(".minT").length){
+	  				$(".minT").remove()
+	  			}
+	  			if($(".minT-negative").length){
+	  				$(".minT-negative").remove()
+	  			}
+	  			if($(".min-max-zero").length){
+	  				$(".min-max-zero").remove()
+	  			}
 
+	  			if($(".maxT").length){
+	  				$(".maxT").remove()
+	  			}
 
-     	$( ".temp").click(function() {
-
-     		if($(".currentT").length){
-  				$(".currentT").remove()
-  			}
-  			if($(".currentT-negative").length){
-  				$(".currentT-negative").remove()
-  			}
-  			if($(".currentT-zero").length){
-  				$(".currentT-zero").remove()
-  			}
-
-  			if($(".minT").length){
-  				$(".minT").remove()
-  			}
-  			if($(".minT-negative").length){
-  				$(".minT-negative").remove()
-  			}
-  			if($(".min-max-zero").length){
-  				$(".min-max-zero").remove()
-  			}
-
-  			if($(".maxT").length){
-  				$(".maxT").remove()
-  			}
-
-  			if($(".maxT-negative").length){
-  				$(".maxT-negative").remove()
-  			}
-  			temperatures();
-    	});
+	  			if($(".maxT-negative").length){
+	  				$(".maxT-negative").remove()
+	  			}
+	  			temperatures();
+	    	});
 
 
-	    function atmosphere(){
-	    	var white = data.clouds.all,
-	    		precipitation = data.weather[0].description;
+		    function atmosphere(){
+		    	var white = data.clouds.all,
+		    		precipitation = data.weather[0].description;
 
 
-	    console.log(precipitation)
-			
-			for (var c = 0; c < white; c++) {	  
-	     		var nube = $("<div/>") ;
-	     		nube.addClass("cloudy");
-	     		$("#circles").append(nube);
-	     		$(".cloudy").each(function(){
-	     			var randomNumber7 = Math.random()*50,
-	     				randomNumber8 = Math.random()*100
-	     			$(this).css({
-	     			"top" :  randomNumber7 + "em",
-	     			"left" : randomNumber8 + "em"
-	     			})
-	     		})
-	     	}
-
-			if(precipitation == "rain" ){
-				var rn = 20
-	     		for (var r = 0; r < rn; r++) {	  
-		     		var rain = $("<div/>") ;
-		     		rain.addClass("rain");
-		     		$("#circles").append(rain);
-		     		$(".rain").each(function(){
-		     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
-		     			$(this).css({
-		     			"top" :  randomNumber9 + "em",
-		     			"left" : randomNumber10 + "em"
-		     			})
-		     		})
-	     		}
-	     		$("body").css({"background-color" : "#666699"})
-
-	     	}else if(precipitation == "shower rain"){
-	     		var sr = 100;
-	     		for (var s = 0; s < sr; s++) {
-		     		var rain = $("<div/>") ;
-		     		rain.addClass("rain");
-		     		$("#circles").append(rain);
-		     		$(".rain").each(function(){
-		     			var randomNumber11 = Math.random()*50,randomNumber12 = Math.random()*100
-		     			$(this).css({
-		     			"top" :  randomNumber11 + "em",
-		     			"left" : randomNumber12 + "em",
-		     			"transform" : "rotate(45deg)",
-		     			})
-		     		})
-	     		}
-	     		$("body").css({"background-color" : "#9999CC"})
-	     		
-	     	}else if(precipitation == "thunderstorm"){
-	     		var rn = 150
-	     		for (var r = 0; r < rn; r++) {
-		     		var rain = $("<div/>") ;
-		     		rain.addClass("rain");
-		     		$("#circles").append(rain);
-		     		$(".rain").each(function(){
-		     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
-		     			$(this).css({
-		     			"top" :  randomNumber9 + "em",
-		     			"left" : randomNumber10 + "em",
-		     			"height" : "100px",
-		     			"width" : "100px",
-		     			"border" : "solid #669999 3px"
-		     			})
-		     		})
-	     		}
-
-	     		var ts = 100;
-	     		for (var t = 0; t < ts; t++) {
-		     		var thunder = $("<div/>") ;
-		     		thunder.addClass("thunder");
-		     		$("#circles").append(thunder);
-		     		$(".thunder").each(function(){
-		     			var randomNumber11 = Math.random()*50,randomNumber12 = Math.random()*100
-		     			$(this).css({
-		     			"top" :  randomNumber11 + "em",
-		     			"left" : randomNumber12 + "em",
-		     			"transform" : "rotate(90deg)",
-		     			})
-		     		})
-	     		}
-
-	     		$("body").css({"background-color" : "#663366"})
-	     		
-	     	}else if(precipitation == "snow"){
-	    		var sw = 80
-	     		for (var w = 0; w < sw; w++) {
-		     		var snow = $("<div/>") ;
-		     		snow.addClass("snow");
-		     		$("#circles").append(snow);
-		     		$(".snow").each(function(){
-		     			var randomNumber7 = Math.random()*50,randomNumber8 = Math.random()*100
-		     			$(this).css({
-		     			"top" :  randomNumber7 + "em",
-		     			"left" : randomNumber8 + "em",
-		     			"transform" : "rotate(75deg)",
-		     			"background-color" : "#33CCCC"
-		     			})
-		     		})
-	     		}
-	     		$("body").css({"background-color" : "#99CCCC"})
-
-	     	}else if(precipitation == "light snow"){
-	     		var ls = 20
-	     		for (var s = 0; s < ls; s++) {
-		     		var snow = $("<div/>") ;
-		     		snow.addClass("snow");
-		     		$("#circles").append(snow);
-		     		$(".snow").each(function(){
-		     			var randomNumber7 = Math.random()*50,randomNumber8 = Math.random()*100
+		    console.log(precipitation)
+				
+				for (var c = 0; c < white; c++) {	  
+		     		var nube = $("<div/>") ;
+		     		nube.addClass("cloudy");
+		     		$("#circles").append(nube);
+		     		$(".cloudy").each(function(){
+		     			var randomNumber7 = Math.random()*50,
+		     				randomNumber8 = Math.random()*100
 		     			$(this).css({
 		     			"top" :  randomNumber7 + "em",
 		     			"left" : randomNumber8 + "em"
 		     			})
 		     		})
-	     		}
-	     		$("body").css({"background-color" : "#CCFFFF"})
+		     	}
 
-	     	}else if(precipitation == "mist"){
-				var mt = 200
-	     		for (var m = 0; m < mt; m++) {	  
-		     		var rain = $("<div/>") ;
-		     		rain.addClass("rain");
-		     		$("#circles").append(rain);
-		     		$(".rain").each(function(){
-		     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
-		     			$(this).css({
-		     			"top" :  randomNumber9 + "em",
-		     			"left" : randomNumber10 + "em",
-		     			"height" : "3.5em",
-		     			"width" : "7em",
-		     			"border-color" : "#996666"
+				if(precipitation == "rain" ){
+					var rn = 20
+		     		for (var r = 0; r < rn; r++) {	  
+			     		var rain = $("<div/>") ;
+			     		rain.addClass("rain");
+			     		$("#circles").append(rain);
+			     		$(".rain").each(function(){
+			     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber9 + "em",
+			     			"left" : randomNumber10 + "em"
+			     			})
+			     		})
+		     		}
+		     		$("body").css({"background-color" : "#666699"})
+
+		     	}else if(precipitation == "shower rain"){
+		     		var sr = 100;
+		     		for (var s = 0; s < sr; s++) {
+			     		var rain = $("<div/>") ;
+			     		rain.addClass("rain");
+			     		$("#circles").append(rain);
+			     		$(".rain").each(function(){
+			     			var randomNumber11 = Math.random()*50,randomNumber12 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber11 + "em",
+			     			"left" : randomNumber12 + "em",
+			     			"transform" : "rotate(45deg)",
+			     			})
+			     		})
+		     		}
+		     		$("body").css({"background-color" : "#9999CC"})
+		     		
+		     	}else if(precipitation == "thunderstorm"){
+		     		var rn = 150
+		     		for (var r = 0; r < rn; r++) {
+			     		var rain = $("<div/>") ;
+			     		rain.addClass("rain");
+			     		$("#circles").append(rain);
+			     		$(".rain").each(function(){
+			     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber9 + "em",
+			     			"left" : randomNumber10 + "em",
+			     			"height" : "100px",
+			     			"width" : "100px",
+			     			"border" : "solid #669999 3px"
+			     			})
+			     		})
+		     		}
+
+		     		var ts = 100;
+		     		for (var t = 0; t < ts; t++) {
+			     		var thunder = $("<div/>") ;
+			     		thunder.addClass("thunder");
+			     		$("#circles").append(thunder);
+			     		$(".thunder").each(function(){
+			     			var randomNumber11 = Math.random()*50,randomNumber12 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber11 + "em",
+			     			"left" : randomNumber12 + "em",
+			     			"transform" : "rotate(90deg)",
+			     			})
+			     		})
+		     		}
+
+		     		$("body").css({"background-color" : "#663366"})
+		     		
+		     	}else if(precipitation == "snow"){
+		    		var sw = 80
+		     		for (var w = 0; w < sw; w++) {
+			     		var snow = $("<div/>") ;
+			     		snow.addClass("snow");
+			     		$("#circles").append(snow);
+			     		$(".snow").each(function(){
+			     			var randomNumber7 = Math.random()*50,randomNumber8 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber7 + "em",
+			     			"left" : randomNumber8 + "em",
+			     			"transform" : "rotate(75deg)",
+			     			"background-color" : "#33CCCC"
+			     			})
+			     		})
+		     		}
+		     		$("body").css({"background-color" : "#99CCCC"})
+
+		     	}else if(precipitation == "light snow"){
+		     		var ls = 20
+		     		for (var s = 0; s < ls; s++) {
+			     		var snow = $("<div/>") ;
+			     		snow.addClass("snow");
+			     		$("#circles").append(snow);
+			     		$(".snow").each(function(){
+			     			var randomNumber7 = Math.random()*50,randomNumber8 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber7 + "em",
+			     			"left" : randomNumber8 + "em"
+			     			})
+			     		})
+		     		}
+		     		$("body").css({"background-color" : "#CCFFFF"})
+
+		     	}else if(precipitation == "mist"){
+					var mt = 200
+		     		for (var m = 0; m < mt; m++) {	  
+			     		var rain = $("<div/>") ;
+			     		rain.addClass("rain");
+			     		$("#circles").append(rain);
+			     		$(".rain").each(function(){
+			     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber9 + "em",
+			     			"left" : randomNumber10 + "em",
+			     			"height" : "3.5em",
+			     			"width" : "7em",
+			     			"border-color" : "#996666"
+			     			})
+			     		})
+		     		}
+		     		$("body").css({"background-color" : "#CC99CC"})
+		     		
+		     	}else{
+		     		$("body").css({"background-color" : "#66CCCC"})
+		     		
+		     	}
+		    }
+
+
+			$( ".sky").click(function() {
+				if($(".cloudy").length){
+					$(".cloudy").remove()
+				}
+	  			atmosphere();
+		    });	
+
+		    function wind(){
+
+	     		var amount = data.wind.speed,
+	     			degree = data.wind.deg,
+	     			amountWind = Math.floor(amount)/4,
+	     			positionY = getRandomInt(20,30),
+	     			positionX = getRandomInt(0,20);
+
+	     			console.log(degree)
+
+
+	     		for (var w = 0; w < amount; w++) {
+		     		var line = $("<div/>"); 
+		     		line.addClass("wind");
+		     		$("body").append(line);
+		     		$(".wind").css({
+		     			"top" :  positionY + "em",
+		     			"left" : positionX + "em",
+		     			"transform" : "rotate( " + degree + "deg)",
+		     			"height" : amountWind + "em",
 		     			})
-		     		})
 	     		}
-	     		$("body").css({"background-color" : "#CC99CC"})
-	     		
-	     	}else{
-	     		$("body").css({"background-color" : "#66CCCC"})
-	     		
-	     	}
+
+	     		if(amount <=30){
+	     			$("body").css({"background-color" : "#336666"})
+	     		}else if (amount >=20){
+	     			$("body").css({"background-color" : "#99CCCC"})
+	     		}else{
+	     			$("body").css({"background-color" : "#339999"})
+	     		}
+
+
+			   	$(".wind").mouseover(function(){
+
+			   		var degrees = degree + 360
+			    	$(this).css({
+			    		"transform" : "rotate( " + degrees + "deg)",
+			    		"transition": "ease-in 2s",
+
+			    	})
+			    })
+		    }
+
+
+		    $( ".air").click(function() {
+	  			if($(".wind").length){
+					$(".wind").remove()
+				}
+
+				wind()
+	  			
+	    	});
+
+	    	const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+					];
+
+			var today = new Date(),
+				dd = today.getDate(),
+				yyyy = today.getFullYear(),
+				city = data.name;
+
+
+			if(mm<10) {
+			    mm = '0'+mm
+			} 
+
+			month = mm[today.getMonth()]
+
+			today = dd  +  + yyyy;
+
+			$(".day").append(dd);
+			$(".month").append(month);
+			$(".year").append(yyyy);
+			$(".city").append(city);
 	    }
-
-
-		$( ".sky").click(function() {
-			if($(".cloudy").length){
-				$(".cloudy").remove()
-			}
-  			atmosphere();
-	    });	
-
-	    function wind(){
-
-     		var amount = data.wind.speed,
-     			degree = data.wind.deg,
-     			amountWind = Math.floor(amount)/4,
-     			positionY = getRandomInt(20,30),
-     			positionX = getRandomInt(0,20);
-
-     			console.log(degree)
-
-
-     		for (var w = 0; w < amount; w++) {
-	     		var line = $("<div/>"); 
-	     		line.addClass("wind");
-	     		$("body").append(line);
-	     		$(".wind").css({
-	     			"top" :  positionY + "em",
-	     			"left" : positionX + "em",
-	     			"transform" : "rotate( " + degree + "deg)",
-	     			"height" : amountWind + "em"
-	     			})
-     		}
-
-     		if(amount <=30){
-     			$("body").css({"background-color" : "#336666"})
-     		}else if (amount >=20){
-     			$("body").css({"background-color" : "#99CCCC"})
-     		}else{
-     			$("body").css({"background-color" : "#339999"})
-     		}
-	    }
-
-	    $( ".air").click(function() {
-  			if($(".wind").length){
-				$(".wind").remove()
-			}
-
-			wind()
-  			
-    	});	     	
-
-	    });
-
-		const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
-				];
-
-		var today = new Date(),
-			dd = today.getDate(),
-			yyyy = today.getFullYear();
-
-
-		if(mm<10) {
-		    mm = '0'+mm
-		} 
-
-		month = mm[today.getMonth()]
-
-		today = dd  +  + yyyy;
-
-		$(".day").append(dd);
-		$(".month").append(month);
-		$(".year").append(yyyy);
-
 
 	})
 
@@ -666,6 +703,7 @@
 		<div class="day"></div>
 		<div class="month"></div>
 		<div class="year"></div>
+		<div class="city"></div>
 	</div>	
 
 	<div id="left"></div>
@@ -673,19 +711,30 @@
 	<div id="right"></div>
 	<div id="circles"></div>
 
+
+	<div id="cities">
+		<div class="ny location">current location</div>
+		<div class="sjo location">hometown</div>
+		<div class="beach location">good vibes</div>	
+		<div class="cn location">mainland</div>	
+		<div class="hk location">quarter of aloha</div>
+		<div class="la location">half of aloha</div>
+		<div class="bcn location">dreams</div>
+	</div>
 	
+	<div id="buttons">
+		<button class="button temp">
+	    	&emsp; &#176;
+	  	</button>
 
-	<button class="button temp">
-    	&#176;
-  	</button>
+	  	<button class="button sky">	
+			&#8258;
+	  	</button>
 
-  	<button class="button sky">	
-		&#8258;
-  	</button>
-
-  	<button class="button air">	
-		&#12336;
-  	</button>
+	  	<button class="button air">	
+			&#12336;
+	  	</button>
+	</div>  	
 
 </body>
 </html>
