@@ -1,154 +1,249 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>js apis</title>
+	<title>my weather</title>
+	<link rel="icon" href="./img/favicon.png" type="image/x-icon" />
 
-	<style type="text/css">
-		
-	body{
-		background-color: salmon;
-		transition: background-color 3s ease-in-out;
+	<style type="text/css">	
 
+		@font-face {font-family: "Univers"; src: url("font/UniversLTStd-Black.otf");}
 
-	}
+		body{
+			background-color: #FF9999;
+			transition: background-color 2s ease-in-out;
+			overflow: hidden;
+		}
 
+		#calendar{
+			position: absolute;
+			right: 2em;
+			top: 2em;
+			text-align: center;
+			font-family: "Univers", sans-serif;
+			z-index: 1;
+			opacity: 0.7;
+		}
 
-	.button{
-		position: fixed;
-		bottom: 1.5em;
-		background-color: transparent;
-	    border: none;
-	    color: black;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 32px;
-	    margin: 4px 2px;
-	    cursor: pointer;
-	    opacity: 0.5;
-	}
+		.day{
+			position: relative;
+			font-size: 2em;
+			line-height: 1em;
+		}
 
-	.button:hover {
-		opacity: 1;
-		transform: scale(1.5);
-		transition: ease-in 0.5s;
+		.month{
+			position: relative;
+			font-size: 3em;
+			line-height: 1em;
+		}
 
-	}
+		.year{
+			position: relative;
+			font-size: 2em;
+			line-height: 0.7em;
+		}
 
-	.temp {
-		left: 2em;
-	}
+		#cities{
+			font-family: "Univers", sans-serif;
+			bottom: 0.25em;
+			position: absolute;
+			font-size: 1em;
+		}
 
-	.sky {
-		left: 3em;
-	}
+		.location{
+			opacity: 0.7;
+			position: relative;
+			float: left;
+			display: inline-block;
+			margin: 0.5em;
+			cursor: pointer;
+			text-decoration: underline solid;
+		}
 
-	.air{
-		left: 4.5em;
-	}
+		.location:hover{
+			text-decoration: none;
+			opacity: 1;
+		}
 
-	#left {
-		position: relative;
-		height: 100%;
-		width: 100%;
+		#buttons{
+			width: 3em;
+			position: fixed;
+			bottom: 1em;
+			right: 2em;
+		}
 
-	}
-	
-	#middle {
-		position: absolute;
-		height: 100%;
-		width: 100%;
+		.button{
+			background-color: transparent;
+		    border: none;
+		    color: black;
+		    font-size: 32px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+		    opacity: 0.7;
+		    transform-origin: center;
+		}
 
-	}
-	
-	#right {
-		position: relative;
-		height: 100%;
-		width: 100%;
+		.button:hover {
+			opacity: 1;
+			transform: scale(1.5);
+			transform-origin: center;
+			transition: ease-in 0.1s;
+		}
 
-	}
+		.button:focus {
+			outline: none;
+		}
 
-	.currentT {
-		position: fixed;
-		width: 0;
-		height: 0;
-		border-left: 50px solid transparent;
-		border-right: 50px solid transparent;
-		border-bottom: 100px solid red;
+		.button:focus-within {
+			outline: none;
+		}
 
-}
+		#top {
+			position: absolute;
+			height: 33.3vh;
+			width: 100vw;
+			top: 0;
+			transition: background-color 2s ease-in-out;
+			z-index: -2;
+		}
 
-	.minT {
-		position: fixed;
-		width: 0;
-		height: 0;
-		border-left: 25px solid transparent;
-		border-right: 25px solid transparent;
-		border-bottom: 50px solid yellow;
+		#middle {
+			position: absolute;
+			height: 33.3vh;
+			width: 100vw;
+			top: 33.3vh;
+			transition: background-color 2s ease-in-out;
+			z-index: -2;
+		}
 
-}
+		#bottom {
+			position: absolute;
+			height: 35vh;
+			width: 100vw;
+			top: 66.6vh;
+			transition: background-color 2s ease-in-out;
+			z-index: -2;
+		}
 
-	.maxT {
-		position: fixed;
-		width: 0;
-		height: 0;
-		border-left: 25px solid transparent;
-		border-right: 25px solid transparent;
-		border-bottom: 50px solid blue;
-}
+		.currentT {
+			position: fixed;
+			width: 0;
+			height: 0;
+			border-left: 50px solid transparent;
+			border-right: 50px solid transparent;
+			border-bottom: 100px solid #66CCFF;
+		}
 
-	.wind{
-		width: 200px;
-		background-color: white;
-		opacity: 0.5;
-		margin-top: auto;
-		margin-bottom: auto;
-		margin-left: auto;
-		margin-right: auto;
-		position: relative;
-		display: inline-block;
-		transition: transform 2s;
-	}
+		.minT {
+			position: fixed;
+			width: 0;
+			height: 0;
+			border-left: 25px solid transparent;
+			border-right: 25px solid transparent;
+			border-bottom: 50px solid #99CCFF;
+		}
 
-	.cloudy{
-		position: fixed;
-		width: 75px;
-		height: 75px;
-	  	background-color: white;
-	  	border-radius: 50%;
-	  	transition: background-color 3s ease-in-out;
-	}
+		.maxT {
+			position: fixed;
+			width: 0;
+			height: 0;
+			border-left: 25px solid transparent;
+			border-right: 25px solid transparent;
+			border-bottom: 50px solid #6699CC;
+		}
 
-	.rain{
-		position: fixed;
-		left: 20em;
-		height: 50px;
-	  	width: 50px;
-	  	border-radius: 50%;
-	  	border: solid #6699CC 2px;
+		.currentT-negative {
+			position: fixed;
+	    	width: 0;
+	    	height: 0;
+	     	border-left: 50px solid transparent;
+	     	border-right: 50px solid transparent;
+	     	border-top: 100px solid #66CCFF;
+	    }
 
-	}
+		.minT-negative {
+			position: fixed;
+			width: 0;
+			height: 0;
+			border-left: 25px solid transparent;
+			border-right: 25px solid transparent;
+			border-top: 50px solid #99CCFF;
+		}
 
-	.thunder{
-		position: fixed;
-		width: 200px;
-		height: 7px;
-		border: solid #99FFFF 4px;
-		opacity: 0.7;
+		.maxT-negative {
+			position: fixed;
+			width: 0;
+			height: 0;
+			border-left: 25px solid transparent;
+			border-right: 25px solid transparent;
+			border-top: 50px solid #6699CC;
+		}
 
-	}
+		.currentT-zero {
+			position: fixed;
+			width: 0;
+			height: 0;
+			border-left: 50px solid #99CCFF;
+			border-right: 50px solid #6699CC;
+			border-bottom: 100px solid #66CCFF;
+		}
 
-	.snow{
-		position: fixed;
-		height: 100px;
-	  	width: 25px;
-	  	background-color: #CCCCFF;
-	  	border-radius: 50%;
-	  	transform: rotate(25deg);
-	  	opacity: 0.5;
-	  	transition: background-color 3s ease-in-out;
+		.min-max-zero{
+			position: fixed;
+			width: 0;
+			height: 0;
+			border-left: 25px solid #99CCFF;
+			border-right: 25px solid #6699CC;
+			border-bottom: 50px solid #66CCFF;
+		}
 
-	}
+		.wind{
+			width: 300px;
+			background-color: #CCCCCC;
+			opacity: 0.7;
+			margin-top: auto;
+			margin-bottom: auto;
+			margin-left: auto;
+			margin-right: auto;
+			position: relative;
+			display: inline-block;
+		}
+
+		.cloudy{
+			position: fixed;
+			width: 75px;
+			height: 75px;
+		  	background-color: white;
+		  	border-radius: 50%;
+		  	transition: background-color 3s ease-in-out;
+		}
+
+		.rain{
+			position: fixed;
+			left: 20em;
+			height: 50px;
+		  	width: 50px;
+		  	border-radius: 50%;
+		  	border: solid #6699CC 2px;
+		}
+
+		.thunder{
+			position: fixed;
+			width: 200px;
+			height: 7px;
+			border: solid #99FFFF 4px;
+			opacity: 0.7;
+		}
+
+		.snow{
+			position: fixed;
+			height: 100px;
+		  	width: 25px;
+		  	background-color: #CCCCFF;
+		  	border-radius: 50%;
+		  	transform: rotate(25deg);
+		  	opacity: 0.5;
+		  	transition: background-color 3s ease-in-out;
+		}
 
 	</style>
 
@@ -160,256 +255,550 @@
 			return Math.floor(Math.random() * (max - min)) + min;
 		}
 
-		const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
-				];
 
-		var today = new Date(),
-			dd = today.getDate(),
-			yyyy = today.getFullYear();
-
-					
-		if(dd<10) {
-		    dd = '0'+dd
-		} 
-
-		if(mm<10) {
-		    mm = '0'+mm
-		} 
-
-		today = dd  + mm[today.getMonth()] + yyyy;
-			document.write(today);
-
-		// document.getElementById('day').innerHTML = dd;	
-		 // document.getElementById('month').innerHTML = mm;
-		 // document.getElementById('year').innerHTML = yyyy;	
-
-
-		
-		 
-
+	
 	$(document).ready(function(){
+
+		$(".ny").click(function(){
+
+			 $.get( "http://api.openweathermap.org/data/2.5/weather?id=5128638&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
+
+				allWeather();
+
+				console.log(weather)
+
+			 })
+
+		})
+
 
 	    $.get( "http://api.openweathermap.org/data/2.5/weather?id=5128638&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
 
+	    	var weather = data.main;
 
-     	var weather = data.main;
+	     	function temperatures(){
 
-     	function temperatures(){
+		    	var tempK = weather.temp,
+		     		tempKN = weather.temp_min,
+		     		tempKX = weather.temp_max,
+		     		tempC = tempK-273.15,
+		     		tempCN = tempKN-273.15,
+		     		tempCX = tempKX-273.15,
+		     		temperature = Math.floor(tempC);
+		     		nTemperature = Math.floor(tempCN);
+		     		xTemperature = Math.floor(tempCX);
 
-	    	var tempK = weather.temp,
-	     		tempKN = weather.temp_min,
-	     		tempKX = weather.temp_max,
-	     		tempC = tempK-273.15,
-	     		tempCN = tempKN-273.15,
-	     		tempCX = tempKX-273.15,
-	     		temperature = Math.floor(tempC)+3,
-	     		nTemperature = Math.floor(tempCN)+10,
-	     		xTemperature = Math.floor(tempCX)+5;
+		     	console.log(temperature, nTemperature, xTemperature)
 
-	     	for (var i = 0; i < temperature; i++) {
-	     		
-	     		var triangle = $("<div/>"); 
 
-	     		triangle.addClass("currentT");
+		     	if(temperature >= 1 ){
+		     		for (var i = 0; i < temperature; i++) {
+			     		var triangle = $("<div/>"); 
+			     		triangle.addClass("currentT");
+			     		$("#temperatures").append(triangle);
+			     		$(".currentT").each(function(){
+			     			var randomNumber = getRandomInt(1,5)*15,
+			     				randomNumber2 = getRandomInt(1,5)*20
+			     			$(this).css({
+				     			"top" :  randomNumber + "em",
+				     			"left" : randomNumber2 + "em"
+				     		})
+				     	})
+				    $("#top").css({"background-color": "#FF6666"})
+		     	}
+		     		
+		     	}else if(temperature <= -1){
 
-	     		$("#left").append(triangle);
+		     		var tempetureN = temperature*-1;
 
-	     		$(".currentT").each(function(){
+			     	for (var n = 0; n < tempetureN; n++) {
+			     		var triangleN = $("<div/>"); 
+			     		triangleN.addClass("currentT-negative");
+			     		$("#temperatures").append(triangleN);
+			     		$(".currentT-negative").each(function(){
+			     			var randomNumber3 = Math.random()*35,
+			     				randomNumber4 = Math.random()*55
+			     			$(this).css({
+			     			"top" :  randomNumber3 + "em",
+			     			"left" : randomNumber4 + "em"
+			     			})
+			     		})
+			     	$("#top").css({"background-color": "#FFFF99"})	
 
-	     			var randomNumber = getRandomInt(1,3)*15
-	     			var randomNumber2 = getRandomInt(1,3)*20
+			     	}
 
-	     			console.log(randomNumber)
 
-	     			$(this).css({
-	     			"top" :  randomNumber + "em",
-	     			"left" : randomNumber2 + "em"
-	     			})
+		     	}else{
+		     		var triangleO = $("<div/>"); 
+		     		triangleO.addClass("currentT-zero");
+		     		$("#temperatures").append(triangleO);
+		     		$(".currentT-zero").each(function(){
+		     			var randomNumber5 = Math.random()*35,
+		     				randomNumber6 = Math.random()*55
+		     			$(this).css({
+		     			"top" :  randomNumber5 + "em",
+		     			"left" : randomNumber6 + "em"
+		     			})
+		     		})
 
-	     		})
-	     		}
+		     		$("#top").css({"background-color": "#FFCC33"})	
 
-	     	for (var t = 0; t < nTemperature; t++) {
-	     		
-	     		var triangle2 = $("<div/>");
+		  
+		     	}	
 
-	     		triangle2.addClass("minT");
+		     	//min
 
-	     		$("#middle").append(triangle2);
+		     	if(nTemperature >= 1 ){
+		     		for (var t = 0; t < nTemperature; t++) {
+			     		var triangle2 = $("<div/>");
+			     		triangle2.addClass("minT");
+			     		$("#temperatures").append(triangle2);
+			     		$(".minT").each(function(){
+			     			var randomNumber3 = Math.random()*25
+			     			var randomNumber4 = Math.random()*35
+			     			$(this).css({
+			     			"top" :  randomNumber3 + "em",
+			     			"left" : randomNumber4 + "em"
+			     			})
+			     		})
+		     		}
 
-	     		$(".minT").each(function(){
+		     	}else if(nTemperature <= -1){
 
-	     			var randomNumber3 = getRandomInt(1,3)*10
-	     			var randomNumber4 = Math.random()*10
+		     		var nTemperatureN = nTemperature*-1;
 
-	     			$(this).css({
-	     			"top" :  randomNumber3 + "em",
-	     			"left" : randomNumber4 + "em"
-	     			})
+		     		for (var n = 0; n < nTemperatureN; n++) {
+		     		var triangle2 = $("<div/>"); 
+		     		triangle2.addClass("minT-negative");
+		     		$("#temperatures").append(triangle2);
+		     		$(".minT-negative").each(function(){
+		     			var randomNumber3 = Math.random()*35,
+		     				randomNumber4 = Math.random()*55
+		     			$(this).css({
+		     			"top" :  randomNumber3 + "em",
+		     			"left" : randomNumber4 + "em"
+		     			})
+		     			})
+		     		}
 
-	     		})
+		     	}else{
+		     		var triangle2 = $("<div/>"); 
+		     		triangle2.addClass("min-max-zero");
+		     		$("#temperatures").append(triangle2);
+		     		$(".min-max-zero").each(function(){
+		     			var randomNumber5 = Math.random()*35,
+		     				randomNumber6 = Math.random()*55
+		     			$(this).css({
+		     			"top" :  randomNumber5 + "em",
+		     			"left" : randomNumber6 + "em"
+		     			})
+		     		})	
+		     	}	
 
-	     		}
+		    //max
 
-	     	for (var x = 0; x < xTemperature; x++) {
-	  
-	     		var triangle3 = $("<div/>") ;
+			    if(xTemperature >= 1 ){	
+			     	for (var x = 0; x < xTemperature; x++) {	  
+			     		var triangle3 = $("<div/>") ;
+			     		triangle3.addClass("maxT");
+			     		$("#temperatures").append(triangle3);	     		
+			     		$(".maxT").each(function(){
+			     			var randomNumber5 = Math.random()*25,
+			     				randomNumber6 = Math.random()*35
+			     			$(this).css({
+			     			"top" :  randomNumber5 + "em",
+			     			"left" : randomNumber6 + "em"
+			     			})
+			     		})
+			     	}
 
-	     		triangle3.addClass("maxT");
+			    	}else if(xTemperature <= -1){
 
-	     		$("#right").append(triangle3);
+			     		var xTemperatureX = xTemperature*-1;
 
-	     		$(".maxT").each(function(){
+			     		for (var n = 0; n < xTemperatureX; n++) {
+			     		var triangle3 = $("<div/>"); 
+			     		triangle3.addClass("maxT-negative");
+			     		$("#temperatures").append(triangle3);
+			     		$(".maxT-negative").each(function(){
+			     			var randomNumber3 = Math.random()*35,
+			     				randomNumber4 = Math.random()*55
+			     			$(this).css({
+			     			"top" :  randomNumber3 + "em",
+			     			"left" : randomNumber4 + "em"
+			     			})
+			     			})
+			     		}
 
-	     			var randomNumber5 = getRandomInt(3,5)*10
-	     			var randomNumber6 = getRandomInt(3,5)*10
+				    }else{
+			     		var triangle3 = $("<div/>"); 
+			     		triangle3.addClass("min-max-zero");
+			     		$("#temperatures").append(triangle3);
+			     		$(".min-max-zero").each(function(){
+			     			var randomNumber5 = Math.random()*35,
+			     				randomNumber6 = Math.random()*55
+			     			$(this).css({
+			     			"top" :  randomNumber5 + "em",
+			     			"left" : randomNumber6 + "em"
+			     			})
+			     		})	
+				    }
 
-	     			$(this).css({
-	     			"top" :  randomNumber5 + "em",
-	     			"left" : randomNumber6 + "em"
-	     			})
+			    $(".currentT").mouseover(function(){
+			    	$(this).css({
+			    		"transform" : "translate(0,-5em)",
+			    		"transition": "ease-in 2s",
 
-	     		})
+			    	})
+			    })
 
+			    $(".currentT-negative").mouseover(function(){
+			    	$(this).css({
+			    		"transform" : "translate(0,5em)",
+			    		"transition": "ease-in 2s",
+
+			    	})
+			    })	
+
+			    $(".minT").mouseover(function(){
+			    	$(this).css({
+			    		"transform" : "translate(0,-5em)",
+			    		"transition": "ease-in 2s",
+
+			    	})
+			    })
+
+			    $(".minT-negative").mouseover(function(){
+			    	$(this).css({
+			    		"transform" : "translate(0,5em)",
+			    		"transition": "ease-in 2s",
+
+			    	})
+			    })
+
+			    $(".min-max-zero").mouseover(function(){
+			    	$(this).css({
+			    		"transform" : "translate(10em,0)",
+			    		"transition": "ease-in 2s",
+
+			    	})
+			    })	
+
+			    $(".maxT").mouseover(function(){
+			    	$(this).css({
+			    		"transform" : "translate(0,-5em)",
+			    		"transition": "ease-in 2s",
+
+			    	})
+			    })
+
+			    $(".maxT-negative").mouseover(function(){
+			    	$(this).css({
+			    		"transform" : "translate(0,5em)",
+			    		"transition": "ease-in 2s",
+
+			    	})
+			    })				
 	     	}
 
-     	}
+
+	     	$( ".temp").click(function() {
+
+	     		if($(".currentT").length){
+	  				$(".currentT").remove()
+	  			}
+	  			if($(".currentT-negative").length){
+	  				$(".currentT-negative").remove()
+	  			}
+	  			if($(".currentT-zero").length){
+	  				$(".currentT-zero").remove()
+	  			}
+
+	  			if($(".minT").length){
+	  				$(".minT").remove()
+	  			}
+	  			if($(".minT-negative").length){
+	  				$(".minT-negative").remove()
+	  			}
+	  			if($(".min-max-zero").length){
+	  				$(".min-max-zero").remove()
+	  			}
+
+	  			if($(".maxT").length){
+	  				$(".maxT").remove()
+	  			}
+
+	  			if($(".maxT-negative").length){
+	  				$(".maxT-negative").remove()
+	  			}
+	  			temperatures();
+	    	});
 
 
-     	$( ".temp").click(function() {
+		    function atmosphere(){
+		    	var white = data.clouds.all,
+		    		precipitation = data.weather[0].description;
 
-     		if($(".currentT").length){
-  				$(".currentT").remove()
-  			}
-  			if($(".minT").length){
-  				$(".minT").remove()
-  			}
-  			if($(".maxT").length){
-  				$(".maxT").remove()
-  			}
-  			temperatures();
-
-    	});
-
-	     	// if(tempC > 25){
-	     	// 	$("body").css({"background-color" : "#d6e5ff"})
-	     	// 	// $(".positiveT").css({"color": "red"})
-
-
-	     	// }else if(tempC < 30){
-	     	// 	$("body").css({"background-color" : "#ffffff"})
-	     	// 	// $(".positiveT").css({"color": "black"})
-	     	// }
-
-	    function atmosphere(){
-
-	    	var white = data.clouds.all,
-	    		precipitation = data.weather[0].description;
-
-
-			for (var c = 0; c < white; c++) {
-	     		var nube = $("<div/>") ;
-	     		nube.addClass("cloudy");
-	     		$("#circles").append(nube);
-	     		$(".cloudy").each(function(){
-	     			var randomNumber7 = Math.random()*50,
-	     				randomNumber8 = Math.random()*100
-	     			$(this).css({
-	     			"top" :  randomNumber7 + "em",
-	     			"left" : randomNumber8 + "em"
-	     			})
-	     		})
-	     	}
-
-			if (precipitation == "rain" ){
-				var rn = 20;
-	     		for (var r = 0; r < rn; r++) {
-		     		var rain = $("<div/>") ;
-		     		rain.addClass("rain");
-		     		$("#circles").append(rain);
-		     		$(".rain").each(function(){
-
-		     			var randomNumber9 = Math.random()*50
-		     			var randomNumber10 = Math.random()*100
-
+		  		console.log(precipitation)
+				
+				for (var c = 0; c < white; c++) {	  
+		     		var nube = $("<div/>") ;
+		     		nube.addClass("cloudy");
+		     		$("#circles").append(nube);
+		     		$(".cloudy").each(function(){
+		     			var randomNumber7 = Math.random()*50,
+		     				randomNumber8 = Math.random()*100
 		     			$(this).css({
 		     			"top" :  randomNumber7 + "em",
 		     			"left" : randomNumber8 + "em"
 		     			})
-
 		     		})
+		     	}
 
+				if(precipitation == "rain" ){
+					var rn = 20
+		     		for (var r = 0; r < rn; r++) {	  
+			     		var rain = $("<div/>") ;
+			     		rain.addClass("rain");
+			     		$("#circles").append(rain);
+			     		$(".rain").each(function(){
+			     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber9 + "em",
+			     			"left" : randomNumber10 + "em"
+			     			})
+			     		})
+		     		}
+		     		$("#middle").css({"background-color" : "#666699"})
+
+		     	}else if(precipitation == "shower rain"){
+		     		var sr = 100;
+		     		for (var s = 0; s < sr; s++) {
+			     		var rain = $("<div/>") ;
+			     		rain.addClass("rain");
+			     		$("#circles").append(rain);
+			     		$(".rain").each(function(){
+			     			var randomNumber11 = Math.random()*50,randomNumber12 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber11 + "em",
+			     			"left" : randomNumber12 + "em",
+			     			"transform" : "rotate(45deg)",
+			     			})
+			     		})
+		     		}
+		     		$("#middle").css({"background-color" : "#9999CC"})
+		     		
+		     	}else if(precipitation == "thunderstorm"){
+		     		var rn = 150
+		     		for (var r = 0; r < rn; r++) {
+			     		var rain = $("<div/>") ;
+			     		rain.addClass("rain");
+			     		$("#circles").append(rain);
+			     		$(".rain").each(function(){
+			     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber9 + "em",
+			     			"left" : randomNumber10 + "em",
+			     			"height" : "100px",
+			     			"width" : "100px",
+			     			"border" : "solid #669999 3px"
+			     			})
+			     		})
+		     		}
+
+		     		var ts = 100;
+		     		for (var t = 0; t < ts; t++) {
+			     		var thunder = $("<div/>") ;
+			     		thunder.addClass("thunder");
+			     		$("#circles").append(thunder);
+			     		$(".thunder").each(function(){
+			     			var randomNumber11 = Math.random()*50,randomNumber12 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber11 + "em",
+			     			"left" : randomNumber12 + "em",
+			     			"transform" : "rotate(90deg)",
+			     			})
+			     		})
+		     		}
+
+		     		$("#middle").css({"background-color" : "#663366"})
+		     		
+		     	}else if(precipitation == "snow"){
+		    		var sw = 80
+		     		for (var w = 0; w < sw; w++) {
+			     		var snow = $("<div/>") ;
+			     		snow.addClass("snow");
+			     		$("#circles").append(snow);
+			     		$(".snow").each(function(){
+			     			var randomNumber7 = Math.random()*50,randomNumber8 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber7 + "em",
+			     			"left" : randomNumber8 + "em",
+			     			"transform" : "rotate(75deg)",
+			     			"background-color" : "#33CCCC"
+			     			})
+			     		})
+		     		}
+		     		$("#middle").css({"background-color" : "#99CCCC"})
+
+		     	}else if(precipitation == "light snow"){
+		     		var ls = 20
+		     		for (var s = 0; s < ls; s++) {
+			     		var snow = $("<div/>") ;
+			     		snow.addClass("snow");
+			     		$("#circles").append(snow);
+			     		$(".snow").each(function(){
+			     			var randomNumber7 = Math.random()*50,randomNumber8 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber7 + "em",
+			     			"left" : randomNumber8 + "em"
+			     			})
+			     		})
+		     		}
+		     		$("body").css({"background-color" : "#CCFFFF"})
+
+		     	}else if(precipitation == "mist"){
+					var mt = 200
+		     		for (var m = 0; m < mt; m++) {	  
+			     		var rain = $("<div/>") ;
+			     		rain.addClass("rain");
+			     		$("#circles").append(rain);
+			     		$(".rain").each(function(){
+			     			var randomNumber9 = Math.random()*50,randomNumber10 = Math.random()*100
+			     			$(this).css({
+			     			"top" :  randomNumber9 + "em",
+			     			"left" : randomNumber10 + "em",
+			     			"height" : "3.5em",
+			     			"width" : "7em",
+			     			"border-color" : "#996666"
+			     			})
+			     		})
+		     		}
+		     		$("#middle").css({"background-color" : "#CC99CC"})
+		     		
+		     	}else{
+		     		$("#middle").css({"background-color" : "#66CCCC"})
+		     		
+		     	}
+
+		     	$(".cloudy").mouseover(function(){
+			    	$(this).css({
+			    		"opacity" : "0.2",
+			    		"transition": "ease-in 2s",
+
+			    	})
+			    })
+
+			    $(".rain").mouseover(function(){
+			    	$(this).css({
+			    		"transform" : "translate(-10em,10em)",
+			    		"transition": "ease-in 2s",
+			    		"background-color": "#6699CC",
+
+			    	})
+			    })
+
+			    $(".snow").mouseover(function(){
+			    	$(this).css({
+			    		"transform" : "translate(-15em,15em)",
+			    		"opacity" : "0.2",
+			    		"transition": "ease-in 2s",
+			    	})
+			    })
+
+			    $(".thunder").mouseover(function(){
+			    	$(this).css({
+			    		"transform" : "translate(0,20em)",
+			    		"opacity" : "0.2",
+			    		"transition": "ease-in 1s",
+			    		"background-color" : "#99FFFF",
+
+			    	})
+			    })
+		    }
+
+			$( ".sky").click(function() {
+				if($(".cloudy").length){
+					$(".cloudy").remove()
+				}
+	  			atmosphere();
+		    });	
+
+		    function wind(){
+
+	     		var amount = data.wind.speed,
+	     			degree = data.wind.deg,
+	     			amountWind = Math.floor(amount)/4,
+	     			positionY = getRandomInt(20,30),
+	     			positionX = getRandomInt(0,20);
+
+	     		for (var w = 0; w < amount; w++) {
+		     		var line = $("<div/>"); 
+		     		line.addClass("wind");
+		     		$("body").append(line);
+		     		$(".wind").css({
+		     			"top" :  positionY + "em",
+		     			"left" : positionX + "em",
+		     			"transform" : "rotate( " + degree + "deg)",
+		     			"height" : amountWind + "em",
+		     			})
 	     		}
 
-	     		$("body").css({"background-color" : "red"})	
+	     		if(amount <=30){
+	     			$("#bottom").css({"background-color" : "#336666"})
+	     		}else if (amount >=20){
+	     			$("#bottom").css({"background-color" : "#99CCCC"})
+	     		}else{
+	     			$("#bottom").css({"background-color" : "#339999"})
+	     		}
 
-	     	}else if(precipitation == "shower rain"){
-	     		$("body").css({"background-color" : "white"})
-	     		
-	     	}else if(precipitation == "thunderstorm"){
+			   	$(".wind").mouseover(function(){
 
-	     		$("body").append(rain)
-	     		$("body").append(thunder)
-
-	     		$("body").css({"background-color" : "white"})
-	     		
-	     	}else if(precipitation == "snow"){
-	     		$("body").css({"background-color" : "green"})
-	     		
-	     	}else if(precipitation == "light snow"){
-
-
-
-
-	     	}else if(precipitation == "mist"){
-	     		$("body").css({"background-color" : "yellow"})
-	     		
-	     	}else{
-	     		$("body").css({"background-color" : "blue"})
-	     		
-	     	}
+			   		var degrees = degree + 360
+			    	$(this).css({
+			    		"transform" : "rotate( " + degrees + "deg)",
+			    		"transition": "ease-in 2s",
+			    	})
+			    })
+		    }
 
 
-	    }
+		    $( ".air").click(function() {
+	  			if($(".wind").length){
+					$(".wind").remove()
+				}
 
-		$( ".sky").click(function() {
+				wind()
 	  			
-				if($(".cloudy").length){
-  				$(".cloudy").remove()
-  			}
+	    	});
 
-	  			atmosphere();
-	    	});	
+	    	const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+					];
 
-	    function wind(){
-
-     		var amount = data.wind.speed,
-     			degree = data.wind.deg,
-     			amountWind = Math.floor(amount)/4,
-     			positionY = getRandomInt(20,30),
-     			positionX = getRandomInt(0,20);
+			var today = new Date(),
+				dd = today.getDate(),
+				yyyy = today.getFullYear(),
+				city = data.name;
 
 
-     		for (var w = 0; w < amount; w++) {
-	     		var line = $("<div/>"); 
-	     		line.addClass("wind");
-	     		$("body").append(line);
-	     		$(".wind").css({
-	     			"top" :  positionY + "em",
-	     			"left" : positionX + "em",
-	     			"transform" : "rotate( " + degree + "deg)",
-	     			"height" : amountWind + "em"
-	     			})
-     		}
-	    }
+			if(mm<10) {
+			    mm = '0'+mm
+			} 
 
+			month = mm[today.getMonth()]
 
-	    $( ".air").click(function() {
-  			$(wind).toggle();
-  			// $(wind).css({opacity:"1"});
-    	});	     	
+			today = dd  +  + yyyy;
+
+			$(".day").append(dd);
+			$(".month").append(month);
+			$(".year").append(yyyy);
+			$(".city").append(city);
+	    
 
 	    });
+
+
+	    	
 
 	})
 
@@ -417,39 +806,45 @@
 
 </head>
 <body>
-	<div id="left"></div>
+
+	<div id="calendar">
+		<div class="day"></div>
+		<div class="month"></div>
+		<div class="year"></div>
+		<div class="city"></div>
+	</div>	
+
+	<div id="top"></div>
 	<div id="middle"></div>
-	<div id="right"></div>
-
+	<div id="bottom"></div>
 	<div id="circles"></div>
+	<div id="temperatures"></div>
+
+
+	<div id="cities">
+		<div class="ny location">current location</div>
+		<div class="sjo location">hometown</div>
+		<div class="beach location">good vibes</div>	
+		<div class="cn location">mainland</div>	
+		<div class="hk location">quarter of aloha</div>
+		<div class="la location">half of aloha</div>
+		<div class="bcn location">dreams</div>
+		<div class="other location">archive</div>
+	</div>
 	
+	<div id="buttons">
+		<button class="button temp">
+	    	&emsp; &#176;
+	  	</button>
 
+	  	<button class="button sky">	
+			&#8258;
+	  	</button>
 
-<!-- 	<div class='times'>
-		<input type="text" id="day" name="dd"  size="3" maxlength="3" /> 
-	</div>
-
-	<div class='times'>
-		<input type="text" id="month" name="mm"  size="3" maxlength="3" /> 
-	</div>
-
-	<div class='times'>
-		<input type="text" id="year" name="yyyy"  size="3" maxlength="3" /> 
-	</div>
- -->
-
-
-	<button class="button temp">
-    	&#176;
-  	</button>
-
-  	<button class="button sky">	
-		&#8258;
-  	</button>
-
-  	<button class="button air">	
-		&#12336;
-  	</button>
+	  	<button class="button air">	
+			&#12336;
+	  	</button>
+	</div>  	
 
 </body>
 </html>
