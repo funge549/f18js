@@ -78,7 +78,7 @@
 		    font-size: 32px;
 		    margin: 4px 2px;
 		    cursor: pointer;
-		    opacity: 0.7;
+		    opacity: 0;
 		    transform-origin: center;
 		}
 
@@ -97,11 +97,31 @@
 			outline: none;
 		}
 
+		@media only screen 
+		  and (min-device-width: 375px) 
+		  and (max-device-width: 736px) 
+		  and (-webkit-min-device-pixel-ratio: 2) { 
+		  	.button{
+		  		font-size: 70px;
+		  	}
+
+		  	#buttons{
+		  		bottom: 10em;
+		  		right: 4em;
+		  	}
+
+		  	#cities{
+		  		font-size: 2em;
+		  	}
+		}
+
+
 		#top {
 			position: absolute;
 			height: 33.3vh;
 			width: 100vw;
 			top: 0;
+			left: 0;
 			transition: background-color 2s ease-in-out;
 			z-index: -2;
 		}
@@ -111,6 +131,7 @@
 			height: 33.3vh;
 			width: 100vw;
 			top: 33.3vh;
+			left: 0;
 			transition: background-color 2s ease-in-out;
 			z-index: -2;
 		}
@@ -120,6 +141,7 @@
 			height: 35vh;
 			width: 100vw;
 			top: 66.6vh;
+			left: 0;
 			transition: background-color 2s ease-in-out;
 			z-index: -2;
 		}
@@ -198,7 +220,8 @@
 
 		.wind{
 			width: 300px;
-			background-color: #CCCCCC;
+			background-color: #ffffff;
+			border: solid 0.5px #CCCCCC;
 			opacity: 0.7;
 			margin-top: auto;
 			margin-bottom: auto;
@@ -259,16 +282,31 @@
 	
 	$(document).ready(function(){
 
+		$(".location").click(function(){
+			$(".button").css({"opacity":"0.7"})
+		})
+
 		$(".ny").click(function(){
 			 $.get( "http://api.openweathermap.org/data/2.5/weather?id=5128638&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
 				allWeather(data);
+
+				$("body").css({"background-color" : "PowderBlue"})
+				$("#cities").css({"color" : "CornflowerBlue"})
+				$("#calendar").css({"color" : "CornflowerBlue"})
+				$(".button").css({"color" : "CornflowerBlue"})
 				// cities();
 			 })
+
 		})
 
 		$(".sjo").click(function(){
 			 $.get( "http://api.openweathermap.org/data/2.5/weather?id=3622497&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
 				allWeather(data);
+
+				$("body").css({"background-color" : "Thistle"})
+				$("#cities").css({"color" : "SlateBlue"})
+				$("#calendar").css({"color" : "SlateBlue"})
+				$(".button").css({"color" : "SlateBlue"})
 				// cities();
 			 })
 		})
@@ -276,6 +314,11 @@
 		$(".beach").click(function(){
 			 $.get( "http://api.openweathermap.org/data/2.5/weather?id=3623076&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
 				allWeather(data);
+
+				$("body").css({"background-color" : "Tomato"})
+				$("#cities").css({"color" : "NavajoWhite"})
+				$("#calendar").css({"color" : "NavajoWhite"})
+				$(".button").css({"color" : "NavajoWhite"})
 				// cities();
 			 })
 		})
@@ -283,6 +326,11 @@
 		$(".cn").click(function(){
 			 $.get( "http://api.openweathermap.org/data/2.5/weather?id=1924858&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
 				allWeather(data);
+
+				$("body").css({"background-color" : "FireBrick"})
+				$("#cities").css({"color" : "Goldenrod"})
+				$("#calendar").css({"color" : "Goldenrod"})
+				$(".button").css({"color" : "Goldenrod"})
 				// cities();
 			 })
 		})
@@ -290,6 +338,11 @@
 		$(".hk").click(function(){
 			 $.get( "http://api.openweathermap.org/data/2.5/weather?id=1819609&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
 				allWeather(data);
+
+				$("body").css({"background-color" : "PaleVioletRed"})
+				$("#cities").css({"color" : "Bisque"})
+				$("#calendar").css({"color" : "Bisque"})
+				$(".button").css({"color" : "Bisque"})
 				// cities();
 			 })
 		})
@@ -297,6 +350,11 @@
 		$(".la").click(function(){
 			 $.get( "http://api.openweathermap.org/data/2.5/weather?id=5368361&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
 				allWeather(data);
+
+				$("body").css({"background-color" : "SlateGray"})
+				$("#cities").css({"color" : "PaleTurquoise"})
+				$("#calendar").css({"color" : "PaleTurquoise"})
+				$(".button").css({"color" : "PaleTurquoise"})
 				// cities();
 			 })
 		})
@@ -304,14 +362,21 @@
 		$(".bcn").click(function(){
 			 $.get( "http://api.openweathermap.org/data/2.5/weather?id=3128760&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
 				allWeather(data);
+
+				$("body").css({"background-color" : "#FF9900"})
+				$("#cities").css({"color" : "#3366FF"})
+				$("#calendar").css({"color" : "#3366FF"})
+				$(".button").css({"color" : "#3366FF"})
 				// cities();
 			 })
 		})
 
-		// $(".other").click(function(){
-
-		// 	 })
-		// })
+		$(".other").click(function(){
+				function newDoc() {
+					window.location.assign("http://www.evelinfung.com/f18js/final/archive.html")
+				}
+			 })
+		})
 
     	const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
 		];
@@ -356,15 +421,14 @@
 
 		     	console.log(temperature, nTemperature, xTemperature)
 
-
 		     	if(temperature >= 1 ){
 		     		for (var i = 0; i < temperature; i++) {
 			     		var triangle = $("<div/>"); 
 			     		triangle.addClass("currentT");
 			     		$("#temperatures").append(triangle);
 			     		$(".currentT").each(function(){
-			     			var randomNumber = getRandomInt(1,5)*15,
-			     				randomNumber2 = getRandomInt(1,5)*20
+			     			var randomNumber = Math.random()*50,
+			     				randomNumber2 = Math.random()*80
 			     			$(this).css({
 				     			"top" :  randomNumber + "em",
 				     			"left" : randomNumber2 + "em"
@@ -382,8 +446,8 @@
 			     		triangleN.addClass("currentT-negative");
 			     		$("#temperatures").append(triangleN);
 			     		$(".currentT-negative").each(function(){
-			     			var randomNumber3 = Math.random()*35,
-			     				randomNumber4 = Math.random()*55
+			     			var randomNumber3 = Math.random()*45,
+			     				randomNumber4 = Math.random()*75
 			     			$(this).css({
 			     			"top" :  randomNumber3 + "em",
 			     			"left" : randomNumber4 + "em"
@@ -399,8 +463,8 @@
 		     		triangleO.addClass("currentT-zero");
 		     		$("#temperatures").append(triangleO);
 		     		$(".currentT-zero").each(function(){
-		     			var randomNumber5 = Math.random()*35,
-		     				randomNumber6 = Math.random()*55
+		     			var randomNumber5 = Math.random()*45,
+		     				randomNumber6 = Math.random()*75
 		     			$(this).css({
 		     			"top" :  randomNumber5 + "em",
 		     			"left" : randomNumber6 + "em"
@@ -420,8 +484,8 @@
 			     		triangle2.addClass("minT");
 			     		$("#temperatures").append(triangle2);
 			     		$(".minT").each(function(){
-			     			var randomNumber3 = Math.random()*25
-			     			var randomNumber4 = Math.random()*35
+			     			var randomNumber3 = Math.random()*45
+			     			var randomNumber4 = Math.random()*75
 			     			$(this).css({
 			     			"top" :  randomNumber3 + "em",
 			     			"left" : randomNumber4 + "em"
@@ -438,8 +502,8 @@
 		     		triangle2.addClass("minT-negative");
 		     		$("#temperatures").append(triangle2);
 		     		$(".minT-negative").each(function(){
-		     			var randomNumber3 = Math.random()*35,
-		     				randomNumber4 = Math.random()*55
+		     			var randomNumber3 = Math.random()*45,
+		     				randomNumber4 = Math.random()*75
 		     			$(this).css({
 		     			"top" :  randomNumber3 + "em",
 		     			"left" : randomNumber4 + "em"
@@ -452,8 +516,8 @@
 		     		triangle2.addClass("min-max-zero");
 		     		$("#temperatures").append(triangle2);
 		     		$(".min-max-zero").each(function(){
-		     			var randomNumber5 = Math.random()*35,
-		     				randomNumber6 = Math.random()*55
+		     			var randomNumber5 = Math.random()*45,
+		     				randomNumber6 = Math.random()*75
 		     			$(this).css({
 		     			"top" :  randomNumber5 + "em",
 		     			"left" : randomNumber6 + "em"
@@ -469,8 +533,8 @@
 			     		triangle3.addClass("maxT");
 			     		$("#temperatures").append(triangle3);	     		
 			     		$(".maxT").each(function(){
-			     			var randomNumber5 = Math.random()*25,
-			     				randomNumber6 = Math.random()*35
+			     			var randomNumber5 = Math.random()*45,
+			     				randomNumber6 = Math.random()*75
 			     			$(this).css({
 			     			"top" :  randomNumber5 + "em",
 			     			"left" : randomNumber6 + "em"
@@ -487,8 +551,8 @@
 			     		triangle3.addClass("maxT-negative");
 			     		$("#temperatures").append(triangle3);
 			     		$(".maxT-negative").each(function(){
-			     			var randomNumber3 = Math.random()*35,
-			     				randomNumber4 = Math.random()*55
+			     			var randomNumber3 = Math.random()*45,
+			     				randomNumber4 = Math.random()*75
 			     			$(this).css({
 			     			"top" :  randomNumber3 + "em",
 			     			"left" : randomNumber4 + "em"
@@ -501,8 +565,8 @@
 			     		triangle3.addClass("min-max-zero");
 			     		$("#temperatures").append(triangle3);
 			     		$(".min-max-zero").each(function(){
-			     			var randomNumber5 = Math.random()*35,
-			     				randomNumber6 = Math.random()*55
+			     			var randomNumber5 = Math.random()*45,
+			     				randomNumber6 = Math.random()*75
 			     			$(this).css({
 			     			"top" :  randomNumber5 + "em",
 			     			"left" : randomNumber6 + "em"
@@ -838,22 +902,8 @@
 	  			
 	    	});
 
-	    	var city = data.name;
+		    var city = data.name;
 	    	$(".city").append(city);
-
-
-		}
-
-		function cities(){
-			 // $(".city").parent().children().each(function() { 
-    //          $(this).removeClass("city");
-    //      });
-    //      $(this).addClass("city");
-
-    	if($(".city").length){
-			$(".city").remove()
-		}
-
 		}
 
 
