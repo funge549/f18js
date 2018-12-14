@@ -20,13 +20,14 @@ h1, h3 {
 }	
 
 a {
-	text-decoration: none;
+	text-decoration: underline;
 	color: black;
 }
 
 a:hover {
 	color: purple;
 }
+
 
 #side-bar ul {
 	position: absolute;
@@ -58,12 +59,22 @@ iframe {
 	overflow: hidden;
 }
 
-
-.tombstone{
+.text{
 	position: absolute;
 	left:70vw;
+}
+
+.tombstone{
+	position: relative;
 	font-family: "Montserrat";
 	font-size: 24pt;
+}
+
+.copy{
+	width: 24em;
+	position: relative;
+	font-family: "Montserrat";
+	font-size: 12pt;
 }
 
 .one {
