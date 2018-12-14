@@ -53,6 +53,19 @@
 			text-decoration: none;
 			opacity: 1;
 		}
+		.other{
+			opacity: 0.7;
+			position: relative;
+			float: left;
+			display: inline-block;
+			margin: 0.5em;
+			cursor: pointer;
+			text-decoration: underline solid;
+		}
+		.other:hover{
+			text-decoration: none;
+			opacity: 1;
+		}
 		.other a {
 			text-decoration: none;
 			color: black;
@@ -243,6 +256,10 @@
 		function getRandomInt(min, max) {
 			return Math.floor(Math.random() * (max - min)) + min;
 		}
+		function newDoc(){
+			window.open("http://www.evelinfung.com/f18js/final/archive.html")
+		}
+
 		$(document).ready(function(){
 			$(".location").click(function(){
 				$(".button").css({"opacity":"0.7"})
@@ -318,6 +335,14 @@
 					// cities();
 				 })
 			})
+
+			$(".other").click(function(){
+				newDoc();
+
+			})
+
+			// onClick = function(event) {
+			//  newDoc();
 
 	    	const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
 			];
@@ -762,7 +787,7 @@
 					wind()
 		    	});
 			    var city = data.name;
-		    	$(".city").append(city);
+		    	$(".city").html(city);
 			}
 		})
 	</script>
@@ -788,7 +813,11 @@
 		<div class="hk location">quarter of aloha</div>
 		<div class="la location">half of aloha</div>
 		<div class="bcn location">dreams</div>
-		<div class="other location"><a href="http://www.evelinfung.com/f18js/final/archive.html" target="_blank">archive</a></div>
+		<div class="other">
+			<!-- <a href="http://www.evelinfung.com/f18js/final/archive.html" target="_blank"> -->
+				archive
+			<!-- </a> -->
+		</div>
 	</div>
 	<div id="buttons">
 		<button class="button temp">
