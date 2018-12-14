@@ -5,15 +5,89 @@
 
 	<style type="text/css">
 
-	#images{
+	@font-face {font-family: "Univers"; src: url("font/UniversLTStd-Black.otf");}
+
+	body {
+		background-color: #f9f4f4;
+	}
+
+	#header{
+		z-index: 1;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		background-color:  #FF9999;
+		width: 100vw;
+		height: 4em;
+		font-family: "Univers", sans-serif;
+		font-size: 1em;
+	}
+
+	p {
+		display: inline-block;
+		float: left;
+		margin: 1.5em;
+		color: #f9f9f9;
+	}
+
+	a {
+		color: #f9f9f9;
+		right: 2em;
+		position: absolute;
+	}
+
+	#images1{
 		position: absolute;
 		left: 4em;
 		top: 0em;
 	}
 
 	#images1 img{
-		max-width: 30vw;
-		max-height: 30vh;
+		max-width: 40vw;
+
+	}
+
+	#images2{
+		position: absolute;
+		left: 4em;
+		top: 0em;
+	}
+
+	#images2 img{
+		max-width: 10vw;
+
+	}
+
+	#images3{
+		position: absolute;
+		left: 4em;
+		top: 0em;
+	}
+
+	#images3 img{
+		max-width: 60vw;
+
+	}
+
+	#images4{
+		position: absolute;
+		left: 4em;
+		top: 0em;
+	}
+
+	#images4 img{
+		max-width: 20vw;
+
+	}
+
+	#images4{
+		position: absolute;
+		left: 4em;
+		top: 0em;
+	}
+
+	#images4 img{
+		max-width: 80vw;
 
 	}
 
@@ -34,55 +108,67 @@
 	    {
 
 	     	var arena = data.contents,
-	     		number = getRandomInt(1,25);
+	     		number = getRandomInt(1,50);
 
 	     	for (var i = 0; i < number; i++) {
 	     		
-	     		console.log(arena[i])
+	     		console.log(number)
 
-	     		$("#images1").append(`
+	     		if(number <= 15 ){
+
+	     			$("#images1").append(`
 
 	     			<img src="${arena[i].image.original.url}"</img>
 
 	    			`)
+
+	     		}else if(number <=  25 ){
+	     			$("#images2").append(`
+
+	     			<img src="${arena[i].image.original.url}"</img>
+
+	    			`)
+	     		}else if(number <= 35 ){
+	     			$("#images3").append(`
+
+	     			<img src="${arena[i].image.original.url}"</img>
+
+	    			`)
+	     		}else if(number >= 45){
+	     			$("#images4").append(`
+
+	     			<img src="${arena[i].image.original.url}"</img>
+
+	    			`)
+
+	     		}else{
+
+	     			$("#images5").append(`
+
+	     			<img src="${arena[i].image.original.url}"</img>
+
+	    			`)
+
+	     		}
 	
 	     	}
-
 
 	    });
 
 
-	    	
-
-
-	    // 	for (var i = arena.length - 1; i >= 0; i--) {
-	    		
-	    // 		console.log(arena[i])
-
-	    //  		if(arena[i].image){
-
-	    //  			$("#arena").append(`
-
-	    //  			<img src="${arena[i].image.original.url}"</img>
-
-	    // 			`)
-	    //  		}else{
-	    //  			console.log("this image doesn't exist")
-	    //  		}
-	    // 	}
-	    // })	
-
-	    
-
-
-		// })
 
 	</script>
 
 </head>
 <body>
 
+	<div id="header">
+		<p>my weather's archive</p> <p> <a href="http://www.evelinfung.com/f18js/final/index.html">my weather</a></p>
+	</div>
+
 	<div id="images1"></div>
+	<div id="images2"></div>
+	<div id="images3"></div>
 
 </body>
 </html>
