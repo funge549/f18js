@@ -64,6 +64,11 @@
 			opacity: 1;
 		}
 
+		.other a {
+			text-decoration: none;
+			color: black;
+		}
+
 		#buttons{
 			width: 3em;
 			position: fixed;
@@ -363,20 +368,14 @@
 			 $.get( "http://api.openweathermap.org/data/2.5/weather?id=3128760&APPID=b2025dd9eb8b84d9ca2ef0fc0e5c80ad", function( data ) {
 				allWeather(data);
 
-				$("body").css({"background-color" : "#FF9900"})
-				$("#cities").css({"color" : "#3366FF"})
-				$("#calendar").css({"color" : "#3366FF"})
-				$(".button").css({"color" : "#3366FF"})
+				$("body").css({"background-color" : "DarkOrange"})
+				$("#cities").css({"color" : "MediumBlue"})
+				$("#calendar").css({"color" : "MediumBlue"})
+				$(".button").css({"color" : "MediumBlue"})
 				// cities();
 			 })
 		})
 
-		$(".other").click(function(){
-				function newDoc() {
-					window.location.assign("http://www.evelinfung.com/f18js/final/archive.html")
-				}
-			 })
-		})
 
     	const mm = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
 		];
@@ -400,6 +399,8 @@
  		$(".day").append(dd);
  		$(".month").append(month);
  		$(".year").append(yyyy);
+
+		
     	
 
 	    function allWeather(data){
@@ -936,7 +937,7 @@
 		<div class="hk location">quarter of aloha</div>
 		<div class="la location">half of aloha</div>
 		<div class="bcn location">dreams</div>
-		<div class="other location">archive</div>
+		<div class="other location"><a href="http://www.evelinfung.com/f18js/final/archive.html">archive</div>
 	</div>
 	
 	<div id="buttons">

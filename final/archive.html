@@ -4,139 +4,55 @@
 	<title>js apis</title>
 
 	<style type="text/css">
-		
-		.title {
-			text-align: right;
-			color: skyBlue;
-		}
+
+	#images{
+		position: absolute;
+		left: 4em;
+		top: 0em;
+	}
+
+	#images1 img{
+		max-width: 30vw;
+		max-height: 30vh;
+
+	}
 
 
 	</style>
 
-	<script type="text/javascript" src="assets/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="assets/jquery.query-yql.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.query-yql.min.js"></script>
 
 	<script type="text/javascript">
-//		$(document).ready(function(){
-			
 
-			// $.queryYQL:
-				// ny times
-				// * means everything within the url
-			// var statement = "select * from feed where url='http://rss.nytimes.com/services/xml/rss/nyt/ArtandDesign.xml'"; // here you link the url you need
+		function getRandomInt(min, max) {
+			return Math.floor(Math.random() * (max - min)) + min;
+		}
 
-	    //$.queryYQL(statement, "json", undefined, function (data) { //function taken from the query-yql library 
-
-	    	//console.log(data)
-
-	    	//console will show  more specific info
-	    	//navigating the object and showing the path
-	    	// 1.data 2.query 3.results 4.item
-	    	// console.log(data.query.results.item)
-
-	    	//this variable becomes an array
-	    // 	var nyArticles = data.query.results.item;
-
-	    // 	for (var i = 0; i < nyArticles.length; i++) {
-	    		
-	    // 		console.log(nyArticles[i]);
-
-	    // 		$("#times").append(`
-
-	    // 				<h1 class="title">${nyArticles[i].title}</h1>
-	    // 				<h2>${nyArticles[i].creator}</h2>
-	    // 				<p>${nyArticles[i].description[0]}</p>
-
-	    // 			`)
-
-	    // 	}
-        
-	    // })
-
-	   // var statement = "select * from feed where url='http://www.craigslist.org/about/best/all/index.rss'";
-
-	   //  	 $.queryYQL(statement, "json", undefined, function (data) { 
-
-	   //  	//console.log(data.query.results.item)
-
-
-	   //  	var craigs = data.query.results.item;
-
-	   //  	for (var i = 0; i < craigs.length; i++) {
-	    		
-	   //  		console.log(craigs[i])
-
-	   //  		$("#times").append(`
-
-	   //  				<h1 class="title">${craigs[i].title[0]}</h1>
-	   //  				<h2>${craigs[i].creator}</h2>
-	   //  				<p>${craigs[i].description[0]}</p>
-
-	   //  			`)
-
-	   //  	}
-         
-	   // })
-
-	   // second way with are.na
-
-	    // $.get requests:
-	    // get + url + function
 	   
-	    $.get("http://api.are.na/v2/channels/websites-1519248651", function( data ) 
+	    $.get("http://api.are.na/v2/channels/archive-yx0heodnw9m", function( data ) 
 	    {
 
-	     	var arena = data.contents;
+	     	var arena = data.contents,
+	     		number = getRandomInt(1,25);
 
-	     	for (var i = 0; i < arena.length; i++) {
+	     	for (var i = 0; i < number; i++) {
 	     		
 	     		console.log(arena[i])
 
-	     		$("#arena").append(`
+	     		$("#images1").append(`
 
 	     			<img src="${arena[i].image.original.url}"</img>
 
 	    			`)
 	
 	     	}
+
+
 	    });
 
 
-	    	for (var i = arena.length - 1; i >= 0; i--) {
-	    		
-	    		console.log(arena[i])
-
-	     		if(arena[i].image){
-
-	     			$("#arena").append(`
-
-	     			<img src="${arena[i].image.original.url}"</img>
-
-	    			`)
-	     		}else{
-	     			console.log("this image doesn't exist")
-	     		}
-	    	}
-//	    })	
-
-
-	    // $.get("http://api.spotify.com", function( data ) 
-	    // {
-
-	    //  	var spotify = data.contents;
-
-	    //  	for (var i = 0; i < spotify.length; i++) {
-	     		
-	    //  		console.log(spotify[i])
-
-	     		// $("#arena").append(`
-
-	     		// 	<img src="${arena[i].image.original.url}"</img>
-
-	    			// `)
-	
-	    //  	}
-	    // });
+	    	
 
 
 	    // 	for (var i = arena.length - 1; i >= 0; i--) {
@@ -166,9 +82,7 @@
 </head>
 <body>
 
-	<div id="times"></div>
-	<div id="arena"></div>
-	<div id="opeanweather"></div>
+	<div id="images1"></div>
 
 </body>
 </html>
