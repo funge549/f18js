@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>js apis</title>
+	<title>my weather_archive</title>
+	<link rel="icon" href="./img/favicon.png" type="image/x-icon" />
 
 	<style type="text/css">
 
@@ -44,7 +45,6 @@
 
 	#images1 img{
 		max-width: 40vw;
-
 	}
 
 	#images2{
@@ -55,7 +55,6 @@
 
 	#images2 img{
 		max-width: 10vw;
-
 	}
 
 	#images3{
@@ -66,7 +65,6 @@
 
 	#images3 img{
 		max-width: 60vw;
-
 	}
 
 	#images4{
@@ -77,7 +75,6 @@
 
 	#images4 img{
 		max-width: 20vw;
-
 	}
 
 	#images4{
@@ -88,9 +85,7 @@
 
 	#images4 img{
 		max-width: 80vw;
-
 	}
-
 
 	</style>
 
@@ -106,69 +101,43 @@
 	   
 	    $.get("http://api.are.na/v2/channels/archive-yx0heodnw9m", function( data ) 
 	    {
-
 	     	var arena = data.contents,
 	     		number = getRandomInt(1,50);
-
 	     	for (var i = 0; i < number; i++) {
-	     		
+	     	
 	     		console.log(number)
-
 	     		if(number <= 15 ){
-
 	     			$("#images1").append(`
-
 	     			<img src="${arena[i].image.original.url}"</img>
-
 	    			`)
-
 	     		}else if(number <=  25 ){
 	     			$("#images2").append(`
-
 	     			<img src="${arena[i].image.original.url}"</img>
-
 	    			`)
 	     		}else if(number <= 35 ){
 	     			$("#images3").append(`
-
 	     			<img src="${arena[i].image.original.url}"</img>
-
 	    			`)
 	     		}else if(number >= 45){
 	     			$("#images4").append(`
-
 	     			<img src="${arena[i].image.original.url}"</img>
-
 	    			`)
-
 	     		}else{
-
 	     			$("#images5").append(`
-
 	     			<img src="${arena[i].image.original.url}"</img>
-
 	    			`)
-
 	     		}
-	
 	     	}
-
 	    });
-
-
-
 	</script>
 
 </head>
 <body>
-
 	<div id="header">
 		<p>my weather's archive</p> <p> <a href="http://www.evelinfung.com/f18js/final/index.html">my weather</a></p>
 	</div>
-
 	<div id="images1"></div>
 	<div id="images2"></div>
 	<div id="images3"></div>
-
 </body>
 </html>
