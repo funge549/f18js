@@ -88,7 +88,12 @@
 
     function newDoc7() {
           window.location.assign("http://www.evelinfung.com/f18js/instrument/problem.html")
-      }         
+      }
+
+    function cursor(){
+    	$(this).css({"cursor":"pointer"})
+    }  
+       
 
 
 		function onFrame(event) {
@@ -186,32 +191,120 @@
    			 newDoc();
 			}
 
+			text.onMouseEnter = function(event) {
+			    this.fillColor = 'red';
+			}
+
+			text.onMouseLeave = function(event) {
+			    this.fillColor = 'pink';
+			}
+
 			text2.onClick = function(event) {
    			 newDoc2();
+			}
+
+			text2.onMouseEnter = function(event) {
+			    this.fillColor = 'blue';
+			}
+
+			text2.onMouseLeave = function(event) {
+			    this.fillColor = 'DeepPink';
 			}
 
 			text3.onClick = function(event) {
    			 newDoc3();
 			}
 
+			text3.onMouseEnter = function(event) {
+			    this.fillColor = 'blue';
+			}
+
+			text3.onMouseLeave = function(event) {
+			    this.fillColor = 'white';
+			}
+
 			text4.onClick = function(event) {
    			 newDoc4();
+			}
+
+			text4.onMouseEnter = function(event) {
+			    this.fillColor = 'red';
+			}
+
+			text4.onMouseLeave = function(event) {
+			    this.fillColor = 'pink';
 			}
 
 			text5.onClick = function(event) {
    			 newDoc5();
 			}
 
+			text5.onMouseEnter = function(event) {
+			    this.fillColor = 'white';
+			}
+
+			text5.onMouseLeave = function(event) {
+			    this.fillColor = 'DeepPink';
+			}
+
 			text6.onClick = function(event) {
    			 newDoc6();
+			}
+
+			text6.onMouseEnter = function(event) {
+			    this.fillColor = 'white';
+			}
+
+			text6.onMouseLeave = function(event) {
+			    this.fillColor = 'SpringGreen';
 			}
 
 			text7.onClick = function(event) {
    			 newDoc6();
 			}
 
+			text7.onMouseEnter = function(event) {
+			    this.fillColor = 'white';
+			}
+
+			text7.onMouseLeave = function(event) {
+			    this.fillColor = 'SpringGreen';
+			}
+
 			text8.onClick = function(event) {
    			 newDoc7();
+			}
+
+			text8.onMouseEnter = function(event) {
+			    this.fillColor = 'white';
+			}
+
+			text8.onMouseLeave = function(event) {
+			    this.fillColor = 'DarkOrange';
+			}
+
+			text9.onClick = function(event) {
+   			 newDoc7();
+			}
+
+			text9.onMouseEnter = function(event) {
+			    this.fillColor = 'white';
+			}
+
+			text9.onMouseLeave = function(event) {
+			    this.fillColor = 'DarkOrange';
+			}
+
+			text10.onClick = function(event) {
+   			 newDoc7();
+			}
+
+			text10.onMouseEnter = function(event) {
+			    this.fillColor = 'white';
+			}
+
+			text10.onMouseLeave = function(event) {
+			    this.fillColor = 'DarkOrange';
 			}
 
 		}
