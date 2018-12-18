@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>hot mess? i prefer divine disaster</title>
+  <title>99 problems but a bitch ain't one</title>
   <link rel="icon" href="./img/favicon.png" type="image/x-icon" />
 <head>
   <meta charset="utf-8">
 
   <style>
-  
+
   body {
-    background-color: Bisque;
-    font-family: georgia, serif;
+    background-color: MediumSpringGreen ;
+    font-family: times, serif;
     font-weight: bold;
   }
 
@@ -19,7 +19,6 @@
     border-width: 0px;
     border-style: none;
   }
-  
   input {
     display: block;
     margin-bottom: .25em;
@@ -51,23 +50,22 @@
     font-size: 30px;
   }
 
-  button:hover {
-    background-color: Bisque;
+  button:hover{
+    background-color:DarkOliveGreen;
+    cursor: pointer;
   }
 
-   #other {
-    font-family: georgia, serif;
+   #other{
+    font-family: times, serif;
     font-weight: bold;
-
    }    
 
    #cookie {
-    font-family: georgia, serif;
+    font-family: times, serif;
     font-weight: bold;
-
    }    
 
-   #home {
+    #home {
     position: fixed;
     bottom: 2.5vh;
     right: 2.5vw;
@@ -82,6 +80,7 @@
     font-family: helvetica, sans-serif;
     font-weight: bold;
    }   
+
 
   .line{
     float:left;
@@ -102,26 +101,27 @@
  
   <form>
     <fieldset>
-      <label for="target">are you doing great sweetie?</label>
+      <label for="target">Talk to me about your troubles</label>
       <input id="target" type="text">
     </fieldset>
   </form>
 
-<!--   <button id="other">
-    i wished...
-  </button> -->
-
-  <button id="cookie">
-    expose yourself
+  <button id="other">
+    click to get rid of them!
   </button>
 
-  <button id="end">
+  <button id="cookie">
+    Want to see your other troubles
+  </button>
+
+    <button id="end">
     feeling better?
   </button>
 
   <button id="home">
     still feel emotional?
   </button>
+
 
   <script src="js/events.js"></script>
 
@@ -132,48 +132,34 @@
       return Math.floor(Math.random() * (max - min)) + min;
       }
 
-    function newDoc() {
-      window.location.assign("http://www.evelinfung.com/f18js/instrument/moods.html")
+      function newDoc() {
+    window.location.assign("http://www.evelinfung.com/f18js/instrument/moods.html")
     }
 
-    function newDoc2() {
-      window.location.assign("http://www.evelinfung.com/f18js/instrument/thanks.html")
+  function newDoc2() {
+    window.location.assign("http://www.evelinfung.com/f18js/instrument/thanks.html")
     }  
 
     var opacity = 0.5,
+        b = getRandomInt(180,237),
+        r = getRandomInt(76,226),
         size,
+        color,
+        color2,
         height,
         width,
         opacity;
 
 
     size = getRandomInt(12,32);
-    
-
-    var emptySentence = "";
-
-    if(Cookies.get("sentence")){
-
-      emptySentence = Cookies.get("sentence");
-
-      $("#target").val(emptySentence);
-
-    }
+    color = "rgb(" + r + ",8," + "8" +")";  
+    color2 = "rgb(" + r + ",255,"  + b +")";  
 
     var xTriggered = 0;
     $( "#target" ).keypress(function( event ) {
      
-      var currentText = $("#target").val();
-
-      console.log(currentText)
-
-      emptySentence = currentText;
-
-      Cookies.set("sentence", emptySentence, {expires: 10});
-
-
      xTriggered++;
-      var msg = currentText;
+      var msg = "Stress has been relieved " + xTriggered + " time(s).";
       $.print( msg);
     });
 
@@ -183,50 +169,48 @@
      
     $( "#other").click(function() {
       $( "#target" ).keypress();
-      $(this).css({"color": "Crimson", "background-color": "Salmon"});
-      $("#target").css({"background-color": "Lavender"});
-      $("body").css({"background-color": "hotPink", "color":"crimson"});
+      $(this).css({"color": color, "background-color": "white"});
+      $("#target").css({"background-color": "red"});
+      $("body").css({"background-color": color, "color":color2});
 
     });
 
-
     $( "#cookie").click(function() {
-       $(this).css({"background-color": "salmon", color: "crimson"});
+       $(this).css({"background-color": "black", color: "red"});
      })
 
     //cookies
 
-    // var allLines = [],
-    // line = "<div class='line'></div>";
+    var allLines = [],
+    line = "<div class='line'></div>";
 
-    // if (Cookies.getJSON('allLines')){
-    //   console.log("cookies are creeping on you");
+    if (Cookies.getJSON('allLines')){
+      console.log("cookies are creeping on you");
 
-    //   allLines = Cookies.getJSON('allLines')
+      allLines = Cookies.getJSON('allLines')
 
-    //   for (var i = 0; i < allLines.length; i++) {
+      for (var i = 0; i < allLines.length; i++) {
 
-    //     $("body").append(allLines[i]);
-    //   }
-    // }
+        $("body").append(allLines[i]);
+      }
+    }
     
 
-    // $("#cookie").click(function(){
+    $("#cookie").click(function(){
 
-    //   $("body").append(line);
-    //   $(".line").css({"background-color": "LightPink", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
+      $("body").append(line);
+      $(".line").css({"background-color": "black", "opacity":opacity, "width": width + "vw",  "height":height + "vh"});
 
-    //   allLines.push(line);
+      allLines.push(line);
 
-    //   Cookies.set('allLines', allLines, {expires: 10});
+      Cookies.set('allLines', allLines, {expires: 10});
 
-    // })
-
-    $("#home").click(function(){
-      newDoc()
     })
 
-    $("#end").click(function(){
+  $("#home").click(function(){
+      newDoc()
+    })
+  $("#end").click(function(){
       newDoc2()
     })
     
